@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "serve": "yarn run build; yarn run start",
     "start": "babel-node --presets env server/app.js"
   },
   "dependencies": {
