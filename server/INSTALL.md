@@ -1,4 +1,4 @@
-# ao server install instructions
+# server install instructions
 
 
 These instructions will assume you are setting up dctrl/ao on a fresh install of
@@ -66,7 +66,7 @@ Enable
 To confirm check the admin console at `localhost:8080` is still on after a reboot.
 
 ---
-### 3. Setup the bitcoin node
+### 4. Setup the bitcoin node
 First get the bitcoin binaries from https://bitcoin.org/en/download and unpack them
 
 - `cd Downloads`
@@ -90,11 +90,19 @@ WantedBy=multi-user.target
 We need a configuration file as well `touch /etc/systemd/system/bitcoind.service`.
 
 ```text
-testnet=0
+txindex=1
 server=1
+daemon=1
+testnet=1
 
 rpcuser=bitcoinrpc
-rpcpassword=yourGoodSecretb7p5y4EpBsdfDSvcarw7udgXsAce
+rpcpassword=<your-Good-Secret>b7p5y4EpBsdfDSvcarw7udgXsAce
+
+zmqpubhashtx=tcp://127.0.0.1:28332
+zmqpubhashblock=tcp://127.0.0.1:28332
+zmqpubrawblock=tcp://127.0.0.1:28332
+zmqpubrawtx=tcp://127.0.0.1:28332
+
 ```
 
 Now enable
@@ -110,10 +118,34 @@ You can check the status of bitcoind using:
 Confirm that these command survive a reboot. It will take some time to sync the node.
 
 ---
-# Setup node.js
-You can install node
+# 5. Install go and lightning node
+Go is needed to run lnd
+- `sudo apt-get install golang-1.10-go`
 
----
-# Get the ao code
+It should install the binaries to /usr/lib/go-1.10/bin. We need to add that path to our binaries to use go from the command line. We also need to configure the go path. Create a go directory in your home director `mkdir go`. And add the following text to the `~/.profile` bash profile file.
+```text
+export PATH=$PATH:/usr/lib/go-1.10/bin
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+Now we should be able to install the go dependence manager glide:
+- `go get -u github.com/Masterminds/glide`
+
+Next we will install lnd. More up to date instructions may be found here; https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md.
+
+```bash
+git clone https://github.com/lightningnetwork/lnd $GOPATH/src/github.com/lightningnetwork/lnd
+cd $GOPATH/src/github.com/lightningnetwork/lnd
+glide install
+go install . ./cmd/...
+```
+
+
+# 6. Install lnd (lightning network node)
+
+# 7. Install node
+# 8. Install yarn
+# 9. Install dctrl-ao
 
 - `git clone `

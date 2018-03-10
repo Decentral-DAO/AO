@@ -1,26 +1,113 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang='pug'>
+
+#app
+    .feed
+        event-feed
+    .mobile
+        mobile-heading
+            router-view
+    main
+      .side_bar
+          main-menu
+      .content
+          router-view
+    img(src='../assets/images/decent_logo_alpha_no_text.svg')
+
 </template>
 
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+<script>
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+import io from 'socket.io-client'
+
+import MainMenu from '.components/MainMenu'
+import MobileHeading from '.components/MobileHeading'
+import EventFeed from '.components/slotUtils/EventFeed'
+
+export default {
+    mounted(){
+        this.$store.dispatch('loadCurrent')
+
+        let token = window.localStorage.token
+        let session = window.localStorage.session
+
+        if (token && session){
+            let auth = {token, session}
+            console.log('setting auth', auth)
+            this.$store.commit('setAuth', auth)
+        }
+
+        const socket = io()
+        socket.on('connect', ()=> {
+            console.log("socket connected")
+            console.log("authenticating with", {
+              session: this.$store.state.loader.session,
+              token: this.$store.state.loader.token
+            })
+
+            socket.emit('authentication', {
+              session: this.$store.state.loader.session,
+              token: this.$store.state.loader.token
+            })
+
+            socket.on('authenticated', ()=> {
+                console.log('socket authenticated')
+                // use the socket as usual
+
+                this.$store.dispatch('loadCurrent')
+
+
+                socket.on('eventstream', ev => {
+                    console.log('eventstream:' , ev)
+                    this.$store.commit('applyEvent', ev)
+                    this.$store.dispatch('displayEvent', ev)
+                })
+            });
+        });
+    },
+    components: {
+        MainMenu, MobileHeading, EventFeed
+    },
+}
+
+
+</script>
+
+<style lang="stylus">
+
+@import "./styles/normalize"
+@import "./styles/breakpoints"
+@import "./styles/framework"
+@import "./styles/colours"
+
+main
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: accent1
+    font-family:font
+
+.side_bar, .content
+    display: flex;
+
+.content
+    flex-grow: 4;
+    overflow-y:scroll
+    padding:0 5rem
+
+.side_bar {
+    flex-basis: 10rem;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+@media (max-width: breakpoint)
+    main
+        display: none
+
+@media (min-width: breakpoint)
+    .mobile
+        display: none
+
 </style>
