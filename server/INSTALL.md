@@ -72,22 +72,37 @@ First get the bitcoin binaries from https://bitcoin.org/en/download and unpack t
 - `cd Downloads`
 - `tar xf bitcoin-0.16.0-x86_64-linux-gnu.tar.gz`
 
-Now you can setup another service file `touch /etc/systemd/system/bitcoind.service`
+Now you can setup another service file `touch /etc/systemd/system/bitcoin.service`
 
 ```text
+# It is not recommended to modify this file in-place, because it will
+# be overwritten during package upgrades. If you want to add further
+# options or overwrite existing ones then use
+# $ systemctl edit bitcoind.service
+# See "man systemd.service" for details.
+
+# Note that almost all daemon options could be specified in
+# /etc/bitcoin/bitcoin.conf
+
 [Unit]
 Description=bitcoin-deamon
+After=network.target
 
 [Service]
-User=<user-name>
-ExecStart=/home/<user-name>/Downloads/bitcoin-0.16.0/bin/bitcoind
-Restart=always
+ExecStart=/home/trhode/Downloads/bitcoin-0.16.0/bin/bitcoind -daemon -conf=/home/trhode/.bitcoin/bitcoin.conf -pid=/run/bitcoind/bitcoind.pid
+# Creates /run/bitcoind owned by bitcoin
+RuntimeDirectory=bitcoind
+User=trhode
+Type=forking
+PIDFile=/run/bitcoind/bitcoind.pid
+Restart=on-failure
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-We need a configuration file as well `touch /etc/systemd/system/bitcoind.service`.
+We need a configuration file as well `touch ~/.bitcoin/bitcoin.conf`.
 
 ```text
 txindex=1
@@ -104,7 +119,6 @@ zmqpubrawblock=tcp://127.0.0.1:28332
 zmqpubrawtx=tcp://127.0.0.1:28332
 
 ```
-
 Now enable
 - `systemctl daemon-reload`
 - `systemctl enable bitcoind.service`
@@ -118,11 +132,23 @@ You can check the status of bitcoind using:
 Confirm that these command survive a reboot. It will take some time to sync the node.
 
 ---
-# 5. Install go and lightning node
+# 5. Install ZMQ
+Get the tarball from http://zeromq.org/intro:get-the-software ; then
+- `cd Downloads`
+- `tar xf zeromq-4.2.3.tar.gz`
+- `cd zeromq-4.2.3`
+- `./configure`
+- `make check`
+- `sudo make install`
+- `sudo ldconfig`
+
+
+# 6. Install go and lightning node
 Go is needed to run lnd
 - `sudo apt-get install golang-1.10-go`
 
 It should install the binaries to /usr/lib/go-1.10/bin. We need to add that path to our binaries to use go from the command line. We also need to configure the go path. Create a go directory in your home director `mkdir go`. And add the following text to the `~/.profile` bash profile file.
+
 ```text
 export PATH=$PATH:/usr/lib/go-1.10/bin
 export GOPATH=~/go
@@ -141,8 +167,7 @@ glide install
 go install . ./cmd/...
 ```
 
-
-# 6. Install lnd (lightning network node)
+### 6. Install lnd (lightning network node)
 
 # 7. Install node
 # 8. Install yarn

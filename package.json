@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "serve": "yarn run build; yarn run start",
+    "build": "vue-cli-service build",
     "start": "babel-node --presets env server/app.js"
   },
   "dependencies": {
     "bitcoin-core": "^2.0.0",
+    "bitcoinjs-lib": "^3.3.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "grpc": "^1.9.1",
@@ -22,7 +22,8 @@
     "superagent": "^3.8.2",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "zmq": "^2.15.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.6",

@@ -1,7 +1,7 @@
-const bitcoind = require('bitcoin-core')
+const Client = require('bitcoin-core')
 const config = require('../../configuration')
 
-const client = new bitcoind.Client(config.bitcoindClient)
+const client = new Client(config.bitcoindClient)
 
 function watchAddress(address, callback){
     console.log({address})
