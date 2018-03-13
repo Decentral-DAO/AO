@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-module.exports = (members, ev)=> {
+function membersMuts(members, ev){
   switch (ev.type){
       case "member-created":
           members.push(ev)
@@ -101,3 +101,5 @@ module.exports = (members, ev)=> {
           break
   }
 }
+
+export default membersMuts

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-module.exports = (invoices, ev) => {
+function invoicesMuts(invoices, ev){
 	switch (ev.type) {
 		case "invoice-created":
 			invoices.push(ev)
@@ -15,3 +15,5 @@ module.exports = (invoices, ev) => {
 			break
 	}
 }
+
+export default invoicesMuts

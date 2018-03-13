@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { cashMuts } from '../../mutations'
+import M from '../mutations'
 
 const state = {
     cash: 0,
@@ -13,13 +13,15 @@ const mutations = {
         state.spot = current.cash.spot
         state.currency = current.cash.currency
     },
-    applyEvent: cashMuts
+    applyEvent: M.cashMuts
 }
 
 const actions = {}
+const getters = {}
 
-module.exports = {
+export default {
     state,
     mutations,
-    actions
+    actions,
+    getters
 }

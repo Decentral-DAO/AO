@@ -10,11 +10,17 @@ import resources from './modules/resources'
 import sessions from './modules/sessions'
 import invoices from './modules/invoices'
 
+// client side
 import events from './modules/events'
 import eventstream from './modules/eventstream'
 import loader from './modules/loader'
 
+console.log('b4 uex ')
+
 Vue.use(Vuex)
+console.log('after uex ')
+
+console.log({cash})
 
 export default new Vuex.Store({
   modules: {

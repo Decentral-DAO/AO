@@ -133,7 +133,7 @@ Confirm that these command survive a reboot. It will take some time to sync the 
 
 ---
 # 5. Install ZMQ
-Get the tarball from http://zeromq.org/intro:get-the-software ; then
+Get the tarball from http://zeromq.org/intro:get-the-software
 - `cd Downloads`
 - `tar xf zeromq-4.2.3.tar.gz`
 - `cd zeromq-4.2.3`
@@ -158,7 +158,7 @@ export PATH=$PATH:$GOPATH/bin
 Now we should be able to install the go dependence manager glide:
 - `go get -u github.com/Masterminds/glide`
 
-Next we will install lnd. More up to date instructions may be found here; https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md.
+Next we will install lnd. More up to date instructions may be found here (https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md).
 
 ```bash
 git clone https://github.com/lightningnetwork/lnd $GOPATH/src/github.com/lightningnetwork/lnd
@@ -167,10 +167,24 @@ glide install
 go install . ./cmd/...
 ```
 
-### 6. Install lnd (lightning network node)
+# 6. Setup lnd as a Service
+# 7. Install node.js
+Easiest way is to use nvm:
+- `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
+Then you need to close and re-open the terminal, then you can install the most recent node. 
+- `nvm install stable`
 
-# 7. Install node
 # 8. Install yarn
+Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
+- `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
+- `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+- `sudo apt-get update`
+- `sudo apt-get install --no-install-recommends yarn` #
+
 # 9. Install dctrl-ao
 
-- `git clone `
+- `git clone ...`
+- `cd dctrl-ao`
+- `yarn install`
+- `yarn run build`
+- `yarn run start`

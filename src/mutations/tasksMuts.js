@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-module.exports = (tasks, ev) => {
+function tasksMuts(tasks, ev) {
 	switch (ev.type) {
 		case "task-created":
 			tasks.push(ev)
@@ -35,3 +35,5 @@ module.exports = (tasks, ev) => {
 			break
 	}
 }
+
+export default tasksMuts

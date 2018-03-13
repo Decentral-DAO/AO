@@ -34,7 +34,7 @@ const actions = {
     }
 }
 
-module.exports = {
+export default {
   state,
   mutations,
   actions

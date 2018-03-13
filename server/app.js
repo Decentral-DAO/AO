@@ -18,43 +18,46 @@ import { socketAuth } from './auth'
 
 const app = express()
 applyRouter(app)
+startDctrlAo()
 
-dctrlDb.startDb( (err, conn) => {
+function startDctrlAo(){
+
+  dctrlDb.startDb( (err, conn) => {
 
     state.initialize( err => {
-        if (err) return console.log('state initialize failed:', err)
-        console.log('state initialized!', state.pubState )
+      if (err) return console.log('state initialize failed:', err)
+      watchSpot()
+      initializeWatchedMembersAddresses()
 
-        watchSpot()
-        initializeWatchedMembersAddresses()
+      // now we listen on the changefeed and keep the state up to date
+      const evStream = dctrlDb.changeFeed.onValue( ev => {
+        state.applyEvent(state.serverState, ev)
+      })
+      .onValue(reactions)
 
-        // now we listen on the changefeed and keep the state up to date
-        const evStream = dctrlDb.changeFeed.onValue( ev => {
-            state.applyEvent(state.serverState, ev)
+      const server = app.listen(PORT, err => {
+        console.log("Listening on port", PORT)
+
+        const io = socketIo(server)
+
+        socketProtector(io, {
+          authenticate: socketAuth,
+          // TODO:
+          // postAuthenticate:
+          // disconnect:
+          // timeout:
         })
-        .onValue(reactions)
 
-        const server = app.listen(PORT, err => {
-            console.log("Listening on port", PORT)
-
-            const io = socketIo(server)
-
-            socketProtector(io, {
-                authenticate: socketAuth,
-                // TODO:
-                // postAuthenticate:
-                // disconnect:
-                // timeout:
-            })
-
-            const filteredStream = evStream
-                .map(state.removeSensitive)
-                .onValue( ev => {
-                    state.applyEvent(state.pubState, ev)
-                    console.log('emitting event')
-                    io.emit('eventstream', ev)
-                })
-
+        const filteredStream = evStream
+        .map(state.removeSensitive)
+        .onValue( ev => {
+          state.applyEvent(state.pubState, ev)
+          console.log('emitting event')
+          io.emit('eventstream', ev)
         })
+      })
     })
-})
+  })
+}
+
+module.exports = startDctrlAo

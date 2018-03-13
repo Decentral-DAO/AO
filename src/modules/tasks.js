@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { tasksMuts } from '../../mutations'
+import M from '../mutations'
 
 const state = []
 
@@ -10,14 +10,14 @@ const mutations = {
             tasks.push(task)
         })
     },
-    applyEvent: tasksMuts
+    applyEvent: M.tasksMuts
 }
 
 const actions = {
 
 }
 
-module.exports = {
+export default {
   state,
   mutations,
   actions

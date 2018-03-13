@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "yarn run build; yarn run start",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "babel-node --presets env server/app.js"
   },
@@ -18,6 +18,7 @@
     "path": "^0.12.7",
     "rethinkdb": "^2.3.3",
     "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
     "socketio-auth": "^0.1.0",
     "superagent": "^3.8.2",
     "vue": "^2.5.13",
@@ -34,6 +35,7 @@
     "pug-loader": "^2.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+    "tape": "^4.9.0",
     "vue-template-compiler": "^2.5.13"
   },
   "babel": {

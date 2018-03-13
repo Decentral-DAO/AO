@@ -11,7 +11,7 @@
           main-menu
       .content
           router-view
-    img(src='../assets/images/decent_logo_alpha_no_text.svg')
+    img(src='./assets/images/decent_logo_alpha_no_text.svg')
 
 </template>
 
@@ -19,9 +19,9 @@
 
 import io from 'socket.io-client'
 
-import MainMenu from '.components/MainMenu'
-import MobileHeading from '.components/MobileHeading'
-import EventFeed from '.components/slotUtils/EventFeed'
+import MainMenu from './components/MainMenu'
+import MobileHeading from './components/MobileHeading'
+import EventFeed from './components/slotUtils/EventFeed'
 
 export default {
     mounted(){
@@ -32,17 +32,11 @@ export default {
 
         if (token && session){
             let auth = {token, session}
-            console.log('setting auth', auth)
             this.$store.commit('setAuth', auth)
         }
 
         const socket = io()
         socket.on('connect', ()=> {
-            console.log("socket connected")
-            console.log("authenticating with", {
-              session: this.$store.state.loader.session,
-              token: this.$store.state.loader.token
-            })
 
             socket.emit('authentication', {
               session: this.$store.state.loader.session,
@@ -51,10 +45,7 @@ export default {
 
             socket.on('authenticated', ()=> {
                 console.log('socket authenticated')
-                // use the socket as usual
-
                 this.$store.dispatch('loadCurrent')
-
 
                 socket.on('eventstream', ev => {
                     console.log('eventstream:' , ev)
@@ -78,6 +69,9 @@ export default {
 @import "./styles/breakpoints"
 @import "./styles/framework"
 @import "./styles/colours"
+
+#app
+    background: main
 
 main
     height: 100%;

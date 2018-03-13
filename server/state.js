@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import dctrlDb from './dctrlDb'
-import mutations from '../src/mutations'
+import M from '../src/mutations'
 
 const serverState = {
   connections: [],
@@ -31,13 +31,13 @@ const pubState = {
 }
 
 function applyEvent(state, ev) {
-    mutations.cashMuts(state.cash, ev)
-    mutations.connectionsMuts(state.connections, ev)
-    mutations.invoicesMuts(state.invoices, ev)
-    mutations.membersMuts(state.members, ev)
-    mutations.resourcesMuts(state.resources, ev)
-    mutations.sessionsMuts(state.sessions, ev)
-    mutations.tasksMuts(state.tasks, ev)
+    M.cashMuts(state.cash, ev)
+    M.connectionsMuts(state.connections, ev)
+    M.invoicesMuts(state.invoices, ev)
+    M.membersMuts(state.members, ev)
+    M.resourcesMuts(state.resources, ev)
+    M.sessionsMuts(state.sessions, ev)
+    M.tasksMuts(state.tasks, ev)
 }
 
 function initialize(callback) {

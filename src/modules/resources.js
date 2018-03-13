@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { resourcesMuts } from '../../mutations'
+import M from '../mutations'
 
 const state = [] // aka resources (in this file):
 
@@ -10,12 +10,12 @@ const mutations = {
             resources.push(resource)
         })
     },
-    applyEvent: resourcesMuts
+    applyEvent: M.resourcesMuts
 }
 
 const actions = {}
 
-module.exports = {
+export default {
   state,
   mutations,
   actions

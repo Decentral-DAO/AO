@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-module.exports = (sessions, ev) => {
+function sessionsMuts(sessions, ev){
 	switch (ev.type) {
 		case "session-created":
 			let idHasSession = sessions.some(session => {
@@ -22,3 +22,5 @@ module.exports = (sessions, ev) => {
 			break
 	}
 }
+
+export default sessionsMuts

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-module.exports = (resources, ev) => {
+function resourcesMuts(resources, ev){
 	switch (ev.type) {
 		case "resource-created":
 			resources.push(ev)
@@ -37,3 +37,5 @@ module.exports = (resources, ev) => {
 			break
 	}
 }
+
+export default resourcesMuts
