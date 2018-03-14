@@ -3,7 +3,6 @@ import dctrlDb from './dctrlDb'
 import M from '../src/mutations'
 
 const serverState = {
-  connections: [],
   invoices: [],
   sessions: [],
   members: [],
@@ -18,7 +17,6 @@ const serverState = {
 
 const pubState = {
   invoices: [],
-  connections: [],
   sessions: [],
   members: [],
   tasks: [],
@@ -32,7 +30,6 @@ const pubState = {
 
 function applyEvent(state, ev) {
     M.cashMuts(state.cash, ev)
-    M.connectionsMuts(state.connections, ev)
     M.invoicesMuts(state.invoices, ev)
     M.membersMuts(state.members, ev)
     M.resourcesMuts(state.resources, ev)
