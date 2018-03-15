@@ -2,16 +2,16 @@
 
 .changer
   h6 change your information:
-    form-box(event='member-field-updated', :data='changeReq', btntxt='change your account')
-        span.i(v-if='inputType === "password"')
-            img.i(v-if='matched', src='../../assets/images/check.svg')
-            img.i(v-else, src='../../assets/images/warn.svg')
-        select(v-model='change.field')
-            option(value='secret') password
-            option(value='email') e-mail
-            option(value='name') hackername
-        input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
-        input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')
+  span(v-if='inputType === "password"')
+      img(v-if='matched', src='../../assets/images/check.svg')
+      img(v-else, src='../../assets/images/warn.svg')
+  form-box(event='member-field-updated', :data='changeReq', btntxt='change your account')
+      select(v-model='change.field')
+          option(value='secret') password
+          option(value='email') e-mail
+          option(value='name') hackername
+      input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
+      input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')
   p(v-if='!secure') Please change your password; extra points for using a password manager or ubikey!
 
 </template>
@@ -32,8 +32,13 @@ export default {
             return x === y
         },
         changeReq(){
+
             if (this.change.field === 'secret'){
-                  this.change.newField = cryptoUtils.createHash( this.change.newField )
+                  return {
+                      field: this.change.field,
+                      newfield: cryptoUtils.createHash( this.change.newfield),
+                      memberId: this.$store.getters.memberId
+                  }
             }
             return {
                 field: this.change.field,
@@ -73,6 +78,10 @@ export default {
 @import '../../styles/colours'
 @import '../../styles/button'
 
+img
+    float: left
+    height: 5em
+
 .changer
     padding: 1em
     background: accent4
@@ -82,9 +91,5 @@ export default {
 input, select
     z-index:123123
     color: main
-
-img
-    float: right
-    height: 2em
 
 </style>

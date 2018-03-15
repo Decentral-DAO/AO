@@ -34,8 +34,8 @@ const actions = {
 }
 
 const state = {
-    token: '',
-    session: '',
+    token: 'a',
+    session: 'a',
 }
 
 const mutations = {
@@ -69,7 +69,7 @@ function loadTestState(commit){
 
       commit('applyEvent', {
         type: 'session-created',
-        session,
+        session:'a',
         ownerId: memberId,
       })
 

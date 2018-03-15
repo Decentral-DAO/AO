@@ -64,9 +64,6 @@ export default {
 .response
   color: red
 
-img
-  height: 17em
-
 form
   padding: 0em
   width:95%
@@ -80,8 +77,5 @@ label
 
 input
   width:100%
-
-img
-  width: 100%
 
 </style>
