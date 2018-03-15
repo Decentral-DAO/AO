@@ -43,7 +43,7 @@ function specMemberAddressUpdated(req, res, next){
     validators.isId(req.body.memberId, errRes) &&
     validators.isAddress(req.body.address, errRes)
   ){
-    events.memberAddressUpdated(
+    events.membersEvs.memberAddressUpdated(
       req.body.memberId,
       req.body.address,
       utils.buildResCallback(res)
@@ -60,7 +60,7 @@ function specMemberFieldUpdated(req, res, next){
     validators.isField(req.body.field, errRes) &&
     validators.isNotes(req.body.newfield, errRes)
   ){
-    events.memberFieldUpdated(
+    events.membersEvs.memberFieldUpdated(
         req.body.memberId,
         req.body.field,
         req.body.newfield,
@@ -78,7 +78,7 @@ function specMemberCreated(req, res, next){
     validators.isFob(req.body.fob, errRes) &&
     validators.isNotes(req.body.secret)
   ){
-    events.memberCreated(
+    events.membersEvs.memberCreated(
       req.body.name,
       req.body.fob,
       req.body.secret,
@@ -97,7 +97,7 @@ function specMemberPaid(req, res, next){
     validators.isBool(req.body.isCash, errRes) &&
     validators.isNotes(req.body.fob, errRes)
   ){
-    events.memberPaid(
+    events.membersEvs.memberPaid(
       req.body.memberId,
       req.body.paid,
       req.body.isCash,
@@ -116,7 +116,7 @@ function specMemberCharged(req, res, next){
     validators.isAmount(req.body.charged, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.memberCharged(
+    events.membersEvs.memberCharged(
       req.body.memberId,
       req.body.charged,
       req.body.notes,
@@ -132,7 +132,7 @@ function specMemberDeactivated(req, res, next){
   if (
     validators.isMemberId(req.body.memberId, errRes)
   ){
-    events.memberDeactivate(
+    events.membersEvs.memberDeactivate(
       req.body.memberId,
       utils.buildResCallback(res)
     )
@@ -146,7 +146,7 @@ function specMemberActivated(req, res, next){
   if (
     validators.isMemberId(req.body.memberId, errRes)
   ){
-    events.memberActivated(
+    events.membersEvs.memberActivated(
       req.body.memberId,
       utils.buildResCallback(res)
     )
@@ -161,7 +161,7 @@ function specBadgeAdded(req, res, next){
       validators.isMemberId(req.body.memberId, errRes) &&
       validators.isNotes( req.body.badge )
     ){
-      events.badgeRemoved(
+      events.membersEvs.badgeAdded(
         req.body.memberId,
         req.body.badge,
         utils.buildResCallback(res)
@@ -177,7 +177,7 @@ function specBadgeRemoved(req, res, next){
       validators.isMemberId(req.body.memberId, errRes) &&
       validators.isNotes( req.body.badge )
     ){
-      events.badgeRemoved(
+      events.membersEvs.badgeRemoved(
         req.body.memberId,
         req.body.badge,
         utils.buildResCallback(res)

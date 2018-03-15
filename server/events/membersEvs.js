@@ -1,18 +1,6 @@
 const uuidV1 = require('uuid/v1')
 const dctrlDb = require('../dctrlDb')
 
-module.exports = {
-  memberCreated,
-  memberPaid,
-  memberCharged,
-  memberDeactivated,
-  memberActivated,
-  memberAddressUpdated,
-  memberFieldUpdated,
-  badgeAdded,
-  badgeRemoved
-}
-
 function memberCreated(name, fob, secret, callback) {
     let newEvent = {
         type: "member-created",
@@ -102,4 +90,16 @@ function badgeRemoved(memberId, badge, callback) {
       badge,
   }
   dctrlDb.insertEvent(newEvent, callback)
+}
+
+export default {
+  memberCreated,
+  memberPaid,
+  memberCharged,
+  memberDeactivated,
+  memberActivated,
+  memberAddressUpdated,
+  memberFieldUpdated,
+  badgeAdded,
+  badgeRemoved
 }

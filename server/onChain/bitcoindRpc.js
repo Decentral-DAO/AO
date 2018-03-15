@@ -1,11 +1,11 @@
 const Client = require('bitcoin-core')
 const config = require('../../configuration')
 
-const client = new Client(config.bitcoindClient)
+const client = new Client(config.bitcoind)
 
-function watchAddress(address, callback){
+function importAddress(address, callback){
     console.log({address})
-    client.cmd(
+    client.command(
         'importaddress',
         address,
         'test',
@@ -18,7 +18,7 @@ function watchAddress(address, callback){
 
 function getBalance(address, callback){
     console.log({address})
-    client.cmd(
+    client.command(
         'getreceivedbyaddress',
         address,
         (err, balance, resHeaders)=>{
@@ -40,6 +40,6 @@ function getAddressHistory(address, callback){
 
 module.exports = {
     getBalance,
-    watchAddress,
+    importAddress,
     getAddressHistory
 }

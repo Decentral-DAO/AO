@@ -34,7 +34,7 @@ function specTaskCreated(req, res, next){
     validators.isBool(req.body.oneTime, errRes) &&
     validators.isFob(req.body.fob, errRes)
   ){
-    events.taskCreated(
+    events.tasksEvs.taskCreated(
       req.body.name,
       req.body.description,
       req.body.monthlyValue,
@@ -66,7 +66,7 @@ function specTaskClaimed(req, res, next){
     validators.isAmount(paid, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.taskClaimed(
+    events.tasksEvs.taskClaimed(
       req.body.taskId,
       memberId,
       paid,
@@ -85,7 +85,7 @@ function specTaskRateUpdated(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.taskMonthlyUpdated(
+    events.tasksEvs.taskMonthlyUpdated(
       req.body.taskId,
       req.body.amount,
       req.body.notes,
@@ -103,7 +103,7 @@ function specTaskBoosted(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.taskBoosted(
+    events.tasksEvs.taskBoosted(
       req.body.taskId,
       req.body.amount,
       req.body.notes,

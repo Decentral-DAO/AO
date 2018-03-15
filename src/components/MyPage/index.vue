@@ -2,8 +2,7 @@
 
 #home
     shared-title(:title='name')
-    .container
-        payment
+    payment
     changer
     label Your badges
     badges(:m='member')

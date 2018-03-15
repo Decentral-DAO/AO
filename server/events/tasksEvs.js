@@ -1,13 +1,6 @@
 const uuidV1 = require('uuid/v1')
 const dctrlDb = require('../dctrlDb')
 
-module.exports = {
-  taskRateUpdated,
-  taskBoosted,
-  taskCreated,
-  taskClaimed,
-}
-
 function taskCreated(name, instructions, monthlyValue, cap, boost, fob, oneTime, callback) {
   let newEvent = {
     type: "task-created",
@@ -53,4 +46,11 @@ function taskRateUpdated(taskId, amount, notes, callback) {
     notes,
   }
   dctrlDb.insertEvent(newEvent, callback)
+}
+
+export default {
+  taskRateUpdated,
+  taskBoosted,
+  taskCreated,
+  taskClaimed,
 }

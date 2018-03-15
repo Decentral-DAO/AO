@@ -1,11 +1,5 @@
 const dctrlDb = require('../dctrlDb')
 
-module.exports = {
-  cashIncreased,
-  cashDecreased,
-  spotUpdated
-}
-
 function cashIncreased(amount, notes, callback) {
   let newEvent = {
       type: "cash-increased",
@@ -46,4 +40,10 @@ function forex(currency, callback) {
       currency
   }
   dctrlDb.insertEvent(newEvent, callback)
+}
+
+export default {
+  cashIncreased,
+  cashDecreased,
+  spotUpdated
 }

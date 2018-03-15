@@ -5,11 +5,6 @@ const dctrlDb = require('../dctrlDb')
 const lnd = require('../lnd.js')
 const meta = require('../lndConfig/meta')
 
-module.exports = {
-    invoiceCreated,
-    invoicePaid
-}
-
 function invoiceCreated(ownerId, memo, value, callback) {
     lnd.addInvoice({ memo, value }, meta, (err, response) => {
         if (err) {
@@ -47,4 +42,10 @@ function invoicePaid(r_hash, callback){
             }
         }
     })
+}
+
+
+export default {
+    invoiceCreated,
+    invoicePaid
 }

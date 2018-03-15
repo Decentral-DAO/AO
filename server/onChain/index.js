@@ -42,10 +42,8 @@ function recordMemberPayment(btcAmount, address){
     let notes = 'dctrl-admin' // txid ?
     console.log({memberId, paid})
     if (memberId && paid){
-        events.memberPaid(memberId, paid, isCash, notes)
+        events.membersEvs.memberPaid(memberId, paid, isCash, notes)
     }
-
-     // bring in the transaction ID, instead of this.
 }
 
 function getMemberIdFromAddress(address){
@@ -63,8 +61,7 @@ function recordResourcePayment(btcAmount, address){
     let resourceId = getResourceIdFromAddress(address)
     let notes = 'dctrl-admin' // bring in the transaction ID, instead of this.
     let amount = (state.pubState.cash.spot * btcAmount).toFixed(6).toString()
-
-    // events.resourcePaid(resourceId, amount, isCash, notes)
+    // events.resourceEvs.resourcePaid(resourceId, amount, isCash, notes)
 }
 
 function getResourceIdFromAddress(address, callback){

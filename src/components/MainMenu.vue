@@ -4,6 +4,7 @@ nav
   router-link(to='/')
       img(src='../assets/images/dctrl.svg')
   li 1 BTC = ${{ cadPrice }}
+  li $1 = {{ sats }} satoshis
   navigation
 
 </template>
@@ -15,7 +16,11 @@ export default {
   components:{
       Navigation
   },
+
   computed: {
+    sats(){
+        return ( 100000000 / this.$store.state.cash.spot ).toFixed().toLocaleString()
+    },
     cadPrice(){
         return this.$store.state.cash.spot.toLocaleString()
     }

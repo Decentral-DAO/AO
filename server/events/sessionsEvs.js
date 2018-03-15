@@ -1,10 +1,6 @@
 const uuidV1 = require('uuid/v1')
 const dctrlDb = require('../dctrlDb')
 
-module.exports = {
-  sessionCreated
-}
-
 function sessionCreated(ownerId, session, token, callback) {
     let newEvent = {
         type: "session-created",
@@ -13,4 +9,8 @@ function sessionCreated(ownerId, session, token, callback) {
         ownerId
     }
     dctrlDb.insertEvent(newEvent, callback)
+}
+
+export default {
+  sessionCreated
 }

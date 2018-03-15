@@ -23,7 +23,7 @@ function specCashIncreased(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.cashIncreased(
+    events.cashEvs.cashIncreased(
       req.body.amount,
       req.body.notes,
       utils.buildResCallback(res)
@@ -39,7 +39,7 @@ function specCashDecreased(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.cashDecreased(
+    events.cashEvs.cashDecreased(
       req.body.amount,
       req.body.notes,
       utils.buildResCallback(res)

@@ -28,7 +28,7 @@ function specResourceCreated(req, res, next){
     validators.isAmount(req.body.charged, errRes) &&
     validators.isNotes(req.body.secret, errRes)
   ){
-    events.resourceCreated(
+    events.resourcesEvs.resourceCreated(
       req.body.resourceId,
       req.body.name,
       req.body.charged,
@@ -49,7 +49,7 @@ function specResourceUsed(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isAmount(req.body.charged, errRes)
   ){
-    events.resourceUsed(
+    events.resourcesEvs.resourceUsed(
       req.body.resourceId,
       memberId,
       req.body.amount,
@@ -71,7 +71,7 @@ function specResourceStocked(req, res, next){
     validators.isAmount(req.body.paid, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
-    events.resourceStocked(
+    events.resourcesEvs.resourceStocked(
       req.body.resourceId,
       memberId,
       req.body.amount,

@@ -28,7 +28,6 @@ export default {
   name: 'Auth',
   components: { SharedTitle, FormBox },
   data(){
-
       return {
           name: '',
           pass: '',
@@ -47,7 +46,7 @@ export default {
   methods: {
       createSession(){
           let session = uuidV1()
-          let sessionKey = cryptoUtils.createHash(session + this.pass)
+          let sessionKey = cryptoUtils.createHash(session + cryptoUtils.createHash(this.pass))
           let token = cryptoUtils.hmacHex(session, sessionKey)
           request
               .post('/session')

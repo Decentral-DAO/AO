@@ -8,7 +8,7 @@ module.exports = function(req, res, next){
     let memberId = utils.memberIdFromFob(req.body.fob)
     let resource = utils.getResource(req.body.resourceId)
     if (memberId && resource){
-        events.resourceUsed(
+        events.resourceEvs.resourceUsed(
           req.body.resourceId,
           memberId,
           req.body.amount || 1,

@@ -31,9 +31,9 @@ module.exports = {
 }
 
 const sock = zmq.socket('sub')
-// sock.subscribe("hashblock");
+sock.subscribe("hashblock");
 // sock.subscribe("hashtx");
-sock.subscribe("rawblock");
+// sock.subscribe("rawblock");
 // sock.subscribe("rawtx");
 sock.on('message', function(topic, message) {
     switch ( topic.toString('utf8') ) {

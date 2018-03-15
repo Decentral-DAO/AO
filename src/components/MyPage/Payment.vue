@@ -30,7 +30,6 @@ export default {
         if ( this.$store.getters.member.balance < 0){
             cadvalue = -this.$store.getters.member.balance
         }
-        console.log({cadvalue})
         if (!cadvalue){
             cadvalue = 0
         } else {

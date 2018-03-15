@@ -1,7 +1,8 @@
-const r = require('rethinkdb')
-const Kefir = require('kefir')
-const config = require('../configuration')
-const _ = require('lodash')
+import r from 'rethinkdb'
+import Kefir from 'kefir'
+import config from '../configuration'
+import cryptoUtils from '../src/crypto'
+import _ from 'lodash'
 
 var conn, eventEmitter
 
@@ -9,12 +10,25 @@ const changeFeed = Kefir.stream(e => {
   eventEmitter = e
 }).log('dbfeed')
 
-
-function initializeRethink() {
+function initializeRethink(cb) {
   if (!conn) return console.log("wait for connection")
   return r.dbCreate('dctrl').run(conn, (err, result) => {
-    r.db('dctrl').tableCreate('events').run(conn, (err, result2) => {
-      startFeed()
+    r.db('dctrl').tableCreate('events').run(conn, (err2, result2) => {
+
+      insertEvent({
+        type: 'member-created',
+        name: 'dctrl',
+        fob: '0000000000',
+        secret: cryptoUtils.createHash('1235'), // password for dctrl init user is 1235
+        memberId: '0',
+        address: '2MyY5mgC8Nf3k3mdUK6tGKQhCUFLKXuFZVk',
+        active: 1,
+        balance: 0,
+        badges: [],
+        info: {}
+      })
+      cb(null, conn)
+      // startFeed()
     })
   })
 }
@@ -22,6 +36,7 @@ function initializeRethink() {
 function getAll(callback) {
     if (!conn) return console.log("wait for connection")
     r
+        .db('dctrl')
         .table('events')
         .orderBy('timestamp') //todo index
         .run(conn, (err, cursor) => {
@@ -39,6 +54,7 @@ function getAll(callback) {
 function startFeed() {
   console.log("starting feed...")
   r
+    .db('dctrl')
     .table('events')
     .changes()
     .run(conn, (err, cursor) => {
@@ -69,10 +85,10 @@ function startDb(callback){
     r.dbList().run(conn, (err, list) => {
       if (_.includes(list, 'dctrl')) { // TODO check for table too
         startFeed()
+        callback(null, conn)
       } else {
-        initializeRethink()
+        initializeRethink(callback)
       }
-      callback(null, conn)
     })
   })
 }

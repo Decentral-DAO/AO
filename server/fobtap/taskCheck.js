@@ -22,7 +22,7 @@ module.exports = function(req, res, next){
     let memberId = utils.memberIdFromFob(req.body.fob)
     if (memberId){
         let paid = calculations.calculateTaskPayout(taskCheck.task)
-        events.taskClaimed(
+        events.taskEvs.taskClaimed(
           taskCheck.task.taskId,
           memberId,
           paid,

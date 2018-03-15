@@ -2,11 +2,11 @@
 
 #newmember
 	shared-title(title='Create New Member')
-	form-box(btntxt="Welcome New Member"  event='member-created' v-bind:data='member')
+	form-box(btntxt="Welcome New Member"  event='member-created' v-bind:data='memberReq')
 			label hacker name
 			input(v-model='member.name' type='text' )
 			label secret login password
-			input(v-model='member.secret' type='password')
+			input(v-model='member.pass' type='password')
 			label Member Fob! (tap it)
 			input(v-model='member.fob' type='text')
 
@@ -14,6 +14,7 @@
 
 <script>
 import request from "superagent"
+import cryptoUtils from '../../crypto'
 import SharedTitle from '../slotUtils/SharedTitle'
 import FormBox from '../slotUtils/FormBox'
 
@@ -22,11 +23,20 @@ export default {
     return {
       member: {
         name: '',
-        secret: '',
+        pass: '',
         fob: '',
       }
     }
   },
+	computed: {
+			memberReq(){
+					return {
+							name: this.member.name,
+							secret: cryptoUtils.createHash(this.member.pass),
+							fob: '',
+					}
+			}
+	},
   components: {
     SharedTitle, FormBox
   }

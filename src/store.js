@@ -64,6 +64,7 @@ export default new Vuex.Store({
                   _.assign(loggedInMember, member)
               }
           })
+          console.log({loggedInMember})
           return loggedInMember
       },
       name(state, getters){

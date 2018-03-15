@@ -5,19 +5,21 @@ require('./onChain')
 require('./reactions')
 
 import express from 'express'
+import dctrlDb from './dctrlDb'
 import path from "path"
-import { watchSpot } from './exchangeRate'
 import { initializeWatchedMembersAddresses } from './onChain/currentAccounts'
 import socketProtector from 'socketio-auth'
 import socketIo from 'socket.io'
-import dctrlDb from './dctrlDb'
 import state from './state'
 import reactions from './reactions'
 import applyRouter from './router'
 import { socketAuth } from './auth'
+import { watchSpot } from './exchangeRate'
 
 const app = express()
+
 applyRouter(app)
+
 startDctrlAo()
 
 function startDctrlAo(){
@@ -26,6 +28,9 @@ function startDctrlAo(){
 
     state.initialize( err => {
       if (err) return console.log('state initialize failed:', err)
+
+      console.log('state initialized', state.pubState)
+
       watchSpot()
       initializeWatchedMembersAddresses()
 
@@ -59,5 +64,3 @@ function startDctrlAo(){
     })
   })
 }
-
-module.exports = startDctrlAo

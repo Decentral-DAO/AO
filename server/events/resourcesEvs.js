@@ -1,12 +1,6 @@
 import uuidV1 from 'uuid/v1'
 import dctrlDb from '../dctrlDb'
 
-module.exports = {
-    resourceCreated,
-    resourceUsed,
-    resourceStocked,
-}
-
 function resourceCreated(resourceId, name, charged, secret, callback) {
     let newEvent = {
         type: "resource-created",
@@ -43,4 +37,10 @@ function resourceUsed(resourceId, memberId, amount, charged, notes, callback) {
       notes
   }
   dctrlDb.insertEvent(newEvent, callback)
+}
+
+export default {
+    resourceCreated,
+    resourceUsed,
+    resourceStocked,
 }

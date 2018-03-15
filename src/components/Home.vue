@@ -4,7 +4,7 @@
     shared-title(title='dctrl community commons')
     auth
     p Welcome to dctrl, smart community application for the singularity.
-    p 
+    p
     p ... TODO
     p We host &nbsp;
         a(href='https://www.meetup.com/dctrlvan/') meetups &nbsp;
@@ -20,7 +20,6 @@
 <script>
 
 import SharedTitle from './slotUtils/SharedTitle'
-// import CrazyBtn from './slotUtils/CrazyBtn'
 import Auth from './Auth'
 
 export default {

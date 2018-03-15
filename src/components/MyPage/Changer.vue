@@ -19,6 +19,7 @@
 <script>
 
 import FormBox from '../slotUtils/FormBox'
+import cryptoUtils from '../../crypto'
 
 export default {
     components: {
@@ -28,10 +29,12 @@ export default {
         matched(){
             let x = this.change.newfield
             let y = this.change.confirmNewfield
-            console.log({x, y})
             return x === y
         },
         changeReq(){
+            if (this.change.field === 'secret'){
+                  this.change.newField = cryptoUtils.createHash( this.change.newField )
+            }
             return {
                 field: this.change.field,
                 newfield: this.change.newfield,
