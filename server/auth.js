@@ -3,11 +3,6 @@ const events = require('./events')
 const cryptoUtils = require('../src/crypto')
 const state = require('./state')
 
-const getSecret = function(id){
-
-  return '1234'
-}
-
 const getIdSecret = function(identifier){
     let ownerId, secret
     state.serverState.members.forEach( member => {
@@ -26,7 +21,7 @@ const getIdSecret = function(identifier){
 
     return {ownerId, secret}
 }
-
+// Used in socketio-auth creation, checks token (https://www.npmjs.com/package/socketio-auth)
 function socketAuth(socket, data, callback){
     let authorized
     state.serverState.sessions.forEach(session => {

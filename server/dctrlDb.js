@@ -8,13 +8,12 @@ var conn, eventEmitter
 
 const changeFeed = Kefir.stream(e => {
   eventEmitter = e
-}).log('dbfeed')
+})
 
 function initializeRethink(cb) {
   if (!conn) return console.log("wait for connection")
   return r.dbCreate('dctrl').run(conn, (err, result) => {
     r.db('dctrl').tableCreate('events').run(conn, (err2, result2) => {
-
       insertEvent({
         type: 'member-created',
         name: 'dctrl',

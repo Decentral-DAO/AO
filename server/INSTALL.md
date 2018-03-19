@@ -171,7 +171,7 @@ go install . ./cmd/...
 # 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
-Then you need to close and re-open the terminal, then you can install the most recent node. 
+Then you need to close and re-open the terminal, then you can install the most recent node.
 - `nvm install stable`
 
 # 8. Install yarn
@@ -183,8 +183,26 @@ Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 
 # 9. Install dctrl-ao
 
+Get the code from github and install the dependencies:
 - `git clone ...`
 - `cd dctrl-ao`
 - `yarn install`
-- `yarn run build`
-- `yarn run start`
+
+Now compile the Vue code from the /src folder into /dist. This will be served by the express service defined in /server.
+- `yarn build`
+
+At this point you will should be ready to run the app. On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
+- `yarn start`
+
+You should now be able to navigate to localhost:8003 to find the dctrl-ao admin console. Log in as the first user (dctrl:1235).
+
+# 10. Connect any rfid scanning Pi's
+See the setup instructions at (https://github.com/dctrl-ao/fobtap)
+
+# 11. Setup dctrl-ao as a service - (using pm2 this time)
+( http://pm2.keymetrics.io/ )
+
+# 12. Host on the internet!
+TODO
+# 13. Host on cjdns / meshnet
+TODO
