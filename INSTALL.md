@@ -155,21 +155,18 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 ```
 
-Now we should be able to install the go dependence manager glide:
-- `go get -u github.com/Masterminds/glide`
-
 Next we will install lnd. More up to date instructions may be found here (https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md).
 
 ```bash
-git clone https://github.com/lightningnetwork/lnd $GOPATH/src/github.com/lightningnetwork/lnd
+go get -d github.com/lightningnetwork/lnd
 cd $GOPATH/src/github.com/lightningnetwork/lnd
-glide install
-go install . ./cmd/...
+make && make install
 ```
 
 # 6. Setup lnd
   - how to setup negotiate channels able to accept payments?
-  -
+
+
 # 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
@@ -183,7 +180,7 @@ Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 - `sudo apt-get update`
 - `sudo apt-get install --no-install-recommends yarn` #
 
-# 9. Install dctrl-ao
+# 9. Install ao
 
 Get the code from github and install the dependencies:
 - `git clone ...`
@@ -191,18 +188,17 @@ Get the code from github and install the dependencies:
 - `yarn install`
 - `yarn compile`
 
-There are now 4 scripts, `yarn buildFront` compiles the vue code in /dist. `yarn buildBack` builds the production server in /production. `yarn serve` starts the hot reloading server for editing styles.
-
 At this point you will should be ready to run the app. `yarn start` On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
 
 Alternatively you can use `yarn serve` to startup the vue hot-reloading. In this mode any changes you make to the /src/ folder will be immeadiately displayed. This is useful while editing the frontend components or templating new functionality.
 
 To recap the dctrl-ao scripts are:
-- `yarn build` # compile the vue code to /dist
-- `yarn start` # eventstate server & web app, hosted at http://localhost:8003
+- `yarn buildFront` # compile the vue code to /dist
+- `yarn buildBack` # compile the server code to /production
 - `yarn serve` # hot reloading + dev-tools (https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+- `yarn start` # eventstate server & web app, hosted at http://localhost:8003
 
-You should now be able to navigate to localhost:8003 to find the dctrl-ao admin console. Log in as the first user (dctrl:1235).
+You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
 # 10. Connect any rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
