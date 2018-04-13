@@ -54,12 +54,12 @@ function startDctrlAo(){
         })
 
         const filteredStream = evStream
-        .map(state.removeSensitive)
-        .onValue( ev => {
-          state.applyEvent(state.pubState, ev)
-          console.log('emitting event')
-          io.emit('eventstream', ev)
-        })
+            .map(state.removeSensitive)
+            .onValue( ev => {
+              state.applyEvent(state.pubState, ev)
+              console.log('emitting event')
+              io.emit('eventstream', ev)
+            })
       })
     })
   })

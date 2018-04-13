@@ -1,7 +1,7 @@
 // https://apiv2.bitcoinaverage.com/#requests
 const crypto = require('crypto');
 const request = require('superagent')
-const config = require('../configuration')
+const config = require('../../configuration')
 const events = require('./events')
 const state = require('./state')
 const validators = require('./spec/validators')

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import dctrlDb from './dctrlDb'
-import M from '../src/mutations'
+import M from '../mutations'
 
 const serverState = {
   invoices: [],

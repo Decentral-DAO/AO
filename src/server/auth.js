@@ -1,6 +1,6 @@
 const utils = require('./spec/utils')
 const events = require('./events')
-const cryptoUtils = require('../src/crypto')
+const cryptoUtils = require('../crypto')
 const state = require('./state')
 
 const getIdSecret = function(identifier){

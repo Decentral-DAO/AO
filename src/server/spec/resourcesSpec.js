@@ -2,7 +2,6 @@ import utils from './utils'
 import validators from './validators'
 import events from '../events'
 import state from '../state'
-import calculations from '../../src/calculations'
 
 module.exports = function(req,res, next){
   switch (req.body.type){

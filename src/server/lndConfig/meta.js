@@ -1,7 +1,7 @@
 const fs = require('fs')
-const config = require('./index')
+const lnd = require('./index')
 const grpc = require('grpc')
-const macaroonFile = fs.readFileSync(config.macaroon)
+const macaroonFile = fs.readFileSync(lnd.macaroon)
 const meta = new grpc.Metadata()
 meta.add('macaroon', macaroonFile.toString('hex'))
 

@@ -1,5 +1,5 @@
 const Client = require('bitcoin-core')
-const config = require('../../configuration')
+const config = require('../../../configuration')
 
 const client = new Client(config.bitcoind)
 

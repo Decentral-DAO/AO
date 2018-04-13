@@ -1,7 +1,7 @@
 import r from 'rethinkdb'
 import Kefir from 'kefir'
-import config from '../configuration'
-import cryptoUtils from '../src/crypto'
+import config from '../../configuration'
+import cryptoUtils from '../crypto'
 import _ from 'lodash'
 
 var conn, eventEmitter

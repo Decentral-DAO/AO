@@ -167,7 +167,9 @@ glide install
 go install . ./cmd/...
 ```
 
-# 6. Setup lnd as a Service
+# 6. Setup lnd
+  - how to setup negotiate channels able to accept payments?
+  - 
 # 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
@@ -188,11 +190,16 @@ Get the code from github and install the dependencies:
 - `cd dctrl-ao`
 - `yarn install`
 
-Now compile the Vue code from the /src folder into /dist. This will be served by the express service defined in /server.
-- `yarn build`
+Now compile the Vue code from the /src folder into /dist. This will be served by the express service defined in /server.`yarn build`
 
-At this point you will should be ready to run the app. On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
-- `yarn start`
+At this point you will should be ready to run the app. `yarn start` On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
+
+Alternatively you can use `yarn serve` to startup the vue hot-reloading. In this mode any changes you make to the /src/ folder will be immeadiately displayed. This is useful while editing the frontend components or templating new functionality.
+
+To recap the dctrl-ao scripts are:
+- `yarn build` # compile the vue code to /dist
+- `yarn start` # eventstate server & web app, hosted at http://localhost:8003
+- `yarn serve` # hot reloading + dev-tools (https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
 You should now be able to navigate to localhost:8003 to find the dctrl-ao admin console. Log in as the first user (dctrl:1235).
 

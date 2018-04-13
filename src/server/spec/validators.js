@@ -29,18 +29,18 @@ module.exports = {
       return true
   },
   isFob(val, errRes){
-      let regex = /^[0-9]{10}$/
-      let result = regex.test(val)
-      if (!result){
-        errRes.push('invalid fob format')
-      }
-      return result
+      // let regex = /^[0-9]{10}$/
+      // let result = regex.test(val)
+      // if (!result){
+      //   errRes.push('invalid fob format')
+      // }
+      return true
   },
   isMultisigAddress(val, errRes){
-      return true
+      return true // XXX
   },
   isAddress(val, errRes){
-      return true
+      return true // XXX
   },
   isMemberId(val, errRes){
       let result = false

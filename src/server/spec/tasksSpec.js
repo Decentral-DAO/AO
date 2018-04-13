@@ -2,7 +2,7 @@ import utils from './utils'
 import validators from './validators'
 import events from '../events'
 import state from '../state'
-import calculations from '../../src/calculations'
+import { calculateTaskPayout } from '../../calculations'
 
 module.exports = function(req,res, next){
   switch (req.body.type){
@@ -55,7 +55,7 @@ function specTaskClaimed(req, res, next){
   let paid
   state.pubState.tasks.forEach( task => {
     if (task.taskId == req.body.taskId){
-        paid = calculations.calculateTaskPayout(task)
+        paid = calculateTaskPayout(task)
     }
   })
   let memberId = utils.memberIdFromFob(req.body.fob)

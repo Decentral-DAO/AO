@@ -1,4 +1,4 @@
-import config from '../../configuration'
+import config from '../../../configuration'
 import request from 'superagent'
 import events from '../events'
 import state from '../state'

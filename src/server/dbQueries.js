@@ -1,5 +1,5 @@
 const r = require('rethinkdb')
-const config = require('../configuration')
+const config = require('../../configuration')
 const dctrlDb = require('./dctrlDb')
 
 // todo time filter

@@ -1,6 +1,6 @@
 import express from 'express'
 import state from './state'
-import cryptoUtils from '../src/crypto'
+import cryptoUtils from '../crypto'
 import BloomFilter from 'bloom-filter'
 
 const router = express.Router()

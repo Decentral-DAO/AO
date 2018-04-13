@@ -1,5 +1,5 @@
 const request = require('superagent')
-const config = require('../../configuration')
+const config = require('../../../configuration')
 const state = require('../state')
 const bitcoindRpc = require('./bitcoindRpc')
 
