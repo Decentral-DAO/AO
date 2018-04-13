@@ -6,7 +6,7 @@ These instructions will assume you are setting up dctrl/ao on a fresh install of
 ### 1. Get ubuntu
 
 To create a bootable Ubuntu usb (on linux) download the .iso file from the above link. Run the command `sudo fdisk -l` to see a list of the the plugged in drives. Once you have selected the correct drive (ie. /dev/sdb) run: The dd command specifies an input file (if) which is the iso and an output file (of) which is the usd drive. Careful this formats the usb!
-- `sudo unmount <path-to-usb>`
+- `sudo umount <path-to-usb>`
 - `sudo dd if=<path-to-ubuntu-iso> of=<path-to-usb> bs=1M`
 - i.e. `sudo dd if=./Downloads/Ubuntu-17.10.iso> of=/dev/sdb bs=1M`
 
