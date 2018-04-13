@@ -169,7 +169,7 @@ go install . ./cmd/...
 
 # 6. Setup lnd
   - how to setup negotiate channels able to accept payments?
-  - 
+  -
 # 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
@@ -189,8 +189,9 @@ Get the code from github and install the dependencies:
 - `git clone ...`
 - `cd dctrl-ao`
 - `yarn install`
+- `yarn compile`
 
-Now compile the Vue code from the /src folder into /dist. This will be served by the express service defined in /server.`yarn build`
+There are now 4 scripts, `yarn buildFront` compiles the vue code in /dist. `yarn buildBack` builds the production server in /production. `yarn serve` starts the hot reloading server for editing styles.
 
 At this point you will should be ready to run the app. `yarn start` On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
 
