@@ -9,10 +9,9 @@ function tasksMuts(tasks, ev) {
 			tasks.forEach(task => {
 				if (task.taskId === ev.taskId) {
 					if (task.oneTime) {
-						_.remove(tasks, function(task) {
-							return (task.taskId === ev.taskId)
-						})
+						_.remove(tasks, (task) => task.taskId === ev.taskId )
 					} else {
+						task.lastClaimedBy = ev.memberId
 						task.lastClaimed = Date.now()
 						task.boost = 0
 					}

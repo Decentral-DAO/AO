@@ -13,6 +13,8 @@ const mutations = {
     applyEvent: M.membersMuts
 }
 
+
+
 const actions = {}
 
 export default {

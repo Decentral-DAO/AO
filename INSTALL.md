@@ -203,6 +203,8 @@ You should now be able to navigate to localhost:8003 to find the ao admin consol
 # 10. Connect any rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
 
+# 11. Network split secure / guest
+
 # 11. Setup dctrl-ao as a service - (using pm2 this time)
 ( http://pm2.keymetrics.io/ )
 

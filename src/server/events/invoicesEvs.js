@@ -8,6 +8,7 @@ const meta = require('../lndConfig/meta')
 function invoiceCreated(ownerId, memo, value, callback) {
     lnd.addInvoice({ memo, value }, meta, (err, response) => {
         if (err) {
+            console.log("add Invoice error", err)
             callback(err);
         } else {
           let newEvent = {

@@ -27,12 +27,18 @@ function resourcesMuts(resources, ev){
 			})
 			break
 		case "resource-stocked":
-			console.log('resource stocked mutation')
 			resources.forEach( resource => {
 				if (resource.resourceId == ev.resourceId){
-					console.log('adjusting stock, ', ev.amount)
 					resource.stock += parseFloat(ev.amount)
 				}
+			})
+			break
+		case "cleanup":
+			resources.forEach( resource => {
+					resource.current = _.filter(resource.current, ev => {
+							// XXX
+							return  Date.now() - parseInt(ev.timestamp) > 10000
+					})
 			})
 			break
 	}

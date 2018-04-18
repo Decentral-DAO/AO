@@ -72,11 +72,8 @@ function membersMuts(members, ev){
           break
 
       case "member-field-updated":
-          console.log('trying to mutate field', ev)
           members.forEach( member => {
               if (member.memberId === ev.memberId){
-                  console.log({member})
-                  console.log( 'trying to change', ev.field, member[ev.field] )
                   member[ev.field] = ev.newfield
               }
           })

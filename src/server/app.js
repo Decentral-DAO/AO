@@ -31,6 +31,14 @@ function startDctrlAo(){
 
       console.log('state initialized', state.pubState)
 
+      const cleanup = {
+          type: "cleanup"
+      }
+
+      setInterval( () => {
+          state.applyEvent(state.serverState, cleanup)
+      }, 1234 )
+
       watchSpot()
       initializeWatchedMembersAddresses()
 

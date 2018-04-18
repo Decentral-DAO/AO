@@ -24,7 +24,7 @@ function specInvoiceCreated(req, res, next){
     validators.isNotes(req.body.memo, errRes) &&
     validators.isAmount(req.body.value, errRes)
   ){
-    events.invoiceEvs.invoiceCreated(
+    events.invoicesEvs.invoiceCreated(
       req.body.ownerId,
       req.body.memo,
       req.body.value,
@@ -40,7 +40,7 @@ function specInvoicePaid(req, res, next){
   if ( true // TODO
     // validators.isInvoiceHash(req.body.r_hash, errRes)
   ){
-    events.invoiceEvs.invoicePaid(
+    events.invoicesEvs.invoicePaid(
       req.body.r_hash,
       utils.buildResCallback(res)
     )

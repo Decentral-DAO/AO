@@ -30,6 +30,16 @@ export default new Vuex.Store({
       invoices
   },
   getters: {
+      mrclean(state, getters){
+          let time = 0, who = ''
+          state.tasks.forEach(task => {
+              if (task.lastClaimed > time){
+                  who = task.lastClaimedby
+              }
+          })
+          console.log('mrclean ', {who})
+          return who
+      },
       memberId(state, getters){
           let id
           state.sessions.forEach( s => {
