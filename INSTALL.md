@@ -1,5 +1,4 @@
-# server install instructions
-
+# ao server install instructions
 
 These instructions will assume you are setting up dctrl/ao on a fresh install of
 - Ubuntu 17.10 - https://www.ubuntu.com/download/desktop
@@ -132,7 +131,7 @@ You can check the status of bitcoind using:
 Confirm that these command survive a reboot. It will take some time to sync the node.
 
 ---
-# 5. Install ZMQ
+### 5. Install ZMQ
 Get the tarball from http://zeromq.org/intro:get-the-software
 - `cd Downloads`
 - `tar xf zeromq-4.2.3.tar.gz`
@@ -143,7 +142,7 @@ Get the tarball from http://zeromq.org/intro:get-the-software
 - `sudo ldconfig`
 
 
-# 6. Install go and lightning node
+### 6. Install go and lightning node
 Go is needed to run lnd
 - `sudo apt-get install golang-1.10-go`
 
@@ -163,24 +162,24 @@ cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
 
-# 6. Setup lnd
+### 6. Setup lnd
   - how to setup negotiate channels able to accept payments?
 
 
-# 7. Install node.js
+### 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
 Then you need to close and re-open the terminal, then you can install the most recent node.
 - `nvm install stable`
 
-# 8. Install yarn
+### 8. Install yarn
 Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `sudo apt-get update`
 - `sudo apt-get install --no-install-recommends yarn` #
 
-# 9. Install ao
+### 9. Install ao
 
 Get the code from github and install the dependencies:
 - `git clone ...`
@@ -200,7 +199,7 @@ To recap the dctrl-ao scripts are:
 
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
-# 9.1 Setup ao as a service - (using pm2 this time)
+### 9.1 Setup ao as a service - (using pm2 this time)
 
 For reference: ( http://pm2.keymetrics.io/ ). Start by installing pm2 globally and start the process.
 - `yarn global add pm2`
@@ -209,12 +208,18 @@ For reference: ( http://pm2.keymetrics.io/ ). Start by installing pm2 globally a
 
 After initializing the startup command the terminal will give you instructions to finish the setup, run the command it specifies.
 
-# 10. Connect any rfid scanning Pi's
+### 10. Split network: secure / public
+TODO
+
+### 11. Open channels / configure lnd service
+TODO
+
+### 12. Connect rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
 
-# 11. Network split secure / guest
-
-# 12. Host on the internet!
-TODO
-# 13. Host on cjdns / meshnet
-TODO
+## TODO
+### - Host on cjdns / meshnet
+### - Host on the internet
+### - Run IPFS client
+### - Run Matrix chat server
+### - ???
