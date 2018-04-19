@@ -20,20 +20,19 @@ export default {
         }
     },
     mounted(){
-      let memberId = this.$router.currentRoute.path.split('/')[2]
-      if (!memberId){
-          // This sets the default shown to the logged in member
-          memberId = this.$store.getters.memberId
+      let taskId = this.$router.currentRoute.path.split('/')[2]
+      if (taskId){
+          this.$store.dispatch('loadEvents', { taskId })
       }
-      this.id = memberId
-      this.$store.dispatch('loadEvents', { memberId })
+      this.id = taskId
+      // TODO - what happens if no task loaded?
     },
     computed: {
         calcTitle(){
             let name
-            this.$store.state.members.forEach( m => {
-                if (this.id === m.memberId){
-                    name = m.name
+            this.$store.state.tasks.forEach( t => {
+                if (this.id === t.taskId){// XXX:
+                    name = t.name
                 }
             })
             return name

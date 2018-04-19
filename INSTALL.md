@@ -9,10 +9,9 @@ To create a bootable Ubuntu usb (on linux) download the .iso file from the above
 - `sudo dd if=<path-to-ubuntu-iso> of=<path-to-usb> bs=1M`
 - i.e. `sudo dd if=./Downloads/Ubuntu-17.10.iso> of=/dev/sdb bs=1M`
 
-
 This should create a bootable usb and you can then go through the ubuntu install process by interupting the computers boot up with `delete` or `f10`.
-
 ---
+
 ### 2. Get the database
 
 Now that we have an operating system, the first thing we need is a database to store and persist our applications state. Our database of choice is rethinkdb. We are following the instructions from https://www.rethinkdb.com/docs/build/ with some modifications for 17.10 -->
@@ -141,7 +140,7 @@ Get the tarball from http://zeromq.org/intro:get-the-software
 - `sudo make install`
 - `sudo ldconfig`
 
-
+---
 ### 6. Install go and lightning node
 Go is needed to run lnd
 - `sudo apt-get install golang-1.10-go`
@@ -161,24 +160,24 @@ go get -d github.com/lightningnetwork/lnd
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
-
+---
 ### 6. Setup lnd
   - how to setup negotiate channels able to accept payments?
 
-
+---
 ### 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
 Then you need to close and re-open the terminal, then you can install the most recent node.
 - `nvm install stable`
-
+---
 ### 8. Install yarn
 Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `sudo apt-get update`
 - `sudo apt-get install --no-install-recommends yarn` #
-
+---
 ### 9. Install ao
 
 Get the code from github and install the dependencies:
@@ -199,25 +198,23 @@ To recap the dctrl-ao scripts are:
 
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
+---
 ### 9.1 Setup ao as a service - (using pm2 this time)
 
 For reference: ( http://pm2.keymetrics.io/ ). Start by installing pm2 globally and start the process.
 - `yarn global add pm2`
 - `pm2 start production/server/app.js --name ao`
 - `pm2 startup`
-
+-
 After initializing the startup command the terminal will give you instructions to finish the setup, run the command it specifies.
 
+---
+## TODO
 ### 10. Split network: secure / public
-TODO
-
 ### 11. Open channels / configure lnd service
-TODO
-
 ### 12. Connect rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
 
-## TODO
 ### - Host on cjdns / meshnet
 ### - Host on the internet
 ### - Run IPFS client

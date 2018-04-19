@@ -38,6 +38,7 @@ import Manage from './components/Manage'
 import Auth from './components/Auth'
 
 import MemberCalendar from './components/MemberCalendar'
+import TaskCalendar from './components/TaskCalendar'
 import List from './components/EventsList'
 
 import MyPage from './components/MyPage'
@@ -113,6 +114,9 @@ const routes =[{
 },{
   path: '/task_claim/*',
   component: TaskClaim
+},{
+  path: '/task/*',
+  component: TaskCalendar
 },{
   path: '/task_rate_update/*',
   component: TaskRateUpdate
