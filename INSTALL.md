@@ -200,13 +200,19 @@ To recap the dctrl-ao scripts are:
 
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
+# 9.1 Setup ao as a service - (using pm2 this time)
+
+For reference: ( http://pm2.keymetrics.io/ ). Start by installing pm2 globally and start the process.
+- `yarn global add pm2`
+- `pm2 start production/server/app.js --name ao`
+- `pm2 startup`
+
+After initializing the startup command the terminal will give you instructions to finish the setup, run the command it specifies.
+
 # 10. Connect any rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
 
 # 11. Network split secure / guest
-
-# 11. Setup dctrl-ao as a service - (using pm2 this time)
-( http://pm2.keymetrics.io/ )
 
 # 12. Host on the internet!
 TODO
