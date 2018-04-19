@@ -4,7 +4,10 @@ tr
     td
         router-link(:to='claimLocation')
             img(src='../../assets/images/claim.svg')
-        span.val ${{currentValue}}
+        span ${{currentValue}}
+        br
+        span {{ sats }} sats
+
     td {{b.name}}
     td
         li(v-for='i in instructions') {{i}}.
@@ -16,7 +19,7 @@ tr
 
 <script>
 
-import {calculateTaskPayout} from '../../calculations'
+import {calculateTaskPayout, cadToSats} from '../../calculations'
 
 export default {
     props: ['b'],
@@ -32,6 +35,9 @@ export default {
         },11111)
     },
     computed: {
+        sats(){
+            return cadToSats(this.currentValue, this.$store.state.cash.spot)
+        },
         instructions(){
             return this.b.instructions.split('.').filter(Boolean).slice(0,2)
         },

@@ -1,4 +1,9 @@
 
+function cadToSats(cadAmt, spot){
+    let sats = parseFloat( cadAmt ) / parseFloat( spot ) * 100000000 // one hundred million per btc
+    return sats.toFixed(0)
+}
+
 function calculateMsThisMonth(){
     let today = new Date()
     let daysThisMonth = new Date(today.getYear(), today.getMonth(), 0).getDate()
@@ -20,5 +25,6 @@ function calculateTaskPayout(task){
 }
 
 module.exports = {
-  calculateTaskPayout
+  calculateTaskPayout,
+  cadToSats
 }

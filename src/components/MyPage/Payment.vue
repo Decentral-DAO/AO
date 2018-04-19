@@ -23,6 +23,7 @@
 import request from 'superagent'
 import FormBox from '../slotUtils/FormBox'
 import qrcode from 'qrcode-generator'
+import calcs from '../../calculations'
 
 export default {
     data( ){
@@ -35,17 +36,11 @@ export default {
         } else {
             cadvalue = cadvalue.toFixed(2)
         }
-        return {
-          details: {
-            cadvalue
-          }
-        }
+        return { cadvalue }
     },
     computed: {
         sats(){
-            let sats = parseFloat( this.details.cadvalue ) / this.$store.state.cash.spot * 100000000
-            console.log({sats})
-            return sats.toFixed(0)
+            return calcs.cadToSats(this.cadvalue, this.$store.state.cash.spot)
         },
         imgTag(){
             console.log('computing imgTag?')
