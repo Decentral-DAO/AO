@@ -29,7 +29,7 @@ function startDctrlAo(){
     state.initialize( err => {
       if (err) return console.log('state initialize failed:', err)
 
-      console.log('state initialized', state.pubState)
+      console.log('state initialized', state.serverState)
 
       const cleanup = {
           type: "cleanup"

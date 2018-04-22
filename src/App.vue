@@ -39,8 +39,8 @@ export default {
         socket.on('connect', ()=> {
 
             socket.emit('authentication', {
-              session: this.$store.state.loader.session,
-              token: this.$store.state.loader.token
+                session: this.$store.state.loader.session,
+                token: this.$store.state.loader.token
             })
 
             socket.on('authenticated', ()=> {
