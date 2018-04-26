@@ -181,32 +181,33 @@ Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 ### 9. Install ao
 
 Get the code from github and install the dependencies:
-- `git clone ...`
-- `cd dctrl-ao`
-- `yarn install`
-- `yarn compile`
+- `git clone https://github.com/dctrl-ao/ao.git`
+- `cd ao`
+- `yarn build`
 
-At this point you will should be ready to run the app. `yarn start` On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
+At this point you will should be ready to run the app in dev mode. Try `yarn serve` to startup the vue hot-reloading. In this mode any changes you make to the /src/ folder will be immeadiately displayed. This is useful while editing the frontend components or templating new functionality.
 
-Alternatively you can use `yarn serve` to startup the vue hot-reloading. In this mode any changes you make to the /src/ folder will be immeadiately displayed. This is useful while editing the frontend components or templating new functionality.
+Before you run the production server you need to setup a configuration.js file in the root of the project. An example configuration file can be found at /setupSamples/configurationSAMPLE.js. Now you can run `yarn compile` to build and start the app.
+
+On first start it should create a rethinkdb database called 'dctrl' and a table on it called 'events'. This is where all of the data of the app will be stored, in a single table of events. An initial member (dctrl) will be created with password 1235 that can be used for initial auth into the app.
 
 To recap the dctrl-ao scripts are:
 - `yarn buildFront` # compile the vue code to /dist
 - `yarn buildBack` # compile the server code to /production
 - `yarn serve` # hot reloading + dev-tools (https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 - `yarn start` # eventstate server & web app, hosted at http://localhost:8003
+- `yarn compile` # yarn buildFront && yarn buildBack && yarn start
 
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
 ---
-### 9.1 Setup ao as a service - (using pm2 this time)
+### 9.1 Setup ao as a service
 
-For reference: ( http://pm2.keymetrics.io/ ). Start by installing pm2 globally and start the process.
-- `yarn global add pm2`
-- `pm2 start production/server/app.js --name ao`
-- `pm2 startup`
--
-After initializing the startup command the terminal will give you instructions to finish the setup, run the command it specifies.
+Create another service file. An example service file can be found at setupSamples/ao.service. You can copy it into /etc/systemd/system/ao.service. You need to update the example so the path to the code executable and the /ao/production/server/app.js is correct. Once you do that you can run:
+
+- `systemctl daemon-reload`
+- `systemctl start ao.service` # this should start it, check that it works
+- `systemctl enable ao.service` # this should start it on boot, check that it works by restarting
 
 ---
 ## TODO

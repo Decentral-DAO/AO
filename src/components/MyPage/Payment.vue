@@ -1,20 +1,19 @@
 <template lang='pug'>
 
-
 .address
     .qr
         div(v-html='imgTag')
-    h5 on chain address for {{ name }}: {{address}}
+    h5 on chain address for {{ name }}: {{ address }}
     img.l.big(src='../../assets/images/bitcoin.svg')
     h5 or lightning payment for
-        input(type='text', v-model='details.cadvalue')
+        input(type='text', v-model='cadvalue')
     router-link(:to='"/invoices/" + memberId')
         button(@click='createPayRec')
             img.r(src='../../assets/images/lightning.svg')
             img.r(src='../../assets/images/lightning.svg')
             img.l(src='../../assets/images/lightning.svg')
             img.l(src='../../assets/images/lightning.svg')
-            span {{sats.toLocaleString()}} sats = ${{ details.cadvalue }}
+            span {{sats.toLocaleString()}} sats = ${{ cadvalue }}
 
 </template>
 
