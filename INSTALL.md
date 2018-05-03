@@ -201,6 +201,7 @@ To recap the dctrl-ao scripts are:
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
 ---
+
 ### 9.1 Setup ao as a service
 
 Create another service file. An example service file can be found at setupSamples/ao.service. You can copy it into /etc/systemd/system/ao.service. You need to update the example so the path to the code executable and the /ao/production/server/app.js is correct. Once you do that you can run:
@@ -211,7 +212,10 @@ Create another service file. An example service file can be found at setupSample
 
 ---
 ## TODO
+
+### 10. Multisig party: Set up electrum multisig watch only daemon
 ### 10. Split network: secure / public
+
 ### 11. Open channels / configure lnd service
 ### 12. Connect rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)

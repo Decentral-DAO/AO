@@ -11,6 +11,7 @@ import MemberCharge from './components/forms/MemberCharge'
 import MemberPaid from './components/forms/MemberPaid'
 import MemberPaidStuff from './components/forms/MemberPaidStuff'
 import MemberActivate from './components/forms/MemberActivate'
+import MemberAddressUpdate from './components/forms/MemberAddressUpdate'
 
 // Task components
 import Tasks from './components/Tasks'
@@ -84,6 +85,9 @@ const routes =[{
 },{
   path: '/member_activate/*',
   component: MemberActivate
+},{
+  path: '/member_address_update/*',
+  component: MemberAddressUpdate
 },{
   path: '/members',
   component: Members

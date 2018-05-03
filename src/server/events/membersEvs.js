@@ -56,10 +56,10 @@ function memberActivated(memberId, callback) {
 
 function memberAddressUpdated(memberId, address, proof, callback){
   let newEvent = {
-    type: "member-address-updated",
-    memberId,
-    address,
-    proof,
+      type: "member-address-updated",
+      memberId,
+      address,
+      proof,
   }
   dctrlDb.insertEvent(newEvent, callback)
 }

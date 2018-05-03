@@ -1,10 +1,10 @@
 import events from './events'
+import {checkInitial} from './onChain/currentAccounts'
 
 function reactions(ev){
     switch (ev.type) {
         case 'member-field-updated':
             if (ev.field === 'secret') {
-                // TODO: check if already have it
                 events.membersEvs.badgeAdded(ev.memberId, 'secure')
             }
             break
@@ -13,6 +13,9 @@ function reactions(ev){
             break
         case 'resource-stocked':
             events.membersEvs.badgeAdded(ev.memberId, 'bitpepsi')
+            break
+        case 'member-address-updated':
+            checkInitial(ev.address, 'member')
             break
     }
 }

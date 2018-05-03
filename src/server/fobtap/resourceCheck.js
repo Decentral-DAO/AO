@@ -4,7 +4,6 @@ const validators = require('../spec/validators')
 const events = require('../events')
 
 module.exports = function(req, res, next){
-
     let memberId = utils.memberIdFromFob(req.body.fob)
     let resource = utils.getResource(req.body.resourceId)
     console.log('resource check middleware', {memberId, resource})
@@ -14,7 +13,7 @@ module.exports = function(req, res, next){
           memberId,
           req.body.amount || 1,
           resource.charged || 0,
-          req.body.notes || '~ resourceCheck',
+          req.body.notes || '',
           utils.buildResCallback(res)
         )
     } else {

@@ -41,11 +41,13 @@ function specMemberAddressUpdated(req, res, next){
   let errRes = []
   if (
     validators.isId(req.body.memberId, errRes) &&
-    validators.isAddress(req.body.address, errRes)
+    validators.isAddress(req.body.address, errRes) &&
+    validators.isNotes(req.body.proof, errRes)
   ){
     events.membersEvs.memberAddressUpdated(
       req.body.memberId,
       req.body.address,
+      req.body.proof,
       utils.buildResCallback(res)
     )
   } else {

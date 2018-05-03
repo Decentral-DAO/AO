@@ -24,6 +24,17 @@ function memberIdFromFob(fob){
   return memberId
 }
 
+function memberIdFromFob(fob){
+  let memberId
+  // TODO: hide fob in server side state
+  state.serverState.members.forEach(member => {
+      if (member.fob == fob){
+          memberId = member.memberId
+      }
+  })
+  return memberId
+}
+
 function taskFromFob(fob){
   let task
   state.serverState.tasks.forEach(t => {

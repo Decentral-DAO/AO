@@ -28,4 +28,4 @@ function checkInitial(address, group){
     })
 }
 
-module.exports = {currentAccounts, initializeWatchedMembersAddresses}
+module.exports = {currentAccounts, initializeWatchedMembersAddresses, checkInitial}
