@@ -9,8 +9,6 @@
         input(v-model='info.paid' type='text')
         label notes
         input(v-model='info.notes' type='text')
-        label Member Fob (Tap it!)
-        input(v-model='info.fob' type='text')
 
 </template>
 
@@ -23,21 +21,20 @@ import FormBox from '../slotUtils/FormBox'
 export default {
     mounted(){
         let resourceId = this.$router.currentRoute.path.split('/')[2]
-        console.log('setting resourceId', {resourceId})
         this.info.resourceId = resourceId
+        this.info.memberId = this.$store.getters.memberId
     },
     data(){
         return {
             info: {
+                memberId: '',
                 resourceId:'',
-                fob: '',
                 paid: '',
                 amount:'',
                 notes: '',
             }
         }
     },
-
     components:{
         SharedTitle, FormBox
     }

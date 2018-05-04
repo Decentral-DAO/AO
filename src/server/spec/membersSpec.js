@@ -134,7 +134,7 @@ function specMemberDeactivated(req, res, next){
   if (
     validators.isMemberId(req.body.memberId, errRes)
   ){
-    events.membersEvs.memberDeactivate(
+    events.membersEvs.memberDeactivated(
       req.body.memberId,
       utils.buildResCallback(res)
     )

@@ -5,9 +5,7 @@ tr(class="")
         img(v-if='isLoggedIn', src='../../assets/images/loggedIn.svg')
         img(v-else, src='../../assets/images/loggedOut.svg')
     td
-        router-link(:to='\'/member_paid/\' + this.m.memberId')
-            img(src='../../assets/images/cash1.svg')
-        label {{ m.balance.toFixed(2) }}
+        h6 {{ m.balance.toFixed(2) }}
     td
         dctrl-active(:m='m')
     td

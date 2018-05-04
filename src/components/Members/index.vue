@@ -3,9 +3,13 @@
 #member
     crazy-btn(v-if='loggedIn' to='/member_create' text='new member')
     shared-title(title='Illuminati Hit List')
-    .list(v-if='true')
+    .list(v-if="loggedIn")
         tab
-            row(v-for="m in members", :m="m")
+            row(v-for="m in members", :m="m", v-if='m.active > 0')
+        .purg
+            template(v-for="m in members", v-if='m.active <= 0')
+                .bouncy {{ m.name }}
+                    dctrl-active(m="m")
     .padding(v-else)
         h5 dctrl member
         ol
@@ -24,6 +28,7 @@ import request from "superagent"
 import SharedTitle from '../slotUtils/SharedTitle'
 import Tab from './Tab'
 import CrazyBtn from '../slotUtils/CrazyBtn'
+import DctrlActive from './DctrlActive'
 
 export default {
     computed: {
@@ -38,7 +43,8 @@ export default {
         SharedTitle,
         Row,
         Tab,
-        CrazyBtn
+        CrazyBtn,
+        DctrlActive
     }
 }
 
@@ -66,6 +72,24 @@ li
 
 .padding
     padding: 1.987654321em
+
+.purg
+    width: 100%
+    position: relative;
+    overflow: hidden;
+
+.bouncy
+    position: relative;
+    animation: moveX 3s linear 0.5s infinite alternate,
+      moveY 0.5s linear 1s infinite alternate;
+
+@keyframes moveX {
+  from { left: 0; } to { left: 400px }
+}
+
+@keyframes moveY {
+  from { top: 0; } to { top: 10px; }
+}
 
 
 </style>

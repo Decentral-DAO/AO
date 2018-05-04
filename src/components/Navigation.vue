@@ -1,34 +1,18 @@
 <template lang='pug'>
 
 ul.navigation
-    router-link( to='/mypage') My Page
+    router-link( to='/MYPAGE') My Page
     router-link(to='/MEMBERS') Members
     router-link(to='/RESOURCES') Resources
     router-link(to='/TASKS') Tasks
-    .admin(v-if='isAdmin')
-        label admin
-        router-link(to='/MANAGE') Manage Cash
-        router-link(to='/HISTORY') View All Events
+    //- router-link(to='/EVENTS') Events
 
 </template>
 
 <script>
+
 export default {
-    name: 'navigation',
-    computed: {
-        memberId(){
-            return this.$store.getters.isAdmin
-        },
-        memberId(){
-            return this.$store.getters.memberId
-        },
-        isLoggedIn(){
-            return this.$store.getters.isLoggedIn
-        },
-        isAdmin(){
-            return this.$store.getters.isLoggedIn
-        },
-    }
+    name: 'navigation'
 }
 </script>
 

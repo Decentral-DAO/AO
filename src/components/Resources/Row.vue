@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 .resources
-    h3.stock {{ r.stock }}
+    h3(v-if='r.stock > 0').stock {{ r.stock }}
     h3 {{ r.name }}
     .row
         .six.columns

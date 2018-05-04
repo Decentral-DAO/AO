@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 div
-  div(v-if='m.active > 0' :class='c')
+  div(v-if='m.active > 0')
     img(:class='calcSpin(m)' v-if='m.active == 1' src='../../assets/images/active1.svg')
     img(:class='calcSpin(m)' v-if='m.active == 2' src='../../assets/images/active2.svg')
     img(:class='calcSpin(m)' v-if='m.active == 3' src='../../assets/images/active3.svg')
@@ -24,14 +24,7 @@ div
 
 <script>
 
-
-
 export default {
-    computed: {
-        c(){
-            test: true
-        }
-    },
     methods: {
         calcSpin(m){
             if (m.balance > 0){
