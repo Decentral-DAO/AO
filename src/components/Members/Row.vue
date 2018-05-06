@@ -5,6 +5,8 @@ tr(class="")
         img(v-if='isLoggedIn', src='../../assets/images/loggedIn.svg')
         img(v-else, src='../../assets/images/loggedOut.svg')
     td
+        addr(:a="m.address")
+    td
         h6 {{ m.balance.toFixed(2) }}
     td
         dctrl-active(:m='m')
@@ -23,10 +25,12 @@ tr(class="")
 
 import DctrlActive from './DctrlActive'
 import Badges from './Badges'
+import Addr from './Addr'
+
 
 export default {
     props: ['m'],
-    components: {DctrlActive, Badges},
+    components: {DctrlActive, Badges, Addr},
     computed:{
         isLoggedIn(){
             let isLoggedIn
