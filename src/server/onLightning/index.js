@@ -1,18 +1,23 @@
-import events from "./events"
+import events from "../events"
 import lnd from "./lnd"
 
-const call = lnc.subscribeInvoices({})
+console.log('starting onLightning watching')
 
-call.on('data', function(message) {
-    console.log('lnd stream', message)
+lnd.getInfo({}, (err, res) => {
+    console.log('getInfo', err, res)
 })
 
-call.on('end', function() {
-    // The server has finished sending  console.log("END");
-    console.log("lnd stream ended")
-})
-
-call.on('status', function(status) {
-    console.log('lnd status', status)
-    // Process status  console.log("Current status: " + status);
-})
+// const call = lnd.subscribeInvoices({})
+// lnd.on('data', function(message) {
+//     console.log('lnd stream', message)
+// })
+//
+// lnd.on('end', function() {
+//     // The server has finished sending  console.log("END");
+//     console.log("lnd stream ended")
+// })
+//
+// lnd.on('status', function(status) {
+//     console.log('lnd status', status)
+//     // Process status  console.log("Current status: " + status);
+// })

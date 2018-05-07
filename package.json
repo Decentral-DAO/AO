@@ -5,8 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "buildFront": "vue-cli-service build",
-    "buildBack":"npx babel src --no-babelrc --presets=env --out-dir production --copy-files",
-    "compile": "yarn buildFront && yarn buildBack && yarn start", 
+    "buildBack": "npx babel src --no-babelrc --presets=env --out-dir production --copy-files",
+    "compile": "yarn buildFront && yarn buildBack && yarn start",
     "start": "node production/server/app.js"
   },
   "dependencies": {
@@ -14,7 +14,7 @@
     "bitcoinjs-lib": "^3.3.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "grpc": "^1.9.1",
+    "grpc": "^1.11.3",
     "kefir": "^3.8.2",
     "lodash": "^4.17.5",
     "path": "^0.12.7",

@@ -2,8 +2,8 @@ const fs = require('fs')
 const grpc = require('grpc')
 const uuidV1 = require('uuid/v1')
 const dctrlDb = require('../dctrlDb')
-const lnd = require('../lnd.js')
-const meta = require('../lndConfig/meta')
+const lnd = require('../onLightning/lnd.js')
+const meta = require('../onLightning/meta')
 
 function invoiceCreated(ownerId, memo, value, callback) {
     lnd.addInvoice({ memo, value }, meta, (err, response) => {
