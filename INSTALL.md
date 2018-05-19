@@ -162,8 +162,9 @@ make && make install
 ```
 ---
 ### 6. Setup lnd
-  - 
+
   - how to setup negotiate channels able to accept payments?
+
 
 ---
 
@@ -223,6 +224,7 @@ Create another service file. An example service file can be found at setupSample
 ### 10. Split network: secure / public
 
 ### 11. Open channels / configure lnd service
+
 ### 12. Connect rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
 
