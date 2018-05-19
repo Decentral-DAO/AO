@@ -83,7 +83,7 @@ export default {
               .set('Authorization', this.$store.state.loader.token)
               .send({
                   type: 'invoice-created',
-                  value: this.sats,
+                  sats: this.sats,
                   memo: 'Payment: ' + this.$store.getters.name ,
                   ownerId: this.$store.getters.memberId
               })

@@ -8,43 +8,57 @@
             label recently used by:
             current(v-for='memberId in currentMembers', :memberId='memberId')
         .six.columns
-            router-link(:to='"/invoices/" + r.resourceId')
-                button(@click='createPayRec')
-                    img.r(src='../../assets/images/lightning.svg')
-                    img.r(src='../../assets/images/lightning.svg')
-                    img.l(src='../../assets/images/lightning.svg')
-                    img.l(src='../../assets/images/lightning.svg')
-                    span {{ sats.toLocaleString() }} sats = ${{ r.charged.toLocaleString() }}
-            router-link(:to='"/resource_stock/" + r.resourceId')
-                button.refill replenish
+            button.payreq(v-if='r.charged > 0', @click='createPayRec')
+                img.payreqbtn(src='../../assets/images/address.svg')
+                img(src='../../assets/images/lightning.svg')
+                span {{ sats }} sats (${{ r.charged.toLocaleString() }})
+                .invoices(v-if='showInvoices')
+                    pay-req(v-if='invoice', :i='invoice')
+            router-link(v-if='r.stock >= 0', :to='"/resource_stock/" + r.resourceId')
+                button.refill replenish supply
 
 </template>
 
 <script>
 import request from 'superagent'
 import Current from './Current'
+import PayReq from './PayReq'
 
 export default {
+    data(){
+        return { showInvoices: false}
+    },
     props: ['r'],
-    components: { Current },
+    components: { Current, PayReq },
     computed: {
+        invoice(){
+            let invoice
+            this.$store.state.invoices.forEach( i => {
+                if (i.ownerId === this.r.resourceId) {
+                    invoice = i
+                }
+            })
+            console.log('returning invoice', invoice)
+            return invoice
+        },
         currentMembers(){
             return this.r.current.slice().map(ev => ev.memberId)
         },
         sats(){
             let sats = this.r.charged / this.$store.state.cash.spot * 100000000
-            return Math.round(sats).toLocaleString()
+            return Math.round(sats).toFixed(0)
         },
     },
     methods: {
         createPayRec(){
+            this.showInvoices = true
             console.log('creating payment request? ')
             request
                 .post('/events')
                 .set('Authorization', this.$store.state.loader.token)
                 .send({
                     type: 'invoice-created',
-                    value: this.sats,
+                    sats: this.sats,
                     memo: this.r.name,
                     ownerId: this.r.resourceId
                 })
@@ -86,8 +100,19 @@ img
     color: accent2
 
 .refill
-    color: main
-    background: green
+    color: green
+    background: main
     border-color: green
+    text-align: left
+
+.payreq
+    color: accent2
+    background: main
+    text-align: left
+    border-color: accent2
+
+.payreqbtn
+    float: right
+
 
 </style>

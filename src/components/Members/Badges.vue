@@ -18,6 +18,8 @@
           img(src='../../assets/images/bitpepsi.png')
       router-link(v-if='isMrClean' to='/')
           img(src='../../assets/images/mrclean.jpg')
+      router-link(v-if='b === "lightning"' to='/')
+          img(src='../../assets/images/lightning.svg')
 
 </template>
 

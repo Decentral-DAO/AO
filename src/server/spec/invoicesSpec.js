@@ -8,9 +8,6 @@ module.exports = function(req,res, next){
       case 'invoice-created':
           specInvoiceCreated(req, res, next)
           break
-      case 'invoice-paid':
-          specInvoicePaid(req, res, next)
-          break
       default:
           next()
   }
@@ -22,26 +19,12 @@ function specInvoiceCreated(req, res, next){
   if (
     validators.isId(req.body.ownerId, errRes) &&
     validators.isNotes(req.body.memo, errRes) &&
-    validators.isAmount(req.body.value, errRes)
+    validators.isAmount(req.body.sats, errRes)
   ){
     events.invoicesEvs.invoiceCreated(
       req.body.ownerId,
       req.body.memo,
-      req.body.value,
-      utils.buildResCallback(res)
-    )
-  } else {
-    res.status(200).send(errRes)
-  }
-}
-
-function specInvoicePaid(req, res, next){
-  let errRes = []
-  if ( true // TODO
-    // validators.isInvoiceHash(req.body.r_hash, errRes)
-  ){
-    events.invoicesEvs.invoicePaid(
-      req.body.r_hash,
+      req.body.sats,
       utils.buildResCallback(res)
     )
   } else {

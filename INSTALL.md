@@ -162,15 +162,18 @@ make && make install
 ```
 ---
 ### 6. Setup lnd
+  - 
   - how to setup negotiate channels able to accept payments?
 
 ---
+
 ### 7. Install node.js
 Easiest way is to use nvm:
 - `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash`
 Then you need to close and re-open the terminal, then you can install the most recent node.
 - `nvm install stable`
 ---
+
 ### 8. Install yarn
 Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
@@ -178,6 +181,7 @@ Yarn, package manager for nodejs (https://yarnpkg.com/en/docs/install)
 - `sudo apt-get update`
 - `sudo apt-get install --no-install-recommends yarn` #
 ---
+
 ### 9. Install ao
 
 Get the code from github and install the dependencies:
@@ -211,6 +215,8 @@ Create another service file. An example service file can be found at setupSample
 - `systemctl enable ao.service` # this should start it on boot, check that it works by restarting
 
 ---
+
+
 ## TODO
 
 ### 10. Multisig party: Set up electrum multisig watch only daemon

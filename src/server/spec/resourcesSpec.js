@@ -62,17 +62,16 @@ function specResourceUsed(req, res, next){
 
 function specResourceStocked(req, res, next){
   let errRes = []
-  let memberId = utils.memberIdFromFob(req.body.fob) // TODO - middleware to do this before getting here
   if (
-    validators.isMemberId(memberId, errRes) &&
     validators.isResourceId(req.body.resourceId, errRes) &&
+    validators.isMemberId(req.body.memberId, errRes) &&
     validators.isAmount(req.body.amount, errRes) &&
     validators.isAmount(req.body.paid, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
     events.resourcesEvs.resourceStocked(
       req.body.resourceId,
-      memberId,
+      req.body.memberId,
       req.body.amount,
       req.body.paid,
       req.body.notes,

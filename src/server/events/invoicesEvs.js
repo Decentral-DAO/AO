@@ -1,12 +1,13 @@
-const fs = require('fs')
-const grpc = require('grpc')
-const uuidV1 = require('uuid/v1')
-const dctrlDb = require('../dctrlDb')
-const lnd = require('../onLightning/lnd.js')
-const meta = require('../onLightning/meta')
+import dctrlDb from '../dctrlDb'
+import lnd from '../onLightning/lnd.js'
+import {serverState} from '../state'
+import {satsToCad} from '../../calculations'
 
-function invoiceCreated(ownerId, memo, value, callback) {
-    lnd.addInvoice({ memo, value }, meta, (err, response) => {
+function invoiceCreated(ownerId, memo, sats, callback) {
+    lnd.addInvoice({
+        memo,
+        value: sats
+    }, (err, response) => {
         if (err) {
             console.log("add Invoice error", err)
             callback(err);
@@ -14,11 +15,10 @@ function invoiceCreated(ownerId, memo, value, callback) {
           let newEvent = {
               type: "invoice-created",
               ownerId,
-              r_hash: response.r_hash,
+              r_hash: response.r_hash.toString('hex'),
               payment_request: response.payment_request,
               memo,
-              value,
-              settled: false,
+              sats,
           }
           dctrlDb.insertEvent(newEvent, callback)
         }
@@ -26,21 +26,32 @@ function invoiceCreated(ownerId, memo, value, callback) {
 }
 
 function invoicePaid(r_hash, callback){
-    lnd.lookupInvoice({ r_hash },function(err, response) {
-        if (err) {
-            callback(err);
-        } else {
-            console.log('LookupInvoice: ' + response);
-            if (response.settled){
-                let newEvent = {
-                    type: "invoice-paid",
-                    r_hash
+    let newEvent = {
+        type: "invoice-paid",
+        r_hash,
+    }
+
+    console.log('trying to match')
+    serverState.invoices.forEach( invoice => {
+
+        if (invoice.r_hash == r_hash){
+            console.log('invoice paid matched')
+            newEvent.amount = satsToCad(invoice.sats, serverState.cash.spot)
+
+            serverState.resources.forEach( r => {
+                if (r.resourceId == invoice.ownerId){
+                    newEvent.resourceId = r.resourceId
                 }
-                dctrlDb.insertEvent(newEvent, callback)
-            } else {
-                console.log('invoice has not been paid')
-                callback('not paid')
-            }
+            })
+
+            serverState.members.forEach( m => {
+                if (m.memberId == invoice.ownerId){
+                    newEvent.memberId = m.memberId
+                }
+            })
+
+            console.log('creating new event', newEvent)
+            dctrlDb.insertEvent(newEvent, callback)
         }
     })
 }

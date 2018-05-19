@@ -9,13 +9,21 @@ function reactions(ev){
             }
             break
         case 'member-paid':
-            events.membersEvs.memberActivated(ev.memberId)
+            if (ev.amount > 33){
+                events.membersEvs.memberActivated(ev.memberId)
+            }
             break
         case 'resource-stocked':
             events.membersEvs.badgeAdded(ev.memberId, 'bitpepsi')
             break
         case 'member-address-updated':
             checkInitial(ev.address, 'member')
+            break
+        case 'invoice-paid':
+            if (ev.memberId) {
+                events.membersEvs.memberPaid(ev.memberId, ev.amount, false, '')
+                events.membersEvs.badgeAdded(ev.memberId, 'lightning')
+            }
             break
     }
 }

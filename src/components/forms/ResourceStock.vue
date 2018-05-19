@@ -1,11 +1,11 @@
 <template lang='pug'>
 
 #stocksupplies
-    shared-title(title='stock bitpepsi')
+    shared-title(title='replenish resource')
     form-box(btntxt="Loaded"  event='resource-stocked' v-bind:data='info')
         label Amount stocked:
         input(v-model='info.amount' type='text')
-        label reciept value
+        label $ value
         input(v-model='info.paid' type='text')
         label notes
         input(v-model='info.notes' type='text')
@@ -23,6 +23,7 @@ export default {
         let resourceId = this.$router.currentRoute.path.split('/')[2]
         this.info.resourceId = resourceId
         this.info.memberId = this.$store.getters.memberId
+        console.log('set Ids', this.info.memberId, this.info.resourceId)
     },
     data(){
         return {
