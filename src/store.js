@@ -34,6 +34,7 @@ export default new Vuex.Store({
           let time = 0, who = ''
           state.tasks.forEach(task => {
               if (task.lastClaimed > time){
+                  time = task.lastClaimed
                   who = task.lastClaimedby
               }
           })
