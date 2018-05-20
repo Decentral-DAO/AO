@@ -30,7 +30,9 @@ export default {
     props: ['m'],
     computed: {
         isMrClean(){
-            return this.$store.getters.mrclean === this.m.memberId
+            let isMrClean = this.$store.getters.mrclean == this.m.memberId
+            console.log({isMrClean})
+            return isMrClean
         }
     },
 }
