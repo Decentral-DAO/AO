@@ -31,14 +31,15 @@ export default new Vuex.Store({
   },
   getters: {
       mrclean(state, getters){
-          let time = 0, who = ''
+          let time = 0
+          let who = ''
           state.tasks.forEach(task => {
               if (task.lastClaimed > time){
                   time = task.lastClaimed
-                  who = task.lastClaimedby
+                  who = task.lastClaimedBy
               }
           })
-          console.log('mrclean ', {who})
+          console.log('mrclean:', {who})
           return who
       },
       memberId(state, getters){
