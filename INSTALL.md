@@ -217,11 +217,11 @@ Create another service file. An example service file can be found at setupSample
 
 ---
 
-
 ## TODO
 
 ### 10. Multisig party: Set up electrum multisig watch only daemon
-### 10. Split network: secure / public
+### 10. Network hardening: Split network: secure / public
+### 10. Backup db script
 
 ### 11. Open channels / configure lnd service
 

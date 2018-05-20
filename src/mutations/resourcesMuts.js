@@ -34,10 +34,12 @@ function resourcesMuts(resources, ev){
 			})
 			break
 		case "cleanup":
-			resources.forEach( resource => {
-					resource.current = _.filter(resource.current, ev => {
-							// XXX
-							return  Date.now() - parseInt(ev.timestamp) > 10000
+			resources.forEach( r => {
+					r.current = _.filter(r.current, ev => {
+							let sinceEvent = Date.now() - ev.timestamp
+							let isCurrent = sinceEvent > 10000
+							console.log({sinceEvent, isCurrent})
+							return isCurrent
 					})
 			})
 			break

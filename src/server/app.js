@@ -16,6 +16,7 @@ import reactions from './reactions'
 import applyRouter from './router'
 import { socketAuth } from './auth'
 import { watchSpot } from './exchangeRate'
+import Kefir from 'kefir'
 
 const app = express()
 
@@ -32,22 +33,17 @@ function startDctrlAo(){
 
       console.log('state initialized', state.serverState)
 
-      const cleanup = {
-          type: "cleanup"
-      }
-
-      setInterval( () => {
-          state.applyEvent(state.serverState, cleanup)
-      }, 1234 )
-
       watchSpot()
       initializeWatchedMembersAddresses()
 
-      // now we listen on the changefeed and keep the state up to date
-      const evStream = dctrlDb.changeFeed.onValue( ev => {
+      const serverReactions = dctrlDb.changeFeed.onValue( ev => {
         state.applyEvent(state.serverState, ev)
       })
       .onValue(reactions)
+
+      const cleanupHeartbeat = Kefir.interval(12345, {type: 'cleanup'})
+
+      const evStream = Kefir.merge([serverReactions, cleanupHeartbeat])
 
       const server = app.listen(PORT, err => {
         console.log("Listening on port", PORT)
