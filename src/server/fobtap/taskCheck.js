@@ -15,6 +15,7 @@ module.exports = function(req, res, next){
         taskCheck.active = true
         taskCheck.task = task
         res.send('task assigned')
+        console.log('task registered')
     } else {
         next()
     }
@@ -22,11 +23,11 @@ module.exports = function(req, res, next){
     let memberId = utils.memberIdFromFob(req.body.fob)
     if (memberId){
         let paid = calculations.calculateTaskPayout(taskCheck.task)
-        events.taskEvs.taskClaimed(
+        events.tasksEvs.taskClaimed(
           taskCheck.task.taskId,
           memberId,
           paid,
-          'taskCheck', // notes
+          '', // notes
           utils.buildResCallback(res)
         )
     }
