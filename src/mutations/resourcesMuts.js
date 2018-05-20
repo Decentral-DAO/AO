@@ -37,8 +37,7 @@ function resourcesMuts(resources, ev){
 			resources.forEach( r => {
 					r.current = _.filter(r.current, ev => {
 							let sinceEvent = Date.now() - ev.timestamp
-							let isCurrent = sinceEvent > 10000
-							console.log({sinceEvent, isCurrent})
+							let isCurrent = sinceEvent < 1000 * 60 * 60 * 5 // 5 hours
 							return isCurrent
 					})
 			})

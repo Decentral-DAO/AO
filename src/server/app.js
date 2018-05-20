@@ -41,7 +41,7 @@ function startDctrlAo(){
       })
       .onValue(reactions)
 
-      const cleanupHeartbeat = Kefir.interval(12345, {type: 'cleanup'})
+      const cleanupHeartbeat = Kefir.interval(123456, {type: 'cleanup'})
 
       const evStream = Kefir.merge([serverReactions, cleanupHeartbeat])
 
