@@ -1,6 +1,8 @@
 <template lang='pug'>
 
 .badges
+  router-link(v-if='isMrClean' to='/')
+      img(src='../../assets/images/mrclean.jpg')
   template(v-for='b in m.badges')
       router-link(v-if='b === "admin"' to='/')
           img(src='../../assets/images/admin.svg')
@@ -16,8 +18,6 @@
           img(src='../../assets/images/bullet.svg')
       router-link(v-if='b === "bitpepsi"' to='/')
           img(src='../../assets/images/bitpepsi.png')
-      router-link(v-if='isMrClean' to='/')
-          img(src='../../assets/images/mrclean.jpg')
       router-link(v-if='b === "lightning"' to='/')
           img(src='../../assets/images/lightning.svg')
 
