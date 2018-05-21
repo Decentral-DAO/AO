@@ -58,17 +58,16 @@ function specTaskClaimed(req, res, next){
         paid = calculateTaskPayout(task)
     }
   })
-  let memberId = utils.memberIdFromFob(req.body.fob)
   console.log('payout ready', paid, memberId)
   if (
     validators.isTaskId(req.body.taskId, errRes) &&
-    validators.isMemberId(memberId, errRes) &&
+    validators.isMemberId(req.body.memberId, errRes) &&
     validators.isAmount(paid, errRes) &&
     validators.isNotes(req.body.notes, errRes)
   ){
     events.tasksEvs.taskClaimed(
       req.body.taskId,
-      memberId,
+      req.body.memberId,
       paid,
       req.body.notes,
       utils.buildResCallback(res)

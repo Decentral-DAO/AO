@@ -5,8 +5,6 @@
     form-box(btntxt="Claim task", v-bind:data="info", event='task-claimed')
         label Notes (optional)
         input(v-model='info.notes' type='text')
-        label Member Fob! (Tap it)
-        input(v-model='info.fob' type='text')
 
 </template>
 
@@ -25,7 +23,7 @@ export default {
         return {
             info: {
                 taskId: '',
-                fob: '',
+                memberId: this.$store.getters.memberId,
                 notes: ''
             }
         }
