@@ -58,7 +58,6 @@ function specTaskClaimed(req, res, next){
         paid = calculateTaskPayout(task)
     }
   })
-  console.log('payout ready', paid, memberId)
   if (
     validators.isTaskId(req.body.taskId, errRes) &&
     validators.isMemberId(req.body.memberId, errRes) &&

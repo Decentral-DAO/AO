@@ -34,8 +34,8 @@ const actions = {
 }
 
 const state = {
-    token: 'a',
-    session: 'a',
+    token: '',
+    session: '',
 }
 
 const mutations = {
