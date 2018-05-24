@@ -13,5 +13,10 @@ module.exports = {
     bitcoinAverage: {
         pub: '',
         secret: ''
+    },
+    lnd: {
+        rpcserver: 'localhost:10009',
+        cert: "/home/trhode/.lnd/tls.cert",
+        macaroon: "/home/trhode/.lnd/admin.macaroon",
     }
 }

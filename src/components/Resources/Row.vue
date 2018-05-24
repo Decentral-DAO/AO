@@ -3,6 +3,8 @@
 .resources
     h3(v-if='r.stock > 0').stock {{ r.stock }}
     h3 {{ r.name }}
+    .invoices(v-if='showInvoices')
+        pay-req(v-if='invoice', :i='invoice')
     .row
         .six.columns
             label recently used by:
@@ -12,8 +14,6 @@
                 img.payreqbtn(src='../../assets/images/address.svg')
                 img(src='../../assets/images/lightning.svg')
                 span {{ sats }} sats (${{ r.charged.toLocaleString() }})
-                .invoices(v-if='showInvoices')
-                    pay-req(v-if='invoice', :i='invoice')
             router-link(v-if='r.stock >= 0', :to='"/resource_stock/" + r.resourceId')
                 button.refill replenish supply
 

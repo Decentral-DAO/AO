@@ -2,7 +2,7 @@
 let PORT = process.env.PORT || 8003
 
 require('./onChain')
-// require('./onLightning')
+require('./onLightning')
 require('./reactions')
 
 import express from 'express'
@@ -41,7 +41,7 @@ function startDctrlAo(){
       })
       .onValue(reactions)
 
-      const cleanupHeartbeat = Kefir.interval(123456, {type: 'cleanup'})
+      const cleanupHeartbeat = Kefir.interval(12345678, {type: 'cleanup'})
 
       const evStream = Kefir.merge([serverReactions, cleanupHeartbeat])
 

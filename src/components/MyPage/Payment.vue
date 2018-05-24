@@ -1,19 +1,18 @@
 <template lang='pug'>
 
 .address
-    .qr
-        div(v-html='imgTag')
-    h5 on chain address for {{ name }}: {{ address }}
     img.l.big(src='../../assets/images/bitcoin.svg')
-    h5 or lightning payment for
-        input(type='text', v-model='cadvalue')
-    router-link(:to='"/invoices/" + memberId')
-        button(@click='createPayRec')
-            img.r(src='../../assets/images/lightning.svg')
-            img.r(src='../../assets/images/lightning.svg')
-            img.l(src='../../assets/images/lightning.svg')
-            img.l(src='../../assets/images/lightning.svg')
-            span {{sats.toLocaleString()}} sats = ${{ cadvalue }}
+    .onchain
+        .qr
+            div(v-html='imgTag')
+        h5 On Chain ({{ name }}): {{ address }}
+    .invoice(v-if='showInvoice')
+        pay-req(v-if='invoice' :i='invoice')
+    .lncontrols(v-else)
+        h6 Create lighting payreq -- custom amount ($):
+            input(type='text', v-model='cadvalue')
+        button(@click='createPayRec') create payment request for {{sats.toLocaleString()}} sats (${{cadvalue}})
+
 
 </template>
 
@@ -23,8 +22,10 @@ import request from 'superagent'
 import FormBox from '../slotUtils/FormBox'
 import qrcode from 'qrcode-generator'
 import calcs from '../../calculations'
+import PayReq from '../Resources/PayReq'
 
 export default {
+    components: { PayReq },
     data( ){
         let cadvalue
         if ( this.$store.getters.member.balance < 0){
@@ -35,7 +36,7 @@ export default {
         } else {
             cadvalue = cadvalue.toFixed(2)
         }
-        return { cadvalue }
+        return { cadvalue, showInvoice: false }
     },
     computed: {
         sats(){
@@ -73,10 +74,21 @@ export default {
         },
         memberId(){
             return this.$store.getters.memberId
-        }
+        },
+        invoice(){
+            let invoice
+            this.$store.state.invoices.forEach( i => {
+                if (i.ownerId === this.memberId) {
+                    invoice = i
+                }
+            })
+            console.log('returning invoice', invoice)
+            return invoice
+        },
     },
     methods: {
         createPayRec(){
+          this.showInvoice = true
           console.log('creating payment request? ')
           request
               .post('/events')

@@ -1,9 +1,10 @@
 <template lang='pug'>
 
 .payreq
-    div(v-html='imgTag')
     label memo: {{i.memo}}
     label sats: {{i.sats}} ($ {{ cadAmount }})
+    div(v-html='imgTag')
+    .box {{ i.payment_request }}
 
 </template>
 
@@ -45,13 +46,10 @@ export default {
 @import '../../styles/grid'
 @import '../../styles/colours'
 
-.payreq
-    width: 100%
-
-.payreqtxt
-    overflow-wrap: break-word;
-    word-wrap: break-word
-    max-width:100%
-
+.box
+    word-wrap:break-word
+    max-width: 500px
+    z-index: 100001
+    padding: 1em
 
 </style>

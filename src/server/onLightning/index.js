@@ -1,29 +1,28 @@
+
 import events from "../events"
 import lnd from "./lnd"
 
-console.log('Fixme: starting onLightning watching')
+// const lnd = getLnd()
+console.log('Starting onLightning watching', lnd)
 
 lnd.getInfo({}, (err, res) => {
     console.log('getInfo', err, res)
 })
 
-// lnd.describeGraph({}, function(err, response) {
-//     // console.log({err , response})
-// })
-
-// XXX Todo: lightning watch:
-// XXX check invoices array for id, create invoice-paid event if settled.
-
-const call = lnd.subscribeInvoices({
-
-})
-//
+const call = lnd.subscribeTransactions()
+// //
 call.on('data', function(message) {
     console.log('lnd stream', message)
     if (message.settled){
         events.invoicesEvs.invoicePaid(message.r_hash.toString('hex'), console.log)
     }
 })
+
+
+
+
+
+
 // example stream
 // lnd stream { memo: '',
 //   receipt: <Buffer >,
@@ -42,14 +41,14 @@ call.on('data', function(message) {
 //   private: false }
 
 
-// //
-call.on('end', function() {
-    // The server has finished sending  console.log("END");
-    console.log("lnd stream ended")
-})
-
+// // //
+// call.on('end', function() {
+//     // The server has finished sending  console.log("END");
+//     console.log("lnd stream ended")
+// })
 //
-call.on('status', function(status) {
-    console.log('lnd status', status)
-    // Process status  console.log("Current status: " + status);
-})
+// //
+// call.on('status', function(status) {
+//     console.log('lnd status', status)
+//     // Process status  console.log("Current status: " + status);
+// })

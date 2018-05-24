@@ -1,5 +1,6 @@
+import { getResource } from './spec/utils'
 import events from './events'
-import {checkInitial} from './onChain/currentAccounts'
+import { checkInitial } from './onChain/currentAccounts'
 
 function reactions(ev){
     switch (ev.type) {
@@ -23,6 +24,11 @@ function reactions(ev){
             if (ev.memberId) {
                 events.membersEvs.memberPaid(ev.memberId, ev.amount, false, '')
                 events.membersEvs.badgeAdded(ev.memberId, 'lightning')
+            }
+            if (ev.resourceId) {
+                let resource = getResource(ev.resourceId)
+                let amount = ev.amount / resource.charged
+                events.resourceEvs.resourceUsed(ev.resourceId,'', amount, 0, '')
             }
             break
     }
