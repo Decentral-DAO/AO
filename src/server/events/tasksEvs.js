@@ -48,9 +48,19 @@ function taskRateUpdated(taskId, amount, notes, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
+function taskInstructionsUpdated(taskId, newInstructions, callback){
+  let newEvent = {
+    type: "task-instructions-updated",
+    taskId,
+    newInstructions,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
 export default {
   taskRateUpdated,
   taskBoosted,
   taskCreated,
   taskClaimed,
+  taskInstructionsUpdated,
 }

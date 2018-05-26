@@ -18,6 +18,9 @@ module.exports = function(req,res, next){
       case 'task-monthly-updated':
           specTaskRateUpdated(req, res, next)
           break
+      case 'task-instructions-updated':
+          specTaskInstructionsUpdated(req, res, next)
+          break
       default:
           next()
   }
@@ -87,6 +90,23 @@ function specTaskRateUpdated(req, res, next){
       req.body.taskId,
       req.body.amount,
       req.body.notes,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
+
+function specTaskInstructionsUpdated(req, res, next){
+  let errRes = []
+  if (
+    validators.isTaskId(req.body.taskId, errRes) &&
+    validators.isNotes(req.body.newInstructions, errRes)
+  ){
+    events.tasksEvs.taskInstructionsUpdated(
+      req.body.taskId,
+      req.body.newInstructions,
       utils.buildResCallback(res)
     )
   } else {

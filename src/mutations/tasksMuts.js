@@ -1,6 +1,7 @@
 import _ from 'lodash'
 
 function tasksMuts(tasks, ev) {
+	console.log('task mutation called', ev.type)
 	switch (ev.type) {
 		case "task-created":
 			tasks.push(ev)
@@ -32,6 +33,16 @@ function tasksMuts(tasks, ev) {
 				}
 			})
 			break
+		case "task-instructions-updated":
+				console.log('mutating instructions update')
+				tasks.forEach(task => {
+					console.log('looping through task')
+					if (task.taskId === ev.taskId) {
+							console.log('updating instructions')
+							task.instructions = ev.newInstructions
+					}
+				})
+				break
 	}
 }
 

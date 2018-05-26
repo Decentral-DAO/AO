@@ -42,7 +42,6 @@ function startDctrlAo(){
       .onValue(reactions)
 
       const cleanupHeartbeat = Kefir.interval(12345678, {type: 'cleanup'})
-
       const evStream = Kefir.merge([serverReactions, cleanupHeartbeat])
 
       const server = app.listen(PORT, err => {
