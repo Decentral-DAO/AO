@@ -3,7 +3,7 @@
 #tasks
     crazy-btn(to='/TASK_CREATE' text='New Task')
     shared-title(title='Active tasks')
-    .list(v-if='true')
+    .list(v-if='isLoggedIn')
         table
             tbody
                 active-tasks(v-for="b in tasks", :b="b")
@@ -29,7 +29,7 @@ export default {
       tasks(){
           return this.$store.state.tasks
       },
-      loggedIn(){
+      isLoggedIn(){
           return this.$store.getters.isLoggedIn
       }
   },

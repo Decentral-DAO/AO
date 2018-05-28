@@ -1,18 +1,17 @@
 <template lang='pug'>
 
-.address
-    img.l.big(src='../../assets/images/bitcoin.svg')
-    .onchain
-        .qr
-            div(v-html='imgTag')
-        h5 On Chain ({{ name }}): {{ address }}
+.payment
+    h5 Add to your account on Chain: {{address}}
+    div(v-html='imgTag')
+    h5 Add to your account with Lightning:
     .invoice(v-if='showInvoice')
-        pay-req(v-if='invoice' :i='invoice')
-    .lncontrols(v-else)
-        h6 Create lighting payreq -- custom amount ($):
+        pay-req(v-if='invoice', :i='invoice')
+    .row.lncontrols
+        .six.columns
+            button(@click='createPayRec') Create Payment Request {{sats.toLocaleString()}} sats (${{cadvalue}})
+        .six.columns
+            label Custom Value:
             input(type='text', v-model='cadvalue')
-        button(@click='createPayRec') create payment request for {{sats.toLocaleString()}} sats (${{cadvalue}})
-
 
 </template>
 
@@ -23,9 +22,10 @@ import FormBox from '../slotUtils/FormBox'
 import qrcode from 'qrcode-generator'
 import calcs from '../../calculations'
 import PayReq from '../Resources/PayReq'
+import Addr from '../Members/Addr'
 
 export default {
-    components: { PayReq },
+    components: { PayReq, Addr },
     data( ){
         let cadvalue
         if ( this.$store.getters.member.balance < 0){
@@ -41,6 +41,15 @@ export default {
     computed: {
         sats(){
             return calcs.cadToSats(this.cadvalue, this.$store.state.cash.spot)
+        },
+        name(){
+            let name = '...loading'
+            this.$store.state.members.forEach( member => {
+                if (member.memberId === this.$store.getters.memberId){
+                    name = member.name.slice()
+                }
+            })
+            return name
         },
         imgTag(){
             console.log('computing imgTag?')
@@ -59,15 +68,6 @@ export default {
             let cellsize = 3
             let margin = 3
             return qr.createImgTag(cellsize, margin)
-        },
-        name(){
-            let name = '...loading'
-            this.$store.state.members.forEach( member => {
-                if (member.memberId === this.$store.getters.memberId){
-                    name = member.name.slice()
-                }
-            })
-            return name
         },
         address(){
             return this.$store.getters.member.address
@@ -112,6 +112,7 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
+@import '../../styles/skeleton'
 @import '../../styles/button'
 
 .qr
@@ -121,29 +122,13 @@ export default {
 h5
     padding: 2em
 
-.big
-    float: left
-    z-index: -1111
-    height: 10em
-    margin-top: -1.5em
-    margin-bottom: -1.5em
-
-input
-    float: right
-
 button
   img
     height: 1.5em
     z-index: 100
 
-.r
+.createaddr
     float: right
 
-.l
-    float: left
-
-.c
-    text-align: center
-    font-size: 3em
 
 </style>

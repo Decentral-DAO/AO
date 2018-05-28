@@ -1,12 +1,15 @@
 <template lang='pug'>
 
-#home
-    shared-title(:title='name')
+#mypage
+    shared-title(:title='calcTitle')
+    h5 Welcome to dctrl account page. Here you can . . .
     payment
+    br
     changer
-    label Your badges
+    br
+    h5 See all the badges you've earned:
     badges(:m='member')
-    h6 dctrl members have access to cool shared resources, but also responsibility for their care, maintenance, and replenishment! Be excellent.
+    h5 You have access to cool shared resources, but also responsibility for their care, maintenance, and replenishment! Be excellent.
     calendar
 
 </template>
@@ -28,7 +31,7 @@ export default {
         member(){
             return this.$store.getters.member
         },
-        name(){
+        calcTitle(){
             return this.$store.getters.name + '(' + this.$store.getters.member.balance.toFixed() + ')'
         }
     }

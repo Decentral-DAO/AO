@@ -44,6 +44,10 @@ function initialize(callback) {
             applyEvent(serverState, ev)
             applyEvent(pubState, removeSensitive(ev))
         })
+
+        applyEvent(serverState, {type: 'cleanup'})
+        applyEvent(pubState, {type: 'cleanup'})
+
         callback(null)
     })
 }

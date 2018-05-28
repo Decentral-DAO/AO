@@ -1,19 +1,23 @@
 <template lang='pug'>
 
-#auth
-  .container(v-if='!confirmed')
+#auth.row
+  .six.columns.offset-by-three(v-if='!confirmed')
+      h4 Login to access app:
       br
       label hackername
-      input#name(type='text' v-model='name' placeholder='enter name')
-      label pass -
-          span(v-for="a in pass") &nbsp;*&nbsp;
-      input.secret(type='text' v-model='pass')
+      br
+      input#name(type='text', v-model='name', placeholder='enter name', autocapitalize="none", autocomplete="off", autocorrect="off")
+      br
+      label pass --
+          span(v-for="a in pass") &nbsp;!&nbsp;
+      br
+      input.secret(type='text', v-model='pass', autocapitalize="none", autocomplete="off", autocorrect="off")
       br
       p.red {{ err }}
       button(@click="createSession") login
-  .container(v-else)
-      h3 session active
-      button(@click="killSession") kill session
+  .c(v-else)
+      h3 you are logged in:
+      button(@click="killSession") log out
 
 </template>
 
@@ -88,14 +92,15 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../styles/colours'
-@import '../styles/grid'
 @import '../styles/button'
 
 #auth
     width: 100%
-
+    content-align: center
+    input
+        color: main
+        width: 100%
 .secret
-    // color: white
     -webkit-text-fill-color: transparent; /* sets just the text color */
 
 .container

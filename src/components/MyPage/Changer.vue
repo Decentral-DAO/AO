@@ -1,11 +1,11 @@
 <template lang='pug'>
 
 .changer
-  h6 change your information:
-  span(v-if='inputType === "password"')
-      img(v-if='matched', src='../../assets/images/check.svg')
-      img(v-else, src='../../assets/images/warn.svg')
+  h5 Update your account info:
   form-box(event='member-field-updated', :data='changeReq', btntxt='change your account')
+      .check(v-if='inputType === "password"')
+          img(v-if='matched', src='../../assets/images/check.svg')
+          img(v-else, src='../../assets/images/warn.svg')
       select(v-model='change.field')
           option(value='secret') password
           option(value='email') e-mail
@@ -84,12 +84,12 @@ img
 
 .changer
     padding: 1em
-    background: accent4
-    content-align: right
-    color: white
 
 input, select
     z-index:123123
     color: main
+
+.check
+    float: right
 
 </style>

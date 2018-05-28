@@ -1,20 +1,15 @@
 <template lang='pug'>
 
-tr(class="")
-    td
+.row
+    .three.grid
         img(v-if='isLoggedIn', src='../../assets/images/loggedIn.svg')
         img(v-else, src='../../assets/images/loggedOut.svg')
-    td
-        addr(:a="m.address")
-    td
-        h6 {{ m.balance.toFixed(2) }}
-    td
+    .three.grid
         dctrl-active(:m='m')
-    td
-        span {{ m.name }}
-    td
-        badges(:m='m')
-    td
+        span {{ m.name }} ({{ m.balance.toFixed(2) }})
+    .three.grid
+        addr(:a="m.address")
+    .three.grid
         router-link(:to='\'/calendar/\' + this.m.memberId')
             img(src='../../assets/images/calendar.svg')
 
@@ -47,13 +42,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 @import '../../styles/colours'
-
-.or
-    font-size: 1.3em
-
-.pad
-    margin-right: 5px
+@import '../../styles/grid'
 
 span
     color: accent1
@@ -63,30 +54,17 @@ span
     width:100%
     padding:1em
 
-.small
-    font-size: .5em
-
-button
-    background: accent2
-    color: black
-    border: none
-
 img
     height: 4em
-    padding-left: .2345em
-    padding-right: .2345em
 
-tr
-    border-left-color: accent2
-    border-bottom-color: accent5
-    border-top-color: accent5
-    border-style: dotted
-    border-right-style: none
-    border-left-style: none
-    border-width: 2px
-    vertical-align:middle
+.row
+    float: left
+    width: 100%
+    border-bottom-style: solid
+    border-bottom-color: accent4
+    border-width: 3px
+    padding-bottom: 0.8em
+    margin-bottom: 0.8em
 
-td
-    padding: .3em
 
 </style>

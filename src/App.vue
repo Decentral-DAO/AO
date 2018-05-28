@@ -5,7 +5,7 @@
         event-feed
     .mobile
         mobile-heading
-            router-view
+        router-view
     main
       .side_bar
           main-menu
@@ -18,7 +18,6 @@
 <script>
 
 import io from 'socket.io-client'
-
 import MainMenu from './components/MainMenu'
 import MobileHeading from './components/MobileHeading'
 import EventFeed from './components/slotUtils/EventFeed'
@@ -67,11 +66,14 @@ export default {
 
 @import "./styles/normalize"
 @import "./styles/breakpoints"
-@import "./styles/framework"
 @import "./styles/colours"
 
 #app
     background: main
+    color: accent1
+    min-height: 100vh
+    font-family:sans-serif
+    font-weight: lighter
 
 main
     height: 100%;
@@ -79,8 +81,6 @@ main
     margin: 0;
     padding: 0;
     display: flex;
-    color: accent1
-    font-family:font
 
 .side_bar, .content
     display: flex;
@@ -95,6 +95,10 @@ main
     flex-shrink: 0;
     flex-grow: 0;
 }
+
+.mobile
+    width: 100vw
+
 
 @media (max-width: breakpoint)
     main

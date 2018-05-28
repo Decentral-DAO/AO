@@ -1,10 +1,13 @@
 <template lang='pug'>
 
 .payreq
-    label memo: {{i.memo}}
-    label sats: {{i.sats}} ($ {{ cadAmount }})
-    div(v-html='imgTag')
-    .box {{ i.payment_request }}
+  .row
+    .six.columns
+        label memo: {{i.memo}}
+        .box {{ i.payment_request }}
+    .six.columns
+        label sats: {{i.sats}} ($ {{ cadAmount }})
+        div(v-html='imgTag')
 
 </template>
 
@@ -43,13 +46,17 @@ export default {
 <style lang="stylus" scoped>
 
 @import '../../styles/button'
-@import '../../styles/grid'
 @import '../../styles/colours'
+@import '../../styles/skeleton'
+
+.payreq
+    color: accent1
 
 .box
     word-wrap:break-word
     max-width: 500px
     z-index: 100001
     padding: 1em
+
 
 </style>

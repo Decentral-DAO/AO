@@ -1,18 +1,18 @@
 <template lang='pug'>
 
 .resources
-    h3(v-if='r.stock > 0').stock {{ r.stock }}
-    h3 {{ r.name }}
+    h3 {{ r.name }} 
+        span(v-if='r.stock > 0').stock ({{ r.stock }} remain)
     .invoices(v-if='showInvoices')
         pay-req(v-if='invoice', :i='invoice')
     .row
-        .six.columns
+        .six.columns.recent
             label recently used by:
             current(v-for='memberId in currentMembers', :memberId='memberId')
         .six.columns
             button.payreq(v-if='r.charged > 0', @click='createPayRec')
-                img.payreqbtn(src='../../assets/images/address.svg')
-                img(src='../../assets/images/lightning.svg')
+                img.payreqimg(src='../../assets/images/address.svg')
+                img.payreqlnimg(src='../../assets/images/lightning.svg')
                 span {{ sats }} sats (${{ r.charged.toLocaleString() }})
             router-link(v-if='r.stock >= 0', :to='"/resource_stock/" + r.resourceId')
                 button.refill replenish supply
@@ -75,28 +75,24 @@ export default {
 <style lang="stylus" scoped>
 
 @import '../../styles/button'
-@import '../../styles/grid'
+@import '../../styles/skeleton'
+@import '../../styles/skeleton-button'
 @import '../../styles/colours'
 
 img
     height: 1.5em
     z-index: 100
 
-.r
-    float: right
-
-.l
-    float: left
-
 .resources
+    color: accent1
+    border-color: accent4
+    border-bottom-style: solid
+    border-width: 3px
     width: 100%
-    border-style: dotted
-    border-color: accent2
-    border-width: 1px
-    padding: 1em
+    margin-bottom: 1em
+    padding-bottom: 1em
 
 .stock
-    float: right
     color: accent2
 
 .refill
@@ -111,8 +107,15 @@ img
     text-align: left
     border-color: accent2
 
-.payreqbtn
+.payreqimg
     float: right
+    height: 2.5em
 
+.payreqlnimg
+    float: left
+    height: 2em
+
+.recent
+    font-size: .8em
 
 </style>

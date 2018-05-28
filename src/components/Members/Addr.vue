@@ -1,9 +1,10 @@
 <template lang='pug'>
 
-.addr
-    label {{ a }}
-        img(@click="buildTag" src='../../assets/images/address.svg')
-    .qr(v-html='imgTag', @click="killTag")
+span.addr
+    img(@click="buildTag", src='../../assets/images/address.svg')
+    .tag(v-if='showTag', @click="killTag")
+        label {{ a }}
+        .qr(v-html='imgTag')
 
 </template>
 
@@ -15,11 +16,13 @@ export default {
     props: ['a'],
     data(){
         return {
-            imgTag : ''
+            imgTag : '',
+            showTag: false
         }
     },
     methods: {
         buildTag(){
+            this.showTag = true
             if (this.imgTag){
                 return this.imgTag = ''
             }
@@ -34,6 +37,7 @@ export default {
             this.imgTag = qr.createImgTag(cellsize, margin)
         },
         killTag(){
+            this.showTag = false
             this.imgTag = ''
         }
     }

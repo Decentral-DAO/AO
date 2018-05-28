@@ -1,18 +1,18 @@
 <template lang='pug'>
 
-tr
-    td
+.task
+  .row
+    .four.columns.name
         label {{b.name}}
-        router-link(:to='claimLocation')
-            button claim {{ sats }} sats(${{currentValue}})
-    td
+        button(@click='claim') claim - {{ sats }} sats (${{currentValue}})
+    .six.columns
         .instructions(v-if='!editMode') {{ b.instructions }}
         .editBox(v-else)
             div
-                label Edit Instrctions
+                label Edit Instructions
                 textarea(v-model='newInstructions')
             button(@click='submitChange') submit change
-    td
+    .two.columns
       img.pencil(v-if='!editMode', src='../../assets/images/pencil.svg', @click='edit')
       img.pencil(v-else, @click='edit', src='../../assets/images/pencil.svg')()
       router-link(:to='historyLocation')
@@ -35,6 +35,9 @@ export default {
             } else {
                 this.editMode = false
             }
+        },
+        claim(){
+            this.router.push(this.claimLocation)
         },
         submitChange(){
             console.log('submit change called')
@@ -91,10 +94,22 @@ export default {
 <style lang="stylus" scoped>
 
 @import '../../styles/colours'
+@import '../../styles/skeleton'
+@import '../../styles/skeleton-button'
 
-td
+.task
     color: accent2
-    font-size: 1.4em
+
+.name
+    content-align: left
+    text-align: left
+    label
+        font-size: 1.4em
+        text-align: left
+        color: accent1
+    button
+        border-color: accent2
+        color: accent2
 
 .val
     color: accent2
@@ -103,7 +118,10 @@ td
     height: 24px
 
 .instructions
-    color: accent3
+    font-size: .8em
+    padding-top: .8em
+    vertical-align:bottom
+    color: accent1
 
 .editBox
     color: main
@@ -117,19 +135,15 @@ td
         width: 100%
         height: 8em
 
-button
-    color: accent2
-    border-color: accent2
-
 img
     height: 55px
 
-tr
+.row
     border-color: accent4
-    border-top-style: solid
     border-bottom-style: solid
+    padding-bottom: .8em
+    margin-bottom: .7em
     border-width: 3px
-    vertical-align:middle
     width: 100%
 
 </style>

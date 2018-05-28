@@ -4,8 +4,7 @@
     crazy-btn(v-if='loggedIn' to='/member_create' text='new member')
     shared-title(title='Illuminati Hit List')
     .list(v-if="loggedIn")
-        tab
-            row(v-for="m in members", :m="m", v-if='m.active > 0')
+        row(v-for="m in members", :m="m", v-if='m.active > 0')
         .purg
             template(v-for="m in members", v-if='m.active <= 0')
                 .bouncy {{ m.name }}
@@ -26,7 +25,6 @@
 import Row from "./Row"
 import request from "superagent"
 import SharedTitle from '../slotUtils/SharedTitle'
-import Tab from './Tab'
 import CrazyBtn from '../slotUtils/CrazyBtn'
 import DctrlActive from './DctrlActive'
 
@@ -42,7 +40,6 @@ export default {
     components:{
         SharedTitle,
         Row,
-        Tab,
         CrazyBtn,
         DctrlActive
     }

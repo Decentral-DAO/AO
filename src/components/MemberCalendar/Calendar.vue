@@ -2,10 +2,10 @@
 
 #calendar
     .row.menu
-        .three.columns(@click='prevMonth')
+        .three.grid(@click='prevMonth')
             img(src='../../assets/images/left.svg')
-        .six.columns {{ monthName }} - {{year}}
-        .three.columns(@click='nextMonth')
+        .six.grid {{ monthName }} - {{year}}
+        .three.grid(@click='nextMonth')
             img(src='../../assets/images/right.svg')
     .weekday(v-for='day in DAYS_OF_WEEK') {{ day }}
     .placeholder(v-for='placeholder in firstDay')
@@ -75,6 +75,8 @@ export default {
 
 <style lang='stylus' scoped>
 @import '../../styles/colours'
+@import '../../styles/grid'
+
 #calendar
     color: accent1
     font-size:2em
