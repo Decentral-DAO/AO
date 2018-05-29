@@ -33,7 +33,7 @@ export default {
 					return {
 							name: this.member.name,
 							secret: cryptoUtils.createHash(this.member.pass),
-							fob: '',
+							fob: this.member.fob,
 					}
 			}
 	},
