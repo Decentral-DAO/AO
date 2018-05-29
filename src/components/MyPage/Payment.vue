@@ -10,7 +10,7 @@
         .six.columns
             button(@click='createPayRec') Create Payment Request {{sats.toLocaleString()}} sats (${{cadvalue}})
         .six.columns
-            label Custom Value:
+            label Custom Value($):
             input(type='text', v-model='cadvalue')
 
 </template>

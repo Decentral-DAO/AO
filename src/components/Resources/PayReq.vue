@@ -1,13 +1,14 @@
 <template lang='pug'>
 
 .payreq
-  .row
-    .six.columns
-        label memo: {{i.memo}}
-        .box {{ i.payment_request }}
-    .six.columns
-        label sats: {{i.sats}} ($ {{ cadAmount }})
-        div(v-html='imgTag')
+  a(:href='"bitcoin:" + this.i.payment_request')
+    .row
+      .six.columns
+          label memo: {{i.memo}}
+          .box {{ i.payment_request }}
+      .six.columns
+          label sats: {{i.sats}} ($ {{ cadAmount }})
+          div(v-html='imgTag')
 
 </template>
 

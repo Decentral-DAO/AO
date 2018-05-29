@@ -1,6 +1,7 @@
 <template lang='pug'>
 
 #app
+    .bg
     .feed
         event-feed
     .mobile
@@ -69,11 +70,13 @@ export default {
 @import "./styles/colours"
 
 #app
-    background: main
+    position:relative
     color: accent1
-    min-height: 100vh
     font-family:sans-serif
     font-weight: lighter
+
+body
+    background: main
 
 main
     height: 100%;
@@ -98,7 +101,8 @@ main
 
 .mobile
     width: 100vw
-
+    padding-left: 1em
+    padding-right: 1em
 
 @media (max-width: breakpoint)
     main
