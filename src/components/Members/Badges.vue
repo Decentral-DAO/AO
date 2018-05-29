@@ -42,12 +42,12 @@ export default {
 <style lang='stylus' scoped>
 
 img
-    height: 4em
+    height: 2em
     padding-left: .2345em
     padding-right: .2345em
 
 a:nth-child(odd)
       img
-          padding: 1.1em
+          padding-top: 1.2em
 
 </style>

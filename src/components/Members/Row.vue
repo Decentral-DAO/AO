@@ -4,11 +4,14 @@
     .three.grid
         img(v-if='isLoggedIn', src='../../assets/images/loggedIn.svg')
         img(v-else, src='../../assets/images/loggedOut.svg')
+        label {{ m.name }}
+        addr(:a="m.address")
     .three.grid
         dctrl-active(:m='m')
-        span {{ m.name }} ({{ m.balance.toFixed(2) }})
+        .c ({{ m.balance.toFixed(2) }})
     .three.grid
-        addr(:a="m.address")
+        div &nbsp;
+        badges(:m='m')
     .three.grid
         router-link(:to='\'/calendar/\' + this.m.memberId')
             img(src='../../assets/images/calendar.svg')
@@ -56,6 +59,10 @@ span
 
 img
     height: 4em
+
+.c
+    content-align: left
+    text-align: left
 
 .row
     float: left

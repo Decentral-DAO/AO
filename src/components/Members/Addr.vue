@@ -3,8 +3,8 @@
 span.addr
     img(@click="buildTag", src='../../assets/images/address.svg')
     .tag(v-if='showTag', @click="killTag")
-        label {{ a }}
         .qr(v-html='imgTag')
+        label {{ a }}
 
 </template>
 
@@ -51,9 +51,17 @@ img
     position: inline
     height: 2.4em
 
-.qr
-    content-align: center
-    text-align: center
-
+.tag
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(29,93,99,0.8); /* Black background with opacity */
+    z-index: 289768; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    padding: 4em
 
 </style>

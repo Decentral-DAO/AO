@@ -37,7 +37,7 @@ export default {
             }
         },
         claim(){
-            this.router.push(this.claimLocation)
+            this.$router.push(this.claimLocation)
         },
         submitChange(){
             console.log('submit change called')
