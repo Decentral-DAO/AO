@@ -3,7 +3,6 @@ let PORT = process.env.PORT || 8003
 
 require('./onChain')
 require('./onLightning')
-require('./reactions')
 
 import express from 'express'
 import dctrlDb from './dctrlDb'
@@ -17,6 +16,8 @@ import applyRouter from './router'
 import { socketAuth } from './auth'
 import { watchSpot } from './exchangeRate'
 import Kefir from 'kefir'
+import cronStarter from './crons'
+
 
 const app = express()
 
@@ -35,6 +36,7 @@ function startDctrlAo(){
 
       watchSpot()
       initializeWatchedMembersAddresses()
+      cronStarter()
 
       const serverReactions = dctrlDb.changeFeed.onValue( ev => {
         state.applyEvent(state.serverState, ev)

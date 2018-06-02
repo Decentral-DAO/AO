@@ -29,7 +29,7 @@ function resourcesMuts(resources, ev){
 		case "resource-stocked":
 			resources.forEach( resource => {
 				if (resource.resourceId == ev.resourceId){
-					resource.stock += parseFloat(ev.amount)
+						resource.stock += parseFloat(ev.amount)
 				}
 			})
 			break
