@@ -38,10 +38,6 @@ export default {
           err: ''
       }
   },
-  mounted(){
-      // TODO: why doesn't this work?! (cursor to name field)
-      // document.getElementById('name').select()
-  },
   computed: {
       confirmed(){
           return this.$store.getters.isLoggedIn
@@ -79,6 +75,15 @@ export default {
       },
       killSession(){
           //XXX TODO tell server to remove session
+          request
+              .post('/events')
+              .set('Authorization', this.$store.state.loader.token)
+              .send({
+                  type: "session-killed",
+                  session: this.$store.state.loader.session
+              })
+              .end(console.log)
+
           window.localStorage.removeItem("token")
           window.localStorage.removeItem("session")
           this.$store.commit('setAuth', {

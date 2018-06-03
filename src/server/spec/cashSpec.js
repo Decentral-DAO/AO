@@ -11,6 +11,9 @@ module.exports = function(req, res, next){
       case 'cash-decreased':
           specCashDecreased(req, res, next)
           break
+      case 'rent-set':
+          specRentSet(req, res, next)
+          break
       default:
           next()
   }
@@ -41,6 +44,20 @@ function specCashDecreased(req, res, next){
     events.cashEvs.cashDecreased(
       req.body.amount,
       req.body.notes,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
+function specRentSet(req, res, next){
+  let errRes = []
+  if (
+    validators.isAmount(req.body.amount, errRes)
+  ){
+    events.cashEvs.rentSet(
+      req.body.amount,
       utils.buildResCallback(res)
     )
   } else {

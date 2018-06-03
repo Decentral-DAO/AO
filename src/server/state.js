@@ -11,7 +11,8 @@ const serverState = {
   cash: {
     currency: 'CAD',
     cash: 0,
-    spot: 0
+    spot: 0,
+    rent: 0
   },
 }
 
@@ -24,7 +25,8 @@ const pubState = {
   cash: {
     currency: 'CAD',
     cash: 0,
-    spot: 0
+    spot: 0,
+    rent: 0
   },
 }
 

@@ -7,9 +7,10 @@
     .padding(v-else)
         h5 dctrl resource
         ol
-            li Raspberry pi running dctrl-fobtap rfid scan point.
-            li Dctrl-admin compatible lightning point of sale service
-            li Possible human, magical entity, fairy, cyborg or alien.
+            li Raspberry pi running fobtap rfid scan point.
+            li Door, vending machine 
+        p
+          strong code at github.com/dctrl-ao/fobtap
 
 </template>
 

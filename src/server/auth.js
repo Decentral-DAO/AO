@@ -54,6 +54,7 @@ function serverAuth(req, res, next){
         state.serverState.sessions.forEach(session => {
             if (session.token === req.headers.authorization){
                 authorized = true
+                req.reqOwner = session.ownerId
             }
         })
         if (authorized){

@@ -11,6 +11,15 @@ function sessionCreated(ownerId, session, token, callback) {
     dctrlDb.insertEvent(newEvent, callback)
 }
 
+function sessionKilled(session, callback) {
+    let newEvent = {
+        type: "session-killed",
+        session
+    }
+    dctrlDb.insertEvent(newEvent, callback)
+}
+
 export default {
-  sessionCreated
+  sessionCreated,
+  sessionKilled
 }

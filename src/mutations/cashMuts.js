@@ -18,6 +18,9 @@ function cashMuts(cash, ev){
 			case "currency-switched":
 				cash.currency = ev.currency
 				break
+			case "rent-set":
+				cash.rent = ev.amount
+				break
 		}
 }
 

@@ -18,6 +18,15 @@ function cashDecreased(amount, notes, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
+function rentSet(amount, callback){
+    let newEvent = {
+      type: "rent-set",
+      amount
+    }
+    dctrlDb.insertEvent(newEvent, callback)
+
+}
+
 function spotUpdated(spot, callback) {
   let newEvent = {
       type: "spot-updated",
@@ -45,5 +54,6 @@ function forex(currency, callback) {
 export default {
   cashIncreased,
   cashDecreased,
-  spotUpdated
+  spotUpdated,
+  rentSet
 }

@@ -30,6 +30,7 @@ import Resources from './components/Resources'
 import ResourceCreate from './components/forms/ResourceCreate'
 import ResourceUse from './components/forms/ResourceUse'
 import ResourceStock from './components/forms/ResourceStock'
+import RentSet from './components/forms/RentSet'
 
 // Invoice components
 import Invoices from './components/Invoices'

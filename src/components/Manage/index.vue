@@ -2,22 +2,17 @@
 
 #manage
     shared-title(title='Manage Cash')
-    table
-      tr
-        td
-          span Current Cash: {{bal}}
+    h4 Current Cash: {{bal}}
     .full.row
       .six.columns
-          label Cash Receive
+          label Record Cash Receive
           cash-receive
       .six.columns
-          label Cash Expense
+          label Record Cash Expense
           cash-expense
-    .mobile
-        label Cash Expense
-        cash-expense
-        label Cash Received
-        cash-received
+    .row
+        label Update the communal rent
+        rent-set
 </template>
 
 <script>
@@ -25,10 +20,11 @@
 import SharedTitle from '../slotUtils/SharedTitle'
 import CashExpense from '../forms/CashExpense'
 import CashReceive from '../forms/CashReceive'
+import RentSet from '../forms/RentSet'
 
 export default {
     components:{
-        SharedTitle, CashExpense, CashReceive
+        SharedTitle, CashExpense, CashReceive, RentSet
     },
     computed:{
       bal(){
@@ -42,55 +38,12 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
-@import '../../styles/framework'
-@import '../../styles/breakpoints'
-
-#home
-  width:100%
-
-table
-  font-size: 1.9em
-  color: accent3
-  width: 100%
-
-button
-    color: white
-    margin: 1em
-    background: accent1
-
-p
-    font-size:1.3em
-    color:white
-    font-family: 'Open Sans', light, sans-serif;
-
-h3
-    text-align: left
-    color:accent1
-    font-family: 'Open Sans', light, sans-serif;
-
-a
-    color: accent2
-    text-decoration: none;
-
-a:visited
-    color: accent1
+@import '../../styles/skeleton'
 
 label
-  font-size: 1.8em
-  background: accent4
-  color: white
-  margin-top: 1.1234em
-  padding: .4321em
+    width: 100%
+    background: accent4
+    color: white
 
-img
-  height: 45px
-
-@media (max-width: breakpoint)
-    .full
-        display: none
-
-@media (min-width: breakpoint)
-    .mobile
-        display: none
 
 </style>

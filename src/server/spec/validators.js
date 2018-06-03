@@ -66,6 +66,18 @@ module.exports = {
       }
       return result
   },
+  isSession(val, errRes){
+      let result = false
+      state.pubState.sessions.forEach(s => {
+          if (val === s.session){
+            result = true
+          }
+      })
+      if (!result) {
+          errRes.push('invalid session')
+      }
+      return result
+  },
   isResourceId(val, errRes){
       let result = false
       state.pubState.resources.forEach(resource =>{

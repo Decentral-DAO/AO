@@ -3,14 +3,14 @@ import cron from 'cron'
 import events from './events'
 import {serverState} from './state'
 
-var rentJob = new cron.CronJob({
-  cronTime: '0 0 2 * * *', //first minute, first hour, second day
+const rentJob = new cron.CronJob({
+  cronTime: '0 0 4 * * *', //first minute, first hour, second day
   onTick: rent,
   start: false,
   timeZone: 'America/Los_Angeles'
 })
 
-deactivateJob = new cron.CronJob({
+const deactivateJob = new cron.CronJob({
   cronTime: '11 11 11 * * *',
   onTick: deactivate,
   start: false,
@@ -19,10 +19,9 @@ deactivateJob = new cron.CronJob({
 
 function rent(){
     console.log('charging for Rent')
-
     let activeMembers = serverState.members.filter( m => m.active >= 0)
     let numberOfActiveMembers = activeMembers.length
-    let charged = 1600 / activeMembers.length
+    let charged = serverState.cash.rent / activeMembers.length
     let notes = ''
     console.log('attempting ev create loop', {numberOfActiveMembers, charged, notes})
     activeMembers.forEach( member => {
@@ -30,11 +29,9 @@ function rent(){
             events.membersEvs.memberCharged(member.memberId, charged, notes)
         }
     })
-    // get memberlist
-    //
 }
 
-deactivate(){
+function deactivate(){
     let deadbeatMembers = serverState.members.filter(m => m.balance <= 0)
     deadbeatMembers.forEach(m => events.membersEvs.memberDeactivated(m.memberId))
 }
