@@ -28,7 +28,7 @@ function reactions(ev){
             if (ev.resourceId) {
                 let resource = getResource(ev.resourceId)
                 let amount = ev.amount / resource.charged
-                events.resourceEvs.resourceUsed(ev.resourceId,'', amount, 0, '')
+                events.resourcesEvs.resourceUsed(ev.resourceId,'', amount, 0, '')
             }
             break
     }

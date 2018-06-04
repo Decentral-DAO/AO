@@ -9,7 +9,7 @@
           .paid(v-else) PAID
       .six.columns
           label sats: {{i.sats}} ($ {{ cadAmount }})
-          div(v-html='imgTag')
+          div(v-if='!i.settled', v-html='imgTag')
 
 </template>
 
