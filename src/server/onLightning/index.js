@@ -9,8 +9,8 @@ lnd.getInfo({}, (err, res) => {
     console.log('getInfo', err, res)
 })
 
-const call = lnd.subscribeTransactions()
-// //
+const call = lnd.subscribeInvoices({})
+
 call.on('data', function(message) {
     console.log('lnd stream', message)
     if (message.settled){

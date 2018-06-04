@@ -63,7 +63,7 @@ function startDctrlAo(){
             .map(state.removeSensitive)
             .onValue( ev => {
               state.applyEvent(state.pubState, ev)
-              console.log('emitting event')
+              console.log('emitting event ', ev.type)
               io.emit('eventstream', ev)
             })
       })
