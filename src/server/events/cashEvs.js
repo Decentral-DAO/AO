@@ -24,8 +24,9 @@ function rentSet(amount, callback){
       amount
     }
     dctrlDb.insertEvent(newEvent, callback)
-
 }
+
+// function rentPaid (cb => dctrlDb.insertEvent({type: "rent-paid"}, cb) )
 
 function spotUpdated(spot, callback) {
   let newEvent = {

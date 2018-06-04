@@ -1,14 +1,15 @@
 <template lang='pug'>
 
 .resources
-    h3 {{ r.name }} 
+    h3 {{ r.name }}
         span(v-if='r.stock > 0').stock ({{ r.stock }} remain)
     .invoices(v-if='showInvoices')
         pay-req(v-if='invoice', :i='invoice')
     .row
         .six.columns.recent
             label recently used by:
-            current(v-for='memberId in currentMembers', :memberId='memberId')
+            .current
+                current(v-for='memberId in currentMembers', :memberId='memberId')
         .six.columns
             button.payreq(v-if='r.charged > 0', @click='createPayRec')
                 img.payreqimg(src='../../assets/images/address.svg')
@@ -96,16 +97,14 @@ img
     color: accent2
 
 .refill
-    color: green
-    background: main
-    border-color: green
-    text-align: left
+    color: main
+    background: green
+    border-color: main
 
 .payreq
-    color: accent2
-    background: main
-    text-align: left
-    border-color: accent2
+    color: main
+    background: accent2
+    border-color: main
 
 .payreqimg
     float: right
@@ -117,5 +116,9 @@ img
 
 .recent
     font-size: .8em
+
+.current
+    background: lightGrey
+    color: main
 
 </style>

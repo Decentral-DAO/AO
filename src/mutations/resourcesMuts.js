@@ -34,9 +34,10 @@ function resourcesMuts(resources, ev){
 			})
 			break
 		case "cleanup":
+			let now = Date.now()
 			resources.forEach( r => {
 					r.current = _.filter(r.current, ev => {
-							let sinceEvent = Date.now() - ev.timestamp
+							let sinceEvent = now - ev.timestamp
 							let isCurrent = sinceEvent < 1000 * 60 * 60 * 5 // 5 hours
 							return isCurrent
 					})

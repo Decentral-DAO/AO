@@ -108,8 +108,13 @@ export default {
         text-align: left
         color: accent1
     button
-        border-color: accent2
-        color: accent2
+        margin-top: 1.5em
+        border-color: main
+        color: main
+        background-color: accent2
+        // XXX - doesn't work
+        :hover
+            background: accent4!important
 
 .val
     color: accent2
@@ -118,10 +123,15 @@ export default {
     height: 24px
 
 .instructions
+    padding: 1.5em
+    border-radius: .5em
+    background: lightGrey
+    color: main
+    min-height: 4em
     font-size: .8em
     padding-top: .8em
-    vertical-align:bottom
-    color: accent1
+    vertical-align: bottom
+    text-align: left
 
 .editBox
     color: main

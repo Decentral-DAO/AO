@@ -5,7 +5,8 @@
     .row
       .six.columns
           label memo: {{i.memo}}
-          .box {{ i.payment_request }}
+          .box(v-if='!i.settled') {{ i.payment_request }}
+          .paid(v-else) PAID
       .six.columns
           label sats: {{i.sats}} ($ {{ cadAmount }})
           div(v-html='imgTag')
@@ -51,7 +52,15 @@ export default {
 @import '../../styles/skeleton'
 
 .payreq
-    color: accent1
+    color: main
+    background-color: lightGrey
+    border-radius: 0.5em
+    padding: 1em
+    margin-bottom: 1.654321em
+
+a
+    text-decoration: none
+    color: main
 
 .box
     word-wrap:break-word
@@ -59,5 +68,8 @@ export default {
     z-index: 100001
     padding: 1em
 
+.paid
+    color: accent1
+    font-size: 5em
 
 </style>

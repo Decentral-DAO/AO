@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 @import '../../styles/colours'
 
 img

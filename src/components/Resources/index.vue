@@ -8,7 +8,7 @@
         h5 dctrl resource
         ol
             li Raspberry pi running fobtap rfid scan point.
-            li Door, vending machine 
+            li Door, vending machine, ... many possibilities
         p
           strong code at github.com/dctrl-ao/fobtap
 

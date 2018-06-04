@@ -8,7 +8,7 @@
         addr(:a="m.address")
     .three.grid
         dctrl-active(:m='m')
-        .c ({{ m.balance.toFixed(2) }})
+        .c {{ m.balance.toFixed(2) }}
     .three.grid
         div &nbsp;
         badges(:m='m')
