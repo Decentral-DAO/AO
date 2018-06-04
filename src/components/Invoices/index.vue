@@ -3,7 +3,7 @@
 #resource
     shared-title(title='Invoices')
     .list(v-if='isLoggedIn')
-        row(v-for="i in invoices", :i="i")
+        pay-req(v-for="i in invoices", :i="i")
     .padding(v-else)
         h5 dctrl invoices
         ol
@@ -14,19 +14,13 @@
 <script>
 
 import request from "superagent"
-import Row from "./Row"
+import PayReq from "../Resources/PayReq"
 import SharedTitle from '../slotUtils/SharedTitle'
 
 export default {
     computed: {
         invoices(){
-            let ownerId = this.$router.currentRoute.path.split('/')[2]
-            if ( !ownerId ){
-                ownerId = this.$store.getters.memberId
-            }
-            return this.$store.state.invoices.filter(i => {
-                return i.ownerId === ownerId
-            })
+            return this.$store.state.invoices
         },
         isLoggedIn(){
             return this.$store.getters.isLoggedIn
@@ -34,7 +28,7 @@ export default {
     },
     components:{
         SharedTitle,
-        Row,
+        PayReq,
     }
 }
 

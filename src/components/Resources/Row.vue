@@ -120,5 +120,7 @@ img
 .current
     background: lightGrey
     color: main
+    padding: 0.3em
+    border-radius: 0.5em
 
 </style>

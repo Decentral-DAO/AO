@@ -69,7 +69,7 @@ a
     padding: 1em
 
 .paid
-    color: accent1
+    color: purple
     font-size: 5em
 
 </style>
