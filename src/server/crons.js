@@ -4,14 +4,14 @@ import events from './events'
 import {serverState} from './state'
 
 const rentJob = new cron.CronJob({
-  cronTime: '0 0 1 * * *',
+  cronTime: '0 0 0 1 * *',
   onTick: rent,
   start: false,
   timeZone: 'America/Los_Angeles'
 })
 
 const deactivateJob = new cron.CronJob({
-  cronTime: '11 11 11 * * *',
+  cronTime: '11 11 11 11 * *',
   onTick: deactivate,
   start: false,
   timeZone: 'America/Los_Angeles'
