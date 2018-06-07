@@ -1,12 +1,13 @@
 <template lang='pug'>
 
 #member
-    crazy-btn(v-if='loggedIn' to='/member_create' text='new member')
+    crazy-btn(v-if='loggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
     .list(v-if="loggedIn")
-        row(v-for="m in members", :m="m", v-if='m.active > 0')
+        h5 Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is ${{ perMonth }} per month.
+        row(v-for="m in activeMembers", :m="m")
         .purg
-            template(v-for="m in members", v-if='m.active <= 0')
+            template(v-for="m in inactiveMembers")
                 .bouncy {{ m.name }}
                     dctrl-active(m="m")
     .padding(v-else)
@@ -30,11 +31,18 @@ import DctrlActive from './DctrlActive'
 
 export default {
     computed: {
+        activeMembers(){
+            return this.$store.state.members.filter(m => m.active > 0)
+        },
+        inactiveMembers(){
+            return this.$store.state.members.filter(m => m.active <= 0)
+        },
         loggedIn(){
             return this.$store.getters.isLoggedIn
         },
-        members(){
-            return this.$store.state.members
+        perMonth(){
+            let perMonth = parseFloat( this.$store.state.cash.rent ) / this.activeMembers.length 
+            return  perMonth.toFixed(2)
         }
     },
     components:{

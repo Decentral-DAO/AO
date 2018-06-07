@@ -4,7 +4,8 @@ import M from '../mutations'
 const state = {
     cash: 0,
     spot: 123456,
-    currency: 'CAD'
+    currency: 'CAD',
+    rent: 0
 }
 
 const mutations = {
@@ -12,6 +13,7 @@ const mutations = {
         state.cash = current.cash.cash
         state.spot = current.cash.spot
         state.currency = current.cash.currency
+        state.rent = current.cash.rent
     },
     applyEvent: M.cashMuts
 }

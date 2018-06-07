@@ -6,7 +6,6 @@ router-link(:to='to')
 
 </template>
 
-
 <script>
 
 export default {
