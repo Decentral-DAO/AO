@@ -1,9 +1,16 @@
 <template lang='pug'>
 
 .payment
-    h5 Add to your account on Chain: {{address}}
-    div(v-html='imgTag')
-    h5 Add to your account with Lightning:
+    .row
+        .seven.columns
+            h5 Keep your account up to date with Bitcoin. Your on chain address is
+                code {{ address }}.
+                span Any amount confirmed at this address will be credited to your account.
+            h5 Or create a lightning payment request below. On andriod check out: 
+                a(href='https://play.google.com/store/apps/details?id=fr.acinq.eclair.wallet.mainnet2&hl=en') eclair wallet
+                span .
+        .five.columns
+            div(v-html='imgTag')
     .invoice(v-if='showInvoice')
         pay-req(v-if='invoice', :i='invoice')
     .row.lncontrols
@@ -115,9 +122,14 @@ export default {
 @import '../../styles/skeleton'
 @import '../../styles/button'
 
-.qr
+.onchainqr
     float: right
     padding:2em
+
+a
+    color: accent2
+    :visited
+        color: accent2
 
 h5
     padding: 2em

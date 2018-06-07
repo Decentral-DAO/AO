@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 #tasks
-    crazy-btn(to='/TASK_CREATE' text='New Task')
+    crazy-btn(v-if='isLoggedIn', to='/TASK_CREATE', text='New Task')
     shared-title(title='Active tasks')
     .list(v-if='isLoggedIn')
         table
@@ -33,11 +33,11 @@ export default {
           return this.$store.getters.isLoggedIn
       }
   },
-    components:{
-        SharedTitle,
-        ActiveTasks,
-        CrazyBtn
-    },
+  components:{
+      SharedTitle,
+      ActiveTasks,
+      CrazyBtn
+  },
 }
 
 </script>

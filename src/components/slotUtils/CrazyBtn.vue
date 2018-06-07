@@ -1,8 +1,8 @@
 <template lang='pug'>
 
-router-link.crazybtn(:to='to')
-    span + {{text}}
-    img.spin(src='../../assets/images/active10.svg')
+router-link(:to='to')
+  button {{text}}
+    //- img.spin(src='../../assets/images/active10.svg')
 
 </template>
 
@@ -20,35 +20,18 @@ export default {
 
 @import '../../styles/colours'
 @import '../../styles/spinners'
+@import '../../styles/skeleton-button'
 
-
-.crazybtn
+button
     float: right
-    top:50px
-    right:100px
-    background: main
-    border-radius: 25px
-    width: 222px
-    color: accent1
-    cursor: pointer
-    font-size: 1.4em
-    text-decoration: none
-    border-style:solid
-    border-width:3px
-    border-radius: 30px
-    margin-top: .5em
-    margin-right: 0.3em
-    padding-top: .123em
-    padding-bottom: .123em
-
-.crazybtn:hover
-    background: accent2
     color: main
+    margin-top: 1.5em
+    background: accent2
 
 img
-    height: 2.6789em
-    float: right
-
+    height: 1em
+    position: relative
+    right: 0
 
 span
     float:left

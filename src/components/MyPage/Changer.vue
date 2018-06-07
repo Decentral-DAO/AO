@@ -1,8 +1,8 @@
 <template lang='pug'>
 
 .changer
-  h5 Update your account info:
-  form-box(event='member-field-updated', :data='changeReq', btntxt='change your account')
+  h5 From here you can update your account name & password.
+  form-box(event='member-field-updated', :data='changeReq', :btntxt='"change your " + change.field')
       .check(v-if='inputType === "password"')
           img(v-if='matched', src='../../assets/images/check.svg')
           img(v-else, src='../../assets/images/warn.svg')
@@ -80,7 +80,9 @@ export default {
 
 img
     float: left
-    height: 5em
+    height: 3em
+    position: relative
+    right: 0
 
 .changer
     padding: 1em
@@ -88,8 +90,5 @@ img
 input, select
     z-index:123123
     color: main
-
-.check
-    float: right
 
 </style>
