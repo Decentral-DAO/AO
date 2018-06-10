@@ -8,7 +8,6 @@ function resourceCreated(resourceId, name, charged, secret, callback) {
         name,
         charged,
         stock: 0,
-        current: [],
         secret,
         info: {}
     }

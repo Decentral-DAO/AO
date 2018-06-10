@@ -15,6 +15,8 @@ import events from './modules/events'
 import eventstream from './modules/eventstream'
 import loader from './modules/loader'
 
+import recent from './modules/recent'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -22,7 +24,7 @@ export default new Vuex.Store({
       loader, members, tasks,
       resources, cash, events,
       eventstream, sessions,
-      invoices
+      invoices, recent
   },
   getters: {
       mrclean(state, getters){
@@ -48,16 +50,11 @@ export default new Vuex.Store({
       },
       isAdmin(state, getters){
           let isAdmin
-          state.members.forEach(member => {
-              if(getters.memberId === member.memberId){
-                  member.badges.forEach( b => {
-                      if (b === 'admin'){
-                          isAdmin = true
-                      }
-                  })
+          getters.member.badges.forEach( b => {
+              if (b === 'admin'){
+                  isAdmin = true
               }
           })
-          console.log('is admin asd', isAdmin)
           return isAdmin
       },
       isLoggedIn(state, getters){
@@ -71,36 +68,8 @@ export default new Vuex.Store({
                   _.assign(loggedInMember, member)
               }
           })
-          console.log({loggedInMember})
           return loggedInMember
       },
-      name(state, getters){
-          let name
-          state.members.forEach(member => {
-              if( getters.memberId === member.memberId){
-                  name = member.name.slice()
-              }
-          })
-          return name
-      },
-      address(state, getters){
-          let address
-          state.members.forEach(member => {
-              if( getters.memberId === member.memberId){
-                  address = member.address.slice() // TODO
-              }
-          })
-          return address
-      },
-      balance(state, getters){
-          let balance
-          state.members.forEach(member => {
-              if( getters.memberId === member.memberId){
-                  balance = member.balance// TODO
-              }
-          })
-          return balance
-      }
   },
   middlewares: [],
   strict: process.env.NODE_ENV !== 'production'

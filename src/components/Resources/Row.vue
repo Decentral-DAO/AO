@@ -43,7 +43,20 @@ export default {
             return invoice
         },
         currentMembers(){
-            return this.r.current.slice().map(ev => ev.memberId)
+            let currentMembers = []
+            let now = Date.now()
+            this.$store.state.recent.forEach(ev => {
+                let msSince = now - ev.timestamp
+                if (
+                    ev.type == 'resource-used' &&
+                    ev.resourceId == this.r.resourceId &&
+                    msSince < 1000 * 60 * 60 * 5 && // 5 hours
+                    currentMembers.indexOf(ev.memberId) == -1
+                ){
+                    currentMembers.push(ev.memberId)
+                }
+            })
+            return currentMembers
         },
         sats(){
             let sats = this.r.charged / this.$store.state.cash.spot * 100000000

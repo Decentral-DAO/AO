@@ -2,9 +2,7 @@
 
 #newresource
     shared-title(:title='calcTitle')
-    form-box(btntxt="Register Use"  endpoint='/resource_use' v-bind:data='resource')
-        label Tap Fob!
-        input(autofocus="autofocus" v-model='resource.fob' type='text')
+    form-box(btntxt="Register Use"  event='resource-used' v-bind:data='resource')
 
 </template>
 
@@ -23,7 +21,10 @@ export default {
         return {
             resource: {
                 resourceId: '',
-                fob: ''
+                memberId: this.$store.getters.member.memberId,
+                amount: 1,
+                charged: 12,
+                notes: ''
             }
         }
     },

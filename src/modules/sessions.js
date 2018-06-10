@@ -1,7 +1,7 @@
 import request from 'superagent'
 import M from '../mutations'
 
-const state = [] // aka resources (in this file):
+const state = []
 
 const mutations = {
     setCurrent(sessions, current){

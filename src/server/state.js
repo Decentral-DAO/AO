@@ -3,6 +3,7 @@ import dctrlDb from './dctrlDb'
 import M from '../mutations'
 
 const serverState = {
+  recent: [],
   invoices: [],
   sessions: [],
   members: [],
@@ -17,6 +18,7 @@ const serverState = {
 }
 
 const pubState = {
+  recent: [],
   invoices: [],
   sessions: [],
   members: [],
@@ -31,6 +33,7 @@ const pubState = {
 }
 
 function applyEvent(state, ev) {
+    M.recentMuts(state.recent, ev)
     M.cashMuts(state.cash, ev)
     M.invoicesMuts(state.invoices, ev)
     M.membersMuts(state.members, ev)

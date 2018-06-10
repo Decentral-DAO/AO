@@ -18,11 +18,8 @@ import { watchSpot } from './exchangeRate'
 import Kefir from 'kefir'
 import cronStarter from './crons'
 
-
 const app = express()
-
 applyRouter(app)
-
 startDctrlAo()
 
 function startDctrlAo(){

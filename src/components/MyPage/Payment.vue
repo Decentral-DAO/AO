@@ -3,9 +3,7 @@
 .payment
     .row
         .seven.columns
-            h5 Keep your account up to date with Bitcoin. Your on chain address is
-                code {{ address }}.
-                span Any amount confirmed at this address will be credited to your account.
+            h5 Your bitcoin address is {{ address }}.
             h5 Or create a lightning payment request below. On andriod check out: 
                 a(href='https://play.google.com/store/apps/details?id=fr.acinq.eclair.wallet.mainnet2&hl=en') eclair wallet
                 span .
@@ -103,7 +101,7 @@ export default {
               .send({
                   type: 'invoice-created',
                   sats: this.sats,
-                  memo: 'Payment: ' + this.$store.getters.name ,
+                  memo: 'Payment: ' + this.$store.getters.member.name ,
                   ownerId: this.$store.getters.memberId
               })
               .end((err,res)=>{

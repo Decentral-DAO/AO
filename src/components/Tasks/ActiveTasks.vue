@@ -5,6 +5,8 @@
     .four.columns.name
         label {{b.name}}
         button(@click='claim') claim - {{ sats }} sats (${{currentValue}})
+        p(v-if="b.lastClaimedBy") Last done by
+            current(:memberId="b.lastClaimedBy")
     .six.columns
         .instructions(v-if='!editMode') {{ b.instructions }}
         .editBox(v-else)
@@ -14,7 +16,7 @@
             button(@click='submitChange') submit change
     .two.columns
       img.pencil(v-if='!editMode', src='../../assets/images/pencil.svg', @click='edit')
-      img.pencil(v-else, @click='edit', src='../../assets/images/pencil.svg')()
+      img.pencil(v-else, @click='edit', src='../../assets/images/pencil.svg')
       router-link(:to='historyLocation')
           img(src='../../assets/images/calendar.svg')
 
@@ -24,8 +26,10 @@
 
 import request from 'superagent'
 import {calculateTaskPayout, cadToSats} from '../../calculations'
+import Current from '../Resources/Current'
 
 export default {
+    components: { Current },
     methods: {
         edit(){
             console.log('edit called')
@@ -112,9 +116,8 @@ export default {
         border-color: main
         color: main
         background-color: accent2
-        // XXX - doesn't work
-        :hover
-            background: accent4!important
+    p
+        font-size: 0.777em
 
 .val
     color: accent2

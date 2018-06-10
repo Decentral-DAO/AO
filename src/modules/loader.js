@@ -11,7 +11,7 @@ const actions = {
                     console.log(err)
                     loadTestState(commit)
                 } else {
-                    console.log('response from server /state:', res.body.members)
+                    console.log('recent events:', res.body.recent)
                     commit('setCurrent', res.body)
                 }
             })

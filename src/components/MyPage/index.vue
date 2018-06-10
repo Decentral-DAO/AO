@@ -2,7 +2,7 @@
 
 #mypage
     shared-title(:title='calcTitle')
-    h5 Welcome {{ $store.getters.name }},
+    h5 Welcome {{ $store.getters.member.name }},
     h5 You have access to cool shared resources, but also responsibility for their care, maintenance, and replenishment! Be excellent.
     payment
     changer
@@ -30,7 +30,7 @@ export default {
             return this.$store.getters.member
         },
         calcTitle(){
-            return this.$store.getters.name + '(' + this.$store.getters.member.balance.toFixed() + ')'
+            return this.$store.getters.member.name + '(' + this.$store.getters.member.balance.toFixed() + ')'
         }
     }
 }

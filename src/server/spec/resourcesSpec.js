@@ -41,18 +41,20 @@ function specResourceCreated(req, res, next){
 
 function specResourceUsed(req, res, next){
   let errRes = []
-  let memberId = utils.memberIdFromFob(req.body.fob)
   if (
-    validators.isMemberId(memberId, errRes) &&
+    validators.isMemberId(req.body.memberId, errRes) &&
     validators.isResourceId(req.body.resourceId, errRes) &&
     validators.isAmount(req.body.amount, errRes) &&
-    validators.isAmount(req.body.charged, errRes)
+    validators.isAmount(req.body.charged, errRes) &&
+    validators.isNotes(req.body.notes, errRes)
+
   ){
     events.resourcesEvs.resourceUsed(
       req.body.resourceId,
-      memberId,
+      req.body.memberId,
       req.body.amount,
       req.body.charged,
+      req.body.notes,
       utils.buildResCallback(res)
     )
   } else {

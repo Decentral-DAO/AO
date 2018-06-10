@@ -23,6 +23,7 @@
 
 <script>
 
+import _ from "lodash"
 import Row from "./Row"
 import request from "superagent"
 import SharedTitle from '../slotUtils/SharedTitle'
@@ -32,7 +33,16 @@ import DctrlActive from './DctrlActive'
 export default {
     computed: {
         activeMembers(){
-            return this.$store.state.members.filter(m => m.active > 0)
+            // place members with recent events at top of list
+            let active = this.$store.state.members.filter(m => m.active > 0)
+            let withRecent = active.map( (m, i) => {
+                this.$store.state.recent.forEach(ev => {
+                    if ( ev.memberId == m.memberId ) {
+                        m.recentTs = - ev.timestamp
+                    }
+                })
+            })
+            return _.sortBy( active, 'recentTs')
         },
         inactiveMembers(){
             return this.$store.state.members.filter(m => m.active <= 0)
@@ -41,7 +51,7 @@ export default {
             return this.$store.getters.isLoggedIn
         },
         perMonth(){
-            let perMonth = parseFloat( this.$store.state.cash.rent ) / this.activeMembers.length 
+            let perMonth = parseFloat( this.$store.state.cash.rent ) / this.activeMembers.length
             return  perMonth.toFixed(2)
         }
     },
