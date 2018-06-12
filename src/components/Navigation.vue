@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 ul.navigation
-    router-link( to='/MYPAGE') My Page
+    router-link(v-if='$store.getters.isLoggedIn' to='/MYPAGE') My Page
     router-link(to='/MEMBERS') Members
     router-link(to='/RESOURCES') Resources
     router-link(to='/TASKS') Tasks

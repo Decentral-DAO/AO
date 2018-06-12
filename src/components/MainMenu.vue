@@ -3,14 +3,16 @@
 nav
   router-link(to='/')
       img(src='../assets/images/dctrl.svg')
-  li 1 BTC = ${{ cadPrice }}
-  li $1 = {{ sats }} satoshis
+  div(v-if='$store.getters.isLoggedIn')
+      li 1 BTC = ${{ cadPrice.toFixed(2).toLocaleString() }}
+      li $1 = {{ sats.toLocaleString() }} satoshis
   navigation
 
 </template>
 
 <script>
 import Navigation from './Navigation'
+import { cadToSats } from '../calculations'
 
 export default {
   components:{
@@ -19,10 +21,11 @@ export default {
 
   computed: {
     sats(){
-        return ( 100000000 / this.$store.state.cash.spot ).toFixed().toLocaleString()
+        let sats = cadToSats( 1 , this.$store.state.cash.spot )
+        return parseInt( sats )
     },
     cadPrice(){
-        return this.$store.state.cash.spot.toLocaleString()
+        return this.$store.state.cash.spot
     }
   }
 }
