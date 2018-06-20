@@ -35,7 +35,9 @@ export default {
         invoice(){
             let invoice
             this.$store.state.invoices.forEach( i => {
-                if (i.ownerId === this.r.resourceId) {
+                if (i.ownerId === this.r.resourceId &&
+                    i.memo === this.$store.getters.member.name
+                ) {
                     invoice = i
                 }
             })

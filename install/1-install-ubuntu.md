@@ -1,3 +1,5 @@
+TODO - to Ubuntu 18
+
 # ao server install instructions
 
 These instructions will assume you are setting up dctrl/ao on a fresh install of
@@ -27,41 +29,7 @@ Now that we have an operating system, the first thing we need is a database to s
   - `make`
   - `sudo make install`
 
-After doing the above commands you should have rethinkdb installed. Use the command `which rethinkdb`. If installed correctly the path to the executable file (in my case /usr/local/bin/rethinkdb) will be printed. Now that we have rethinkdb installed we want to set it up so it runs automatically on boot. To do this we are setting up a systemd service.
-
----
-### 3. Setup the database service
-We need to create a directory for the rethinkdb data. I suggest following the convention of .bitcoind and .lnd :
-- `rethinkdb create -d .rethinkdb`
-
-We also need to create a config file,
-- https://github.com/rethinkdb/rethinkdb/blob/next/packaging/assets/config/default.conf.sample
-- `touch .rethinkdb/rethinkdb.conf`
-
-Now that rethink is ready we can create a systemd service file `touch /etc/systemd/system/rethinkdb.service`. Edit the file with this replacing the user name with yours.
-```text
-[Unit]
-Description=rethinkdb-deamon
-
-[Service]
-User=<user-name>
-ExecStart=/usr/local/bin/rethinkdb serve --config-file /home/<user-name>/.rethinkdb/rethinkdb.conf --directory /home/<user-name>/.rethinkdb
-Restart=always
-KillMode=process
-PrivateTmp=true
-
-[Install]
-WantedBy=multi-user.target
-```
-Enable
-  - `systemctl daemon-reload`
-  - `systemctl enable rethinkdb.service`
-  - `systemctl start rethinkdb.service`
-  - Just useful to know:
-  - `systemctl status rethinkdb.service` # see status
-  - `journalctl -u rethinkdb.service` # see logs
-
-To confirm check the admin console at `localhost:8080` is still on after a reboot.
+After doing the above commands you should have rethinkdb installed. Use the command `which rethinkdb`. If installed correctly the path to the executable file (in my case /usr/local/bin/rethinkdb) will be printed. Now that we have rethinkdb installed we want to set it up so it runs automatically on boot.
 
 ---
 ### 4. Setup the bitcoin node
@@ -99,7 +67,6 @@ PrivateTmp=true
 [Install]
 WantedBy=multi-user.target
 ```
-
 We need a configuration file as well `touch ~/.bitcoin/bitcoin.conf`.
 
 ```text
@@ -130,17 +97,6 @@ You can check the status of bitcoind using:
 Confirm that these command survive a reboot. It will take some time to sync the node.
 
 ---
-### 5. Install ZMQ
-Get the tarball from http://zeromq.org/intro:get-the-software
-- `cd Downloads`
-- `tar xf zeromq-4.2.3.tar.gz`
-- `cd zeromq-4.2.3`
-- `./configure`
-- `make check`
-- `sudo make install`
-- `sudo ldconfig`
-
----
 ### 6. Install go and lightning node
 Go is needed to run lnd
 - `sudo apt-get install golang-1.10-go`
@@ -160,12 +116,6 @@ go get -d github.com/lightningnetwork/lnd
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
----
-### 6. Setup lnd
-
-  - how to setup negotiate channels able to accept payments?
-
-
 ---
 
 ### 7. Install node.js
@@ -206,7 +156,6 @@ To recap the dctrl-ao scripts are:
 You should now be able to navigate to localhost:8003 to find the ao admin console. Log in as the first user (dctrl:1235).
 
 ---
-
 ### 9.1 Setup ao as a service
 
 Create another service file. An example service file can be found at setupSamples/ao.service. You can copy it into /etc/systemd/system/ao.service. You need to update the example so the path to the code executable and the /ao/production/server/app.js is correct. Once you do that you can run:
@@ -214,32 +163,10 @@ Create another service file. An example service file can be found at setupSample
 - `systemctl daemon-reload`
 - `systemctl start ao.service` # this should start it, check that it works
 - `systemctl enable ao.service` # this should start it on boot, check that it works by restarting
-
 ---
-
-### 10 Install KeePassX
-KeePassX is GNU licensed password manager that is open-source and cross-platform. We use it for our passwords because Lastpass is limited to sharing to a certain amount of users. Be aware that in order for your members to have access to the passwords they will need access to the database file and the master password. We host our database file on the server and on Keybase.io through a shared team folder.
-
-- The easiest way to install it would be through the Ubuntu Software application that comes with Ubuntu
-- In the app search and install "KeePassX"
-- When you setup your KeePassX database, do not use a "Key File". Since many people will have access to the database, there's no need to create a keyfile.
-- KeePassX is cross platform any member who has access to the database file and master password can use it.
-- You can create as many databases as you want with different master passwords.
-- More granular permissioning can be done within any KeePassX database
-
-https://www.keepassx.org/
-
-## TODO
-
-### 10. Multisig party: Set up electrum multisig watch only daemon
-### 10. Network hardening: Split network: secure / public
-### 10. Backup db script
-
-### 11. Open channels / configure lnd service
 
 ### 12. Connect rfid scanning Pi's
 See the setup instructions at (https://github.com/dctrl-ao/fobtap)
-
 ### - Host on cjdns / meshnet
 ### - Host on the internet
 ### - Run IPFS client

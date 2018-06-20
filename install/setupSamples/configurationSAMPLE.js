@@ -1,4 +1,5 @@
-// sample configuration.js, production configuration.js should be in root folder of ao
+// sample configuration.js,
+// production configuration.js should be in root folder of ao
 module.exports = {
     rethink: {
         host: 'localhost',

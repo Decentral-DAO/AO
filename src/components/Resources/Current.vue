@@ -1,8 +1,10 @@
 <template lang='pug'>
 
 span
-    img(src='../../assets/images/active15.svg')
-    span {{ name }}
+    div(v-if='memberId')
+        img(src='../../assets/images/active15.svg')
+        span {{ name }}
+    img(v-else, src='../../assets/images/lightning.svg')
 
 </template>
 
@@ -13,7 +15,7 @@ export default {
   computed:{
     name(){
         let memberId = this.memberId
-        let name = '...loading'
+        let name = false
         this.$store.state.members.forEach(member => {
             if (member.memberId == memberId){
                 name = member.name

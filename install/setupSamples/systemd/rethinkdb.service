@@ -1,0 +1,12 @@
+[Unit]
+Description=rethinkdb-deamon
+
+[Service]
+User=trhode
+ExecStart=/usr/local/bin/rethinkdb serve --port-offset 1 --config-file /home/trhode/.rethinkdb/rethinkdb.conf --directory /home/trhode/.rethinkdb
+Restart=always
+KillMode=process
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

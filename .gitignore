@@ -2,6 +2,7 @@
 node_modules
 /dist
 /production
+/cert
 
 # local env files
 .env.local

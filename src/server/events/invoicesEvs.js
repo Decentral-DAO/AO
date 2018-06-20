@@ -1,12 +1,11 @@
 import dctrlDb from '../dctrlDb'
-import lnd from '../onLightning/lnd.js'
+import {addInvoice} from '../onLightning/lnd.js'
 
 import {serverState} from '../state'
 import {satsToCad} from '../../calculations'
 
-
 function invoiceCreated(ownerId, memo, sats, callback) {
-    lnd.addInvoice({
+    addInvoice({
         memo,
         value: sats
     }, (err, response) => {
@@ -32,8 +31,6 @@ function invoicePaid(r_hash, callback){
         type: "invoice-paid",
         r_hash,
     }
-
-    console.log('trying to match')
     serverState.invoices.forEach( invoice => {
 
         if (invoice.r_hash == r_hash){
@@ -51,8 +48,6 @@ function invoicePaid(r_hash, callback){
                     newEvent.memberId = m.memberId
                 }
             })
-
-            console.log('creating new event', newEvent)
             dctrlDb.insertEvent(newEvent, callback)
         }
     })

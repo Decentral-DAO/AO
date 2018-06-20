@@ -4,6 +4,7 @@
   .row
     .four.columns.name
         label {{b.name}}
+        br
         button(@click='claim') claim - {{ sats }} sats (${{currentValue}})
         p(v-if="b.lastClaimedBy") Last done by
             current(:memberId="b.lastClaimedBy")
@@ -78,12 +79,6 @@ export default {
         sats(){
             return cadToSats(this.currentValue, this.$store.state.cash.spot)
         },
-        boostLocation(){
-            return '/TASK_BOOST/' + this.b.taskId
-        },
-        editLocation(){
-            return '/TASK_EDIT/' + this.b.taskId
-        },
         claimLocation(){
             return '/TASK_CLAIM/' + this.b.taskId
         },
@@ -134,9 +129,11 @@ export default {
     font-size: .8em
     padding-top: .8em
     vertical-align: bottom
+    margin-top: 1.5em
     text-align: left
 
 .editBox
+    margin-top: 1.5em
     color: main
     label
         color: accent1

@@ -15,7 +15,7 @@ function invoicesMuts(invoices, ev){
 		case "cleanup":
 				let now = Date.now()
 				invoices.forEach( (invoice, i) => {
-						let isOld = now - invoice.timestamp < 1000 * 60 * 60 * 50
+						let isOld = now - invoice.timestamp < 1000 * 60 * 60 * 1 // 1 hour
 						if (isOld){
 								_.pullAt(invoices, i)
 						}

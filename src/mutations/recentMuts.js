@@ -6,7 +6,7 @@ function recentMuts(recent, ev){
 						let now = Date.now()
 						recent.forEach( (ev, i) => {
 								let msSinceEvent = now - ev.timestamp
-								let isOld = msSinceEvent > 1000 * 60 * 60 * 24 * 3 // three days
+								let isOld = msSinceEvent > 1000 * 60 * 60 * 24 * 5 // three days
 								if (isOld){
 										_.pullAt(recent, i)
 								}
