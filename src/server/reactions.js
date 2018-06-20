@@ -18,6 +18,7 @@ function reactions(ev){
             events.membersEvs.badgeAdded(ev.memberId, 'bitpepsi')
             break
         case 'member-address-updated':
+        case 'member-created':
             checkInitial(ev.address, 'member')
             break
         case 'invoice-paid':
