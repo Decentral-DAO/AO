@@ -12,7 +12,7 @@ function tasksMuts(tasks, ev) {
 						_.remove(tasks, (task) => task.taskId === ev.taskId )
 					} else {
 						task.lastClaimedBy = ev.memberId
-						task.lastClaimed = Date.now()
+						task.lastClaimed = ev.timestamp
 						task.boost = 0
 					}
 				}
