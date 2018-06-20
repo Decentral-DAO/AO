@@ -1,20 +1,36 @@
-const uuidV1 = require('uuid/v1')
-const dctrlDb = require('../dctrlDb')
+import lnd from '../onLightning/lnd.js'
+
+import uuidV1 from 'uuid/v1'
+import dctrlDb from '../dctrlDb'
+
+const NESTED_PUBKEY_HASH = 1
 
 function memberCreated(name, fob, secret, callback) {
-    let newEvent = {
-        type: "member-created",
-        memberId: uuidV1(),
-        fob,
-        name,
-        secret,
-        address: '',
-        active: 1,
-        balance: 0,
-        badges: [],
-        info: {}
-    }
-    dctrlDb.insertEvent(newEvent, callback)
+    lnd.newAddress({
+        type: NESTED_PUBKEY_HASH ,
+    }, (err, response)=>{
+        let a
+        if (err) {
+            console.log('couldnt get an address')
+            a = ''
+        }
+        console.log('new address from lnd', response.address)
+        a = response.address
+        let newEvent = {
+            type: "member-created",
+            memberId: uuidV1(),
+            fob,
+            name,
+            secret,
+            address: a,
+            active: 1,
+            balance: 0,
+            badges: [],
+            info: {}
+        }
+        dctrlDb.insertEvent(newEvent, callback)
+    })
+
 }
 
 function memberPaid(memberId, paid, isCash, notes, callback) {

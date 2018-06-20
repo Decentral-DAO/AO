@@ -1,11 +1,11 @@
 import dctrlDb from '../dctrlDb'
-import {addInvoice} from '../onLightning/lnd.js'
+import lnd from '../onLightning/lnd.js'
 
 import {serverState} from '../state'
 import {satsToCad} from '../../calculations'
 
 function invoiceCreated(ownerId, memo, sats, callback) {
-    addInvoice({
+    lnd.addInvoice({
         memo,
         value: sats
     }, (err, response) => {
