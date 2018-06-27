@@ -25,13 +25,15 @@ function specResourceCreated(req, res, next){
     validators.isNewResourceId(req.body.resourceId, errRes) &&
     validators.isNotes(req.body.name, errRes) &&
     validators.isAmount(req.body.charged, errRes) &&
-    validators.isNotes(req.body.secret, errRes)
+    validators.isNotes(req.body.secret, errRes) &&
+    validators.isBool(req.body.trackStock, errRes)
   ){
     events.resourcesEvs.resourceCreated(
       req.body.resourceId,
       req.body.name,
       req.body.charged,
       req.body.secret,
+      req.body.trackStock,
 			utils.buildResCallback(res)
     )
   } else {
@@ -47,7 +49,6 @@ function specResourceUsed(req, res, next){
     validators.isAmount(req.body.amount, errRes) &&
     validators.isAmount(req.body.charged, errRes) &&
     validators.isNotes(req.body.notes, errRes)
-
   ){
     events.resourcesEvs.resourceUsed(
       req.body.resourceId,

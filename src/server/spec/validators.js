@@ -54,6 +54,18 @@ module.exports = {
       }
       return result
   },
+  isJoinerId(val, errRes){
+      let result = false
+      state.pubState.joiners.forEach(member =>{
+          if (val === member.joinerId){
+            result = true
+          }
+      })
+      if (!result) {
+          errRes.push('invalid joinerId')
+      }
+      return result
+  },
   isTaskId(val, errRes){
       let result = false
       state.pubState.tasks.forEach(task =>{

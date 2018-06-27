@@ -8,16 +8,19 @@
         p We host &nbsp;
             a(href='https://www.meetup.com/dctrlvan/') meetups &nbsp;
             span that focus on decentralization: Decentralized Currency (Bitcoin), Decentralized Law (cooperatives, smart contracts), Decentralized Production (3D printing, vertical farming, solar energy), and Decentralized Communication (encryption, pgp, meshnet, tor).
+    join
+
 </template>
 
 <script>
 
 import SharedTitle from './slotUtils/SharedTitle'
 import Auth from './Auth'
+import Join from './Join'
 
 export default {
     components:{
-        SharedTitle, Auth
+        SharedTitle, Auth, Join
     }
 }
 

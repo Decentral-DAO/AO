@@ -1,16 +1,20 @@
 import uuidV1 from 'uuid/v1'
 import dctrlDb from '../dctrlDb'
 
-function resourceCreated(resourceId, name, charged, secret, callback) {
+function resourceCreated(resourceId, name, charged, secret, trackStock, callback) {
     let newEvent = {
         type: "resource-created",
         resourceId,
         name,
         charged,
-        stock: 0,
         secret,
         info: {}
     }
+
+    if (trackStock) {
+        newEvent.stock = 0
+    }
+
     dctrlDb.insertEvent(newEvent, callback)
 }
 

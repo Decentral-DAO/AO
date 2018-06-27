@@ -5,9 +5,11 @@ import tasksEvs from './tasksEvs'
 import resourcesEvs from './resourcesEvs'
 import invoicesEvs from './invoicesEvs'
 import sessionsEvs from './sessionsEvs'
+import joinersEvs from './joinersEvs'
 // //
 // expose all of the events in a single object
 module.exports = {
+    joinersEvs,
     cashEvs,
     membersEvs,
     tasksEvs,

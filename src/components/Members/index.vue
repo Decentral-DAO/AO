@@ -3,6 +3,7 @@
 #member
     crazy-btn(v-if='loggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
+    joiners
     .list(v-if="loggedIn")
         h5 Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is ${{ perMonth }} each.
         row(v-for="m in activeMembers", :m="m")
@@ -29,6 +30,7 @@ import request from "superagent"
 import SharedTitle from '../slotUtils/SharedTitle'
 import CrazyBtn from '../slotUtils/CrazyBtn'
 import DctrlActive from './DctrlActive'
+import Joiners from './Joiners'
 
 export default {
     computed: {
@@ -59,7 +61,8 @@ export default {
         SharedTitle,
         Row,
         CrazyBtn,
-        DctrlActive
+        DctrlActive,
+        Joiners
     }
 }
 

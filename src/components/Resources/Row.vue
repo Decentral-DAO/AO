@@ -14,8 +14,8 @@
             button.payreq(v-if='r.charged > 0', @click='createPayRec')
                 img.payreqimg(src='../../assets/images/address.svg')
                 img.payreqlnimg(src='../../assets/images/lightning.svg')
-                span {{ sats }} sats (${{ r.charged.toLocaleString() }})
-            router-link(v-if='r.stock >= 0', :to='"/resource_stock/" + r.resourceId')
+                span lightning ({{sats.toLocaleString()}} sat)
+            router-link(v-if='trackStock', :to='"/resource_stock/" + r.resourceId')
                 button.refill replenish supply
 
 </template>
@@ -32,12 +32,13 @@ export default {
     props: ['r'],
     components: { Current, PayReq },
     computed: {
+        trackStock(){
+            return this.r.stock == undefined
+        },
         invoice(){
             let invoice
             this.$store.state.invoices.forEach( i => {
-                if (i.ownerId === this.r.resourceId &&
-                    i.memo === this.$store.getters.member.name
-                ) {
+                if (i.ownerId === this.r.resourceId) {
                     invoice = i
                 }
             })

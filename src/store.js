@@ -9,6 +9,7 @@ import tasks from './modules/tasks'
 import resources from './modules/resources'
 import sessions from './modules/sessions'
 import invoices from './modules/invoices'
+import joiners from './modules/joiners'
 
 // client side
 import events from './modules/events'
@@ -24,7 +25,7 @@ export default new Vuex.Store({
       loader, members, tasks,
       resources, cash, events,
       eventstream, sessions,
-      invoices, recent
+      invoices, recent, joiners
   },
   getters: {
       mrclean(state, getters){

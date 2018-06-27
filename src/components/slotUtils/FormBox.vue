@@ -41,7 +41,7 @@ export default {
                     this.showError = true
                     console.log('err from /events', err )
                     if (res.body) this.errTxt = res.body[0];
-                    return setTimeout( ()=>{
+                    return setTimeout( () => {
                         this.response = false
                     } , 3456)
                 } else {

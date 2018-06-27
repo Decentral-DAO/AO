@@ -9,6 +9,7 @@ const serverState = {
   members: [],
   tasks: [],
   resources: [],
+  joiners: [],
   cash: {
     currency: 'CAD',
     cash: 0,
@@ -24,6 +25,7 @@ const pubState = {
   members: [],
   tasks: [],
   resources: [],
+  joiners: [],
   cash: {
     currency: 'CAD',
     cash: 0,
@@ -40,6 +42,7 @@ function applyEvent(state, ev) {
     M.resourcesMuts(state.resources, ev)
     M.sessionsMuts(state.sessions, ev)
     M.tasksMuts(state.tasks, ev)
+    M.joinersMuts(state.joiners, ev)
 }
 
 function initialize(callback) {

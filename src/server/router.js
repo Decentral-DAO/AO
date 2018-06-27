@@ -6,13 +6,16 @@ import spec from './spec'
 import fobtap from './fobtap'
 import eventServe from './eventServe'
 import { serverAuth } from './auth'
+import publicAccess from './publicAccess'
 
 module.exports = function applyRouter(app){
 
     app.use(express.static(path.join(__dirname, '../../dist')))
     app.use(express.static(path.join(__dirname, '../../public')))
 
-    app.get('/*', function(req, res) {
+    app.use(publicAccess)
+
+    app.get('/*', (req, res) => {
         res.sendFile(path.join(__dirname, '../../dist/index.html'))
     })
 
