@@ -3,6 +3,9 @@ const config = require('../../../configuration')
 
 const client = new Client(config.bitcoind)
 
+
+console.log({client})
+
 function importAddress(address, callback){
     console.log({address})
     client.command(

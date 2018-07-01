@@ -1,10 +1,11 @@
 // sample configuration.js,
-// production configuration.js should be in root folder of ao
+// production configuration.js should be in root folder of ao (../../)
 module.exports = {
     rethink: {
         host: 'localhost',
-        port: 28016,
+        port: 28015,
         db:'dctrl',
+        port: 8332
     },
     bitcoind:{
         username:'bitcoinrpc',

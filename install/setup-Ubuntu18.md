@@ -1,22 +1,19 @@
-TODO - to Ubuntu 18
 
-# ao server install instructions
+# Server Setup Guide
 
-These instructions will assume you are setting up dctrl/ao on a fresh install of
-- Ubuntu 17.10 - https://www.ubuntu.com/download/desktop
+### Operating System (Ubuntu 18.04 LTS)
 
-### Operating System (Ubuntu)
+-  https://www.ubuntu.com/download/desktop
+Download the .iso file from the above link and write it to a usb. To find the location of your thumb drive, use `sudo fdisk -l` to see a list of drives. Once you have selected the correct drive (ie. /dev/sdb). Careful this formats the usb!
 
-To create a bootable Ubuntu usb (on linux) download the .iso file from the above link. Run the command `sudo fdisk -l` to see a list of the the plugged in drives. Once you have selected the correct drive (ie. /dev/sdb) run: The dd command specifies an input file (if) which is the iso and an output file (of) which is the usd drive. Careful this formats the usb!
 - `sudo umount <path-to-usb>`
 - `sudo dd if=<path-to-ubuntu-iso> of=<path-to-usb> bs=1M`
-- i.e. `sudo dd if=./Downloads/Ubuntu-17.10.iso> of=/dev/sdb bs=1M`
+- i.e. `sudo dd if=./Downloads/Ubuntu-18.04.iso> of=/dev/sdb bs=1M`
 
-This should create a bootable usb and you can then go through the ubuntu install process by interupting the computers boot up with `delete` or `f10`.
+This should create a bootable usb and you can then boot from it. Use `delete` or `f10` to interupt boot.
 ---
 
 ### ZMQ
-
 http://zeromq.org/intro:get-the-software
 
 Get the tar from the above link. Then unpack it and install with the following commands.
@@ -29,9 +26,9 @@ Get the tar from the above link. Then unpack it and install with the following c
 
 Don't skip this or the yarn install later will fail.
 
-### Database (Rebirth / Rethink)
+### Database (Rebirth)
 
-A database is needed to store and persist our applications state. Our database of choice is rebirthdb (formerly rethinkdb), an awesome open source db.
+A database is needed to store and persist our applications state. Our database of choice is rebirthdb (formerly rethinkdb), an awesome open-source db.
 
 - `git clone https://github.com/RebirthDB/rebirthdb.git`
 - `./configure --allow-fetch CXX=clang++`
@@ -51,7 +48,7 @@ First get the bitcoin binaries from https://bitcoin.org/en/download and unpack t
 This will create the binaries in `/bitcoin-<version>/bin/ ` which can be run directly.
 ---
 
-### Layer 2 (Lightning)
+### Layer 2 (Micro Transactions)
 
 Go is needed to run lnd
 - `sudo apt-get install golang-1.10-go`
@@ -108,4 +105,31 @@ The scripts are:
 Now we have everything we need but need to create configuration files
 ---
 
-### Configuration For Deving
+### Configuration
+
+You create three directories in your ~/
+
+- `mkdir .rebirthdb`  
+- `mkdir .bitcoin`
+- `mkdir .lnd`
+
+Copy the configuration sample files from (ao/install/configurationSamples/(lnd.conf & bitcoin.conf) into the respective directories above.
+
+### Try out Regtest
+
+The configuration files are set to use (not testnet, not mainnet but) regtest mode. Regtest is a local test blockchain that you have full control over.
+
+You need to start bitcoind in one terminal.
+
+- `cd Downloads/bitcoin-0.16.1/bin/`
+- `./bitcoind`
+
+Then from another terminal using bitcoin-cli you can generate blocks whenever you need (i.e. confirm open tx for lightning channel).
+
+- `cd Downloads/bitcoin-0.16.1/bin/`
+- `./bitcoin-cli generate 101`
+- `./bitcoin-cli generatetoaddress 50 1Ross5Np5doy4ajF9iGXzgKaC2Q3Pwwxv`
+
+We generated 101 blocks because a coinbase transactions (new coins) are not spendable until 100 blocks deep.
+
+### Local Lightning Cluster
