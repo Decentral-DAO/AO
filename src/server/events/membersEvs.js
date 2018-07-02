@@ -2,6 +2,7 @@ import lnd from '../onLightning/lnd.js'
 
 import uuidV1 from 'uuid/v1'
 import dctrlDb from '../dctrlDb'
+import { checkInitial } from '../onChain/currentAccounts'
 
 const NESTED_PUBKEY_HASH = 1
 
@@ -28,6 +29,7 @@ function memberCreated(name, fob, secret, callback) {
             badges: [],
             info: {}
         }
+        checkInitial(newEvent.address, 'member')
         dctrlDb.insertEvent(newEvent, callback)
     })
 
@@ -77,6 +79,7 @@ function memberAddressUpdated(memberId, address, proof, callback){
       address,
       proof,
   }
+  checkInitial(newEvent.address, 'member')
   dctrlDb.insertEvent(newEvent, callback)
 }
 

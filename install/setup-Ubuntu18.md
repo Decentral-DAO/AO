@@ -28,7 +28,7 @@ Don't skip this or the yarn install later will fail.
 
 ### Database (Rebirth)
 
-A database is needed to store and persist our applications state. Our database of choice is rebirthdb (formerly rethinkdb), an awesome open-source db.
+A database is needed to store and persist our applications state. Our database of choice is rebirthdb (formerly rethinkdb), an awesome open source db.
 
 - `git clone https://github.com/RebirthDB/rebirthdb.git`
 - `./configure --allow-fetch CXX=clang++`
@@ -115,21 +115,4 @@ You create three directories in your ~/
 
 Copy the configuration sample files from (ao/install/configurationSamples/(lnd.conf & bitcoin.conf) into the respective directories above.
 
-### Try out Regtest
-
-The configuration files are set to use (not testnet, not mainnet but) regtest mode. Regtest is a local test blockchain that you have full control over.
-
-You need to start bitcoind in one terminal.
-
-- `cd Downloads/bitcoin-0.16.1/bin/`
-- `./bitcoind`
-
-Then from another terminal using bitcoin-cli you can generate blocks whenever you need (i.e. confirm open tx for lightning channel).
-
-- `cd Downloads/bitcoin-0.16.1/bin/`
-- `./bitcoin-cli generate 101`
-- `./bitcoin-cli generatetoaddress 50 1Ross5Np5doy4ajF9iGXzgKaC2Q3Pwwxv`
-
-We generated 101 blocks because a coinbase transactions (new coins) are not spendable until 100 blocks deep.
-
-### Local Lightning Cluster
+Now if you wany to create a full development environment - see the guide in /install/regtest.md. If you want to configure for a new dctrl ao node follow the guide in /install/startup.md and /install/secure.md

@@ -13,17 +13,16 @@ function initializeWatchedMembersAddresses(){
 
 function checkInitial(address, group){
     if (!address) return console.log('address required')
-
-    bitcoindRpc.getBalance(address, (err, balance)=> {
-        if (err) return console.log('getbalance err:', err);
-
-        currentAccounts.push({
-            address,
-            balance,
-            group
+    bitcoindRpc.importAddress(address, (err, res)=> {
+        bitcoindRpc.getBalance(address, (err, balance)=> {
+            if (err) return console.log('getbalance err:', err);
+            currentAccounts.push({
+                address,
+                balance,
+                group
+            })
         })
     })
-
 }
 
 module.exports = {currentAccounts, initializeWatchedMembersAddresses, checkInitial}

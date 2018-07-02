@@ -17,8 +17,8 @@ module.exports = {
         secret: ''
     },
     lnd: {
-        rpcserver: 'localhost:10009',
+        rpcserver: 'localhost:10002',
         cert: "/home/trhode/.lnd/tls.cert",
-        macaroon: "/home/trhode/.lnd/admin.macaroon",
+        macaroon: "/home/trhode/.lnd/bob/data/admin.macaroon",
     }
 }

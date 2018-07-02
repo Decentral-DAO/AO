@@ -20,14 +20,14 @@ function initializeRethink(cb) {
         fob: '0000000000',
         secret: cryptoUtils.createHash('1235'), // password for dctrl init user is 1235
         memberId: '0',
-        address: '2MyY5mgC8Nf3k3mdUK6tGKQhCUFLKXuFZVk',
+        address: '',
         active: 1,
         balance: 0,
         badges: [],
         info: {}
       })
+      startFeed()
       cb(null, conn)
-      // startFeed()
     })
   })
 }
