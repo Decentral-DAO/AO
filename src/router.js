@@ -75,6 +75,9 @@ const routes =[{
   path: '/member_create',
   component: MemberCreate
 },{
+  path: '/member_create/*',
+  component: MemberCreate
+},{
   path: '/member_paid/*',
   component: MemberPaid
 },{

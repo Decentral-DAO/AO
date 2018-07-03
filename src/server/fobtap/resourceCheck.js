@@ -3,11 +3,20 @@ const utils = require('../spec/utils')
 const validators = require('../spec/validators')
 const events = require('../events')
 
+
+function creditCheck(member, resource){
+    let limit = member.active * 3 + 17
+    let newBalance = member.balance - resource.charged
+    console.log({newBalance})
+    return (newBalance + limit < 0)
+}
+
 module.exports = function(req, res, next){
-    let memberId = utils.memberIdFromFob(req.body.fob)
+    let member = utils.memberFromFob(req.body.fob)
     let resource = utils.getResource(req.body.resourceId)
-    console.log('resource check middleware', {memberId, resource})
-    if (memberId && resource){
+
+    let goodCredit = creditCheck(member,resource)
+    if (member && resource && goodCredit){
         events.resourcesEvs.resourceUsed(
           req.body.resourceId,
           memberId,

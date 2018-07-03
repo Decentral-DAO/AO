@@ -24,15 +24,14 @@ function memberIdFromFob(fob){
   return memberId
 }
 
-function memberIdFromFob(fob){
-  let memberId
-  // TODO: hide fob in server side state
-  state.serverState.members.forEach(member => {
+function memberFromFob(fob){
+  let m
+  state.serverState.members.filter(m => m.active > 0).forEach(member => {
       if (member.fob == fob){
-          memberId = member.memberId
+          m = member
       }
   })
-  return memberId
+  return m
 }
 
 function taskFromFob(fob){
@@ -58,6 +57,7 @@ function getResource(resourceId){
 module.exports = {
   buildResCallback,
   memberIdFromFob,
+  memberFromFob,
   taskFromFob,
   getResource
 }

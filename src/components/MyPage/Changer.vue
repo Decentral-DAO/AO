@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 .changer
-  p You can update your account details:
+  p Update your account details:
   form-box(event='member-field-updated', :data='changeReq', :btntxt='"change your " + change.field')
       .row
           .six.columns
@@ -14,7 +14,7 @@
                   img(v-if='matched', src='../../assets/images/check.svg')
                   img(v-else, src='../../assets/images/warn.svg')
           .six.columns
-                label Future
+                label New Detail
                 input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
                 br
                 input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')

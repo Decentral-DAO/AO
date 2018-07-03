@@ -45,7 +45,7 @@ export default {
                         this.response = false
                     } , 3456)
                 } else {
-                    this.$router.push('/')
+                    this.$router.push('/mypage')
                 }
 
             })

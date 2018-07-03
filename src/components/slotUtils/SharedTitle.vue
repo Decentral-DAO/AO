@@ -18,12 +18,12 @@ export default {
 
 div
     width: 100%
-    border-bottom-style: solid
+    border-bottom-style: dotted
     border-bottom-width: .4em
-    border-color: accent2
-    color: white
+    border-color: accent4
+    color: accent4
     padding-top: 3em
-    background: accent4
+    background: main
     padding-left:3.4567em
     padding-top: 1.5em
     padding-bottom: 1.5em

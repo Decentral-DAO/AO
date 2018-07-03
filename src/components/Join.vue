@@ -6,14 +6,9 @@
             label Choose Alias:
             br
             input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
-        .six.columns
-            label Set Password
-            br
-            input(type='password', v-model='password')
-            input(type='password', v-model='repassword')
-            img(v-else, src='../assets/images/warn.svg')
-            img(v-if='matched', src='../assets/images/check.svg')
             button(@click="createJoinReq") Request Access to Commons
+        .six.columns
+            br
 
 </template>
 
@@ -33,11 +28,6 @@ export default {
           responseInvoice: false,
           password: '',
           repassword:''
-      }
-  },
-  computed: {
-      matched(){
-          return this.password === this.repassword
       }
   },
   methods: {

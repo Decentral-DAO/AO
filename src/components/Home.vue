@@ -4,7 +4,7 @@
     .intro
         p Welcome to dctrl commons, smart community application.
         p Interested in joining?
-        p Request your alias and set potential password:
+        p Request your alias:
         join
         p Decentralize
 

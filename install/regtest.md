@@ -66,8 +66,8 @@ Then start ao from /ao/ -- `yarn compile`. It should build, initialize the datab
 - `bitcoin-cli sendtoaddress <address^^> 1`
 - `bitcoin-cli generate 7`
 
-It should update member account on the ui. You can also test the lightning payments on the My Page tab. Use the lightning button to generate a payment request. The below command should settle the request and update the members account.
+It should update member account on the ui. Test the lightning payments on the My Page tab. Use the lightning button to generate a payment request. The below command should settle the request and update the members account.
 
 - `lncli-alice payinvoice <pay-req>`
 
-Now that the ao server is running you can connect a raspberry pi which is used to control door / vending machine / ... /fobtap/install.md . Resources that have been assigned a charged amount can be triggered with lightning payments (in the resources tab). 
+Now that the ao server is running you can connect a raspberry pi which is called a resource and used to control the door / vending machine / ... /fobtap/install.md . Metered resources are lightning enabled.

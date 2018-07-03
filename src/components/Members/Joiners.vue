@@ -1,13 +1,13 @@
 <template lang='pug'>
 
 div
-    h5 Do you want to vouch for any of these recently requested accounts??
+    p You vouch for a joiner??!
     .row
         template(v-for='j in $store.state.joiners')
             .three.columns.w
-                button(@click='vouch(j.joinerId)') {{ j.name }}
+                button.a(@click='vouch(j.joinerId)') {{ j.name }}
                 current(v-for='m in j.vouchers', :memberId='m')
-
+                button.b(v-if='j.vouchers.length > 2' @click='create(j.name)') Create New Member
 </template>
 
 <script>
@@ -18,6 +18,9 @@ import Current from './Current'
 export default {
     components: { Current },
     methods: {
+        create(name){
+            this.$router.push("/member_create/" + name)
+        },
         vouch(joinerId){
             request
                 .post('/events')
@@ -45,11 +48,16 @@ export default {
     border-style: dotted
     border-color: accent2
 
-button
+button.a
     position: inline
     background: accent1
     color: main
     padding: 1em
     border-radius: 3px
+
+button.b
+    float: right
+    background: accent2
+    color: main
 
 </style>

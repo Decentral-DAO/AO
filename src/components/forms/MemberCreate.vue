@@ -2,13 +2,14 @@
 
 #newmember
 	shared-title(title='Create New Member')
-	form-box(btntxt="Welcome New Member"  event='member-created' v-bind:data='memberReq')
-			label hacker name
-			input(v-model='member.name' type='text' )
-			label secret login password
-			input(v-model='member.pass' type='password')
-			label Member Fob! (tap it)
-			input(v-model='member.fob' type='text')
+	.six.columns
+			form-box(btntxt="Welcome New Member"  event='member-created' v-bind:data='memberReq')
+					label Chosen Alias:
+					input(v-model='member.name' type='text' )
+					label Initial Password (you can and should change it later)
+					input(v-model='member.pass' type='password')
+					label Member Fob! (tap it)
+					input(v-model='member.fob' type='text')
 
 </template>
 
@@ -28,6 +29,10 @@ export default {
       }
     }
   },
+	mounted(){
+			let name = this.$router.currentRoute.path.split('/')[2]
+			this.member.name = name
+	},
 	computed: {
 			memberReq(){
 					return {
@@ -44,7 +49,9 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+
 @import '../../styles/colours'
+@import '../../styles/skeleton'
 
 #projects
     color:accent1
