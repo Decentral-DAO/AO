@@ -1,7 +1,4 @@
 
-O
-
-
 # Regtest
 
 The configuration files are set to use (not testnet, not mainnet but) regtest mode. Regtest is a local test blockchain that you have full control over.
@@ -64,4 +61,13 @@ Make sure the following processes are running (each in there own terminal at thi
 - bitcoind
 - lnd (alice and bob)
 
-Then start ao from /ao/ -- `yarn compile`. It should build, initialize the database and add the first member name - dctrl, password - 1235. You should now be able to visit localhost:8080 to see rethinkdb admin console. You should have a database called dctrl with one table (events). localhost:8003 should be your local version of ao.  
+Then start ao from /ao/ -- `yarn compile`. It should build, initialize the database and add the first member name - dctrl, password - 1235. You should now be able to visit localhost:8080 to see rethinkdb admin console. You should have a database called dctrl with one table (events). localhost:8003 should be your local version of ao. After logging in you can create new members. New members will have an address associated (in bob's wallet).
+
+- `bitcoin-cli sendtoaddress <address^^> 1`
+- `bitcoin-cli generate 7`
+
+It should update member account on the ui. You can also test the lightning payments on the My Page tab. Use the lightning button to generate a payment request. The below command should settle the request and update the members account.
+
+- `lncli-alice payinvoice <pay-req>`
+
+Now that the ao server is running you can connect a raspberry pi which is used to control door / vending machine / ... /fobtap/install.md . Resources that have been assigned a charged amount can be triggered with lightning payments (in the resources tab). 

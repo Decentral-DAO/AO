@@ -3,16 +3,16 @@
 #member
     crazy-btn(v-if='loggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
-    joiners
     .list(v-if="loggedIn")
-        h5 Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is ${{ perMonth }} each.
+        p Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is ${{ perMonth }} each.
+        joiners
         row(v-for="m in activeMembers", :m="m")
         .purg
             template(v-for="m in inactiveMembers")
                 .bouncy {{ m.name }}
                     dctrl-active(m="m")
     .padding(v-else)
-        h5 dctrl member
+        p dctrl member
         ol
             li Believer in a transcendent future.
             li Possess dctrl rfid tag.

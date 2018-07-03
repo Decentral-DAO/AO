@@ -1,10 +1,19 @@
 <template lang='pug'>
 
-#join.row
-  .six.columns
-      input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
-      button(@click="createJoinReq") I'd like to join!
-  .six.columns dctrl is based on personal trust. You need to meet some current members and get them to vouch for you! glhf
+.join
+    .row
+        .six.columns
+            label Choose Alias:
+            br
+            input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
+        .six.columns
+            label Set Password
+            br
+            input(type='password', v-model='password')
+            input(type='password', v-model='repassword')
+            img(v-else, src='../assets/images/warn.svg')
+            img(v-if='matched', src='../assets/images/check.svg')
+            button(@click="createJoinReq") Request Access to Commons
 
 </template>
 
@@ -21,7 +30,14 @@ export default {
   data(){
       return {
           name: '',
-          responseInvoice: false
+          responseInvoice: false,
+          password: '',
+          repassword:''
+      }
+  },
+  computed: {
+      matched(){
+          return this.password === this.repassword
       }
   },
   methods: {
@@ -39,26 +55,20 @@ export default {
       },
   }
 }
+
 </script>
 
 <style lang='stylus' scoped>
 
 @import '../styles/colours'
 @import '../styles/button'
+@import '../styles/skeleton'
 
-#auth
-    width: 100%
-    content-align: center
-    input
-        color: main
-        width: 100%
-.secret
-    -webkit-text-fill-color: transparent; /* sets just the text color */
+label
+    position: block
 
-.container
-    width: 100%
-
-.red
-    color: accent2
+img
+    height: 3em
+    float: right
 
 </style>

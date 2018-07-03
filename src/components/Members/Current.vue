@@ -1,7 +1,8 @@
 <template lang='pug'>
 
-span
-    span(v-if='memberId') - {{ name }} -
+.current(v-if='memberId')
+    img(src='../../assets/images/bullet.svg')
+    p {{ name }}
 
 </template>
 
@@ -30,13 +31,10 @@ export default {
 @import '../../styles/colours'
 
 img
-    height: 1.7em
+    height: 0.7em
+    float: left
+p
+    margin-left: 1em
 
-span
-    font-size: 1em
-
-a
-    color: accent2
-    text-decoration: none
 
 </style>

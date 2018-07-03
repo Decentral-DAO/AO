@@ -8,7 +8,7 @@
           .box(v-if='!i.settled') {{ i.payment_request }}
           .paid(v-else) PAID
       .six.columns
-          label sats: {{i.sats}} ($ {{ cadAmount }})
+          label satoshis: {{i.sats}} ($ {{ cadAmount }})
           div(v-if='!i.settled', v-html='imgTag')
 
 </template>

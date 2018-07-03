@@ -1,14 +1,12 @@
 <template lang='pug'>
 
 #home
-    shared-title(title='dctrl community commons')
-    auth
     .intro
-        p Welcome to dctrl, smart community application for the singularity.
-        p We host &nbsp;
-            a(href='https://www.meetup.com/dctrlvan/') meetups &nbsp;
-            span that focus on decentralization: Decentralized Currency (Bitcoin), Decentralized Law (cooperatives, smart contracts), Decentralized Production (3D printing, vertical farming, solar energy), and Decentralized Communication (encryption, pgp, meshnet, tor).
-    join
+        p Welcome to dctrl commons, smart community application.
+        p Interested in joining?
+        p Request your alias and set potential password:
+        join
+        p Decentralize
 
 </template>
 

@@ -2,17 +2,22 @@
 
 ul.navigation
     router-link(v-if='$store.getters.isLoggedIn' to='/MYPAGE') My Page
+    //- router-link(v-if='$store.getters.isLoggedIn' to='/OURNODE') Our Node
     router-link(to='/MEMBERS') Members
     router-link(to='/RESOURCES') Resources
     router-link(to='/TASKS') Tasks
+    auth
     //- router-link(to='/EVENTS') Events
 
 </template>
 
 <script>
 
+import Auth from './Auth'
+
 export default {
-    name: 'navigation'
+    name: 'navigation',
+    components: { Auth }
 }
 </script>
 

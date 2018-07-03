@@ -1,18 +1,25 @@
 <template lang='pug'>
 
 .changer
-  h5 From here you can update your account name & password.
+  p You can update your account details:
   form-box(event='member-field-updated', :data='changeReq', :btntxt='"change your " + change.field')
-      .check(v-if='inputType === "password"')
-          img(v-if='matched', src='../../assets/images/check.svg')
-          img(v-else, src='../../assets/images/warn.svg')
-      select(v-model='change.field')
-          option(value='secret') password
-          option(value='email') e-mail
-          option(value='name') hackername
-      input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
-      input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')
-  p(v-if='!secure') Please change your password; extra points for using a password manager or ubikey!
+      .row
+          .six.columns
+              select(v-model='change.field')
+                  option(value='secret') password
+                  option(value='email') e-mail
+                  option(value='name') hackername
+                  option(value='fob') fob
+              .check(v-if='inputType === "password"')
+                  img(v-if='matched', src='../../assets/images/check.svg')
+                  img(v-else, src='../../assets/images/warn.svg')
+          .six.columns
+                label Future
+                input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
+                br
+                input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')
+
+
 
 </template>
 
@@ -77,15 +84,13 @@ export default {
 
 @import '../../styles/colours'
 @import '../../styles/button'
+@import '../../styles/skeleton'
 
 img
     float: left
     height: 3em
     position: relative
     right: 0
-
-.changer
-    padding: 1em
 
 input, select
     z-index:123123

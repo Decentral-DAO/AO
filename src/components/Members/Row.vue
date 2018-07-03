@@ -8,7 +8,7 @@
         addr(:a="m.address")
     .three.grid
         dctrl-active(:m='m')
-        .c {{ m.balance.toFixed(2) }}
+        label {{ m.balance.toFixed(2) }}
     .three.grid
         div &nbsp;
         badges(:m='m')
@@ -24,7 +24,6 @@
 import DctrlActive from './DctrlActive'
 import Badges from './Badges'
 import Addr from './Addr'
-
 
 export default {
     props: ['m'],
@@ -49,20 +48,13 @@ export default {
 @import '../../styles/colours'
 @import '../../styles/grid'
 
-span
-    color: accent1
-    font-size: 1.4em
-    text-align: center
-    margin: 10px
-    width:100%
-    padding:1em
-
 img
     height: 4em
 
-.c
-    content-align: left
-    text-align: left
+label
+    font-size: 1.246em
+    font-weight: normal;
+    margin: 1em
 
 .row
     float: left

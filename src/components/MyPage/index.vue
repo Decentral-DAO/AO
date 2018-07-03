@@ -2,12 +2,14 @@
 
 #mypage
     shared-title(:title='calcTitle')
-    h5 Welcome {{ $store.getters.member.name }},
-    h5 You have access to cool shared resources, but also responsibility for their care, maintenance, and replenishment! Be excellent.
+    p Welcome {{ $store.getters.member.name }},
+    p You have access to cool shared resources, but also responsibility for their care, improvement, maintenance, and replenishment!
+    p You can settle your account on chain:{{$store.getters.member.address}} - Or with lightning:
     payment
     changer
-    h5 See all the badges you've earned:
+    p See all the badges you've earned:
     badges(:m='member')
+    p See your recent activity:
     calendar
 
 </template>
@@ -19,7 +21,6 @@ import Calendar from '../MemberCalendar'
 import Payment from './Payment' // address is an html word so cannot use
 import Changer from './Changer' // address is an html word so cannot use
 import Badges from '../Members/Badges'
-
 
 export default {
     components: {
@@ -40,6 +41,9 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
+
+p
+    font-size: 1.2em
 
 h6
     padding: 2em

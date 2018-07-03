@@ -1,16 +1,17 @@
 <template lang='pug'>
 
 div
-    h5 Do you know any of these recent reqs?
-    template(v-for='j in $store.state.joiners')
-        button(@click='vouch(j.joinerId)') vouch for {{ j.name }}
-        current(v-for='m in j.vouchers', :memberId='m')
-        br
+    h5 Do you want to vouch for any of these recently requested accounts??
+    .row
+        template(v-for='j in $store.state.joiners')
+            .three.columns.w
+                button(@click='vouch(j.joinerId)') {{ j.name }}
+                current(v-for='m in j.vouchers', :memberId='m')
 
 </template>
 
-
 <script>
+
 import request from 'superagent'
 import Current from './Current'
 
@@ -37,8 +38,18 @@ export default {
 
 <style lang="stylus" scoped>
 
+@import '../../styles/skeleton'
+@import '../../styles/colours'
+
+.w
+    border-style: dotted
+    border-color: accent2
+
 button
     position: inline
-
+    background: accent1
+    color: main
+    padding: 1em
+    border-radius: 3px
 
 </style>

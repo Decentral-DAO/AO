@@ -1,11 +1,11 @@
 <template lang='pug'>
 
 span.addr
-  a(:href='"bitcoin:" + this.a')
-    img(@click="buildTag", src='../../assets/images/address.svg')
-  .tag(v-if='showTag', @click="killTag")
-      .qr(v-html='imgTag')
-      label {{ a }}
+    label(v-if='showAddr') : {{ a }}
+    a(:href='"bitcoin:" + this.a')
+        img(@click="buildTag", src='../../assets/images/address.svg')
+    .tag(v-if='showTag', @click="killTag")
+        .qr(v-html='imgTag')
 
 </template>
 
@@ -18,7 +18,8 @@ export default {
     data(){
         return {
             imgTag : '',
-            showTag: false
+            showTag: false,
+            showAddr: false
         }
     },
     methods: {
@@ -33,6 +34,7 @@ export default {
             let margin = 4
             this.imgTag = qr.createImgTag(cellsize, margin)
             this.showTag = true
+            this.showAddr = true
         },
         killTag(){
             this.showTag = false

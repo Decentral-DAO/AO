@@ -1,22 +1,15 @@
 <template lang='pug'>
 
 .payment
-    .row
-        .seven.columns
-            h5 Your bitcoin address is {{ address }}.
-            h5 Or create a lightning payment request below. On andriod check out: 
-                a(href='https://play.google.com/store/apps/details?id=fr.acinq.eclair.wallet.mainnet2&hl=en') eclair wallet
-                span .
-        .five.columns
-            div(v-html='imgTag')
     .invoice(v-if='showInvoice')
         pay-req(v-if='invoice', :i='invoice')
     .row.lncontrols
-        .six.columns
-            button(@click='createPayRec') Create Payment Request {{sats.toLocaleString()}} sats (${{cadvalue}})
-        .six.columns
-            label Custom Value($):
-            input(type='text', v-model='cadvalue')
+        .five.columns
+          label Set Value($):
+          br
+          input(type='text', v-model='cadvalue')
+        .seven.columns
+            button(@click='createPayRec') Lightning ({{sats}})
 
 </template>
 
@@ -129,10 +122,8 @@ a
     :visited
         color: accent2
 
-h5
-    padding: 2em
-
 button
+  height: 3em
   img
     height: 1.5em
     z-index: 100
