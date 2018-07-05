@@ -1,0 +1,12 @@
+Nickname dctrlNiceRelay
+ORPort 443
+ExitRelay 0
+SocksPort 0
+ControlSocket 0
+ContactInfo info@dctrl.ca
+
+ControlPort 9051
+CookieAuthentication 1
+
+HiddenServiceDir /var/lib/tor/ao-service/
+HiddenServicePort 8003 127.0.0.1:8003

@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 div
-    p You vouch for a joiner??!
+    p Will you vouch for a joiner??!
     .row
         template(v-for='j in $store.state.joiners')
             .three.columns.w
