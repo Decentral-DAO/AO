@@ -30,6 +30,26 @@ var credentials = grpc.credentials.combineChannelCredentials(sslCreds, macaroonC
 var lnrpcDescriptor = grpc.load( __dirname + "/rpc.proto")
 var lnrpc = lnrpcDescriptor.lnrpc
 
-var lnd = new lnrpc.Lightning(config.lnd.rpcserver, credentials)
+var walletUnlocker = new lnrpc.WalletUnlocker(config.lnd.rpcserver, sslCreds);
 
-module.exports = lnd
+function unlock(callback){
+    walletUnlocker.unlockWallet({
+        wallet_password: Buffer.from(config.lnd.password)
+    }, (err, r)=>{
+        // seems buggy lnd needs time before it can process req
+        setTimeout(callback, 2000)
+    })
+}
+
+var lnd
+function getClient(){
+    if (!lnd){
+        lnd = new lnrpc.Lightning(config.lnd.rpcserver, credentials)
+    }
+    return lnd
+}
+
+module.exports = {
+    unlock,
+    getClient
+}

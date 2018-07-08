@@ -2,8 +2,10 @@
 
 ## TODO
 
+### Secure SSH
 
-###  HTTPS / SSL
+
+### HTTPS / SSL
 
 Use lets encrypt
 
@@ -33,7 +35,6 @@ The sample torrc sets up a hidden service for ao on 8003. You can find the addre
 
 
 ### KeePassX - shared passwords
-###
 ###  Network hardening:
 ### Split network: secure / public
 ###  Backup db script

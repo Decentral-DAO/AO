@@ -54,7 +54,10 @@ Before we can open a channel we need to fund the lnd wallets. Use lnd to get an 
 - `lncli-alice openchannel --node_key=<BOB_PUBKEY> --local_amt=1000000`
 - `bitcoin-cli generate 7`
 
-We need to generate blocks in order to confirm the funding and opening transactions. Now that we have one channel open that is enough to test ao. We will connect ao to bob and be able to pay the lightning invoices using alice-cli. We will also be able to test if ao's on chain watching is working.
+We need to generate blocks in order to confirm the funding and opening transactions. Now that we have one channel open that is enough to test ao. We will connect ao to bob and be able to pay the lightning invoices using alice-cli.
+
+### ao
+We will now test if ao's on chain and lightning integration with bitcoind and lnd is working.
 
 Make sure the following processes are running (each in there own terminal at this point):
 - rethinkdb
@@ -70,4 +73,4 @@ It should update member account on the ui. Test the lightning payments on the My
 
 - `lncli-alice payinvoice <pay-req>`
 
-Now that the ao server is running you can connect a raspberry pi which is called a resource and used to control the door / vending machine / ... /fobtap/install.md . Metered resources are lightning enabled.
+Now that the ao server is running you can connect a raspberry pi which is called a resource and used to control the door / vending machine / ... See the setup documentation in fobtap. 

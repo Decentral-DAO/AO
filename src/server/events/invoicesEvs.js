@@ -5,7 +5,7 @@ import {serverState} from '../state'
 import {satsToCad} from '../../calculations'
 
 function invoiceCreated(ownerId, memo, sats, callback) {
-    lnd.addInvoice({
+    lnd.getClient().addInvoice({
         memo,
         value: sats
     }, (err, response) => {

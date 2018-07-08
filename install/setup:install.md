@@ -10,7 +10,7 @@ Download the .iso file from the above link and write it to a usb. To find the lo
 - `sudo dd if=<path-to-ubuntu-iso> of=<path-to-usb> bs=1M`
 - i.e. `sudo dd if=./Downloads/Ubuntu-18.04.iso> of=/dev/sdb bs=1M`
 
-This should create a bootable usb and you can then boot from it. Use `delete` or `f10` to interupt boot.
+This should create a bootable usb and you can then boot from it. Use `delete` or `f10` to interrupt boot.
 ---
 
 ### ZMQ
@@ -115,4 +115,4 @@ You create three directories in your ~/
 
 Copy the configuration sample files from (ao/install/configurationSamples/(lnd.conf & bitcoin.conf) into the respective directories above.
 
-Now if you wany to create a full development environment - see the guide in /install/regtest.md. If you want to configure for a new dctrl ao node follow the guide in /install/startup.md and /install/secure.md
+Now if you want to create a full development environment - see the guide in /install/regtest.md. If you want to configure for a new dctrl ao node follow the guide in /install/startup.md and /install/secure.md

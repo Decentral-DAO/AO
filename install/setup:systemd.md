@@ -1,33 +1,26 @@
 TODO - Simplify and summarize how to use systemd
 
+### Systemd
+
+- `sudo cp ./install/configurationSamples/systemd/* /etc/systemd/system/`
+- `systemctl daemon-reload`
+- `systemctl enable rethinkdb.service`
+- `systemctl enable bitcoind.service`
+- `systemctl enable lnd.service`
+- `systemctl enable ao.service`
+- `sudo reboot`
 ---
 ### 3. Setup the database service
 We need to create a directory for the rethinkdb data. I suggest following the convention of .bitcoind and .lnd :
 - `rethinkdb create -d .rethinkdb`
 
 We also need to create a config file,
-- https://github.com/rethinkdb/rethinkdb/blob/next/packaging/assets/config/default.conf.sample
-- `touch .rethinkdb/rethinkdb.conf`
+- `cp ./install/configurationSamples/systemd/rethinkdb.conf .rethinkdb/rethinkdb.conf`
+- `cp ./install/configurationSamples/systemd/rethinkdb.service /etc/systemd/system/rethinkdb.service`
 
-Now that rethink is ready we can create a systemd service file `touch /etc/systemd/system/rethinkdb.service`. Edit the file with this replacing the user name with yours.
-```text
-[Unit]
-Description=rethinkdb-deamon
+Now that rethink is ready we can create a systemd service file. Edit the file with this replacing the user name with yours.
 
-[Service]
-User=<user-name>
-ExecStart=/usr/local/bin/rethinkdb serve --config-file /home/<user-name>/.rethinkdb/rethinkdb.conf --directory /home/<user-name>/.rethinkdb
-Restart=always
-KillMode=process
-PrivateTmp=true
-
-[Install]
-WantedBy=multi-user.target
-```
 Enable
-  - `systemctl daemon-reload`
-  - `systemctl enable rethinkdb.service`
-  - `systemctl start rethinkdb.service`
   - Just useful to know:
   - `systemctl status rethinkdb.service` # see status
   - `journalctl -u rethinkdb.service` # see logs

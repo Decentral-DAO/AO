@@ -7,7 +7,7 @@ import { checkInitial } from '../onChain/currentAccounts'
 const NESTED_PUBKEY_HASH = 1
 
 function memberCreated(name, fob, secret, callback) {
-    lnd.newAddress({
+    lnd.getClient().newAddress({
         type: NESTED_PUBKEY_HASH ,
     }, (err, response)=>{
         let a

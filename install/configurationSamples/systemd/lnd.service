@@ -1,0 +1,14 @@
+[Unit]
+Description=lightning-deamon
+After=network.target
+
+[Service]
+ExecStart=/home/trhode/go/bin/lnd --rpclisten=localhost:10002 --listen=localhost:10012 --restlisten=localhost:8002
+RuntimeDirectory=lnd
+User=trhode
+Type=forking
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
