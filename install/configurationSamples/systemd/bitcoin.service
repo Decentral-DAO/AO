@@ -3,11 +3,10 @@ Description=bitcoin-deamon
 After=network.target
 
 [Service]
-ExecStart=/home/trhode/Downloads/bitcoin-0.16.0/bin/bitcoind -daemon -conf=/home/trhode/.bitcoin/bitcoin.conf -pid=/run/bitcoind/bitcoind.pid 
+ExecStart=/usr/local/bin/bitcoind 
 RuntimeDirectory=bitcoind
 User=trhode
 Type=forking
-PIDFile=/run/bitcoind/bitcoind.pid
 Restart=on-failure
 PrivateTmp=true
 

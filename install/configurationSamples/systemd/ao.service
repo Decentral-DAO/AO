@@ -1,11 +1,12 @@
 [Unit]
 Description=ao-deamon
-After=network.target
+After=lnd.service
 
 [Service]
-ExecStart=/home/trhode/.nvm/versions/node/v9.7.1/bin/node /home/trhode/dctrl/ao/production/server/app.js
+ExecStart=/home/trhode/.nvm/versions/node/v9.11.2/bin/node /home/trhode/dctrl/ao/production/server/app.js
 User=trhode
-Restart=on-failure
+Restart=always
+RestartSec=39
 PrivateTmp=true
 
 [Install]

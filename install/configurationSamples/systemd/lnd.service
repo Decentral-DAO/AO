@@ -1,9 +1,9 @@
 [Unit]
 Description=lightning-deamon
-After=network.target
+After=bitcoin.service
 
 [Service]
-ExecStart=/home/trhode/go/bin/lnd --rpclisten=localhost:10002 --listen=localhost:10012 --restlisten=localhost:8002
+ExecStart=/home/trhode/go/bin/lnd  
 RuntimeDirectory=lnd
 User=trhode
 Type=forking
@@ -12,3 +12,4 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
+
