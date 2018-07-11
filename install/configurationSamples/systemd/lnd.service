@@ -9,6 +9,7 @@ User=trhode
 Type=forking
 Restart=on-failure
 PrivateTmp=true
+TimeoutStartSec=infinity
 
 [Install]
 WantedBy=multi-user.target
