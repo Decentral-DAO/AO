@@ -9,8 +9,11 @@
         row(v-for="m in activeMembers", :m="m")
         .purg
             template(v-for="m in inactiveMembers")
-                .bouncy {{ m.name }}
+                .bouncy
+                    p {{ m.name }} {{m.balance}}
+                        addr(:a="m.address")
                     dctrl-active(m="m")
+
     .padding(v-else)
         p dctrl member
         ol
@@ -31,6 +34,7 @@ import SharedTitle from '../slotUtils/SharedTitle'
 import CrazyBtn from '../slotUtils/CrazyBtn'
 import DctrlActive from './DctrlActive'
 import Joiners from './Joiners'
+import Addr from './Addr'
 
 export default {
     computed: {
@@ -62,7 +66,8 @@ export default {
         Row,
         CrazyBtn,
         DctrlActive,
-        Joiners
+        Joiners,
+        Addr
     }
 }
 
@@ -71,16 +76,6 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
-
-label
-    margin-top: 2em
-    font-size: 1.4em
-    border-bottom-style: solid
-    border-left-style: solid
-    border-color: accent2
-    margin-bottom: -1px
-    background: accent2
-    color: main
 
 #member
     width: 100%

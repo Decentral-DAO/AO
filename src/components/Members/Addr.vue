@@ -1,11 +1,13 @@
 <template lang='pug'>
 
 span.addr
+    img(@click="buildTag", src='../../assets/images/address.svg')
     label(v-if='showAddr') : {{ a }}
-    a(:href='"bitcoin:" + this.a')
-        img(@click="buildTag", src='../../assets/images/address.svg')
     .tag(v-if='showTag', @click="killTag")
+        h4 {{ a }}
         .qr(v-html='imgTag')
+        a(:href='"bitcoin:" + this.a')
+          button Open Wallet
 
 </template>
 
@@ -30,7 +32,7 @@ export default {
             let data = 'bitcoin:' + this.a
             qr.addData(data)
             qr.make()
-            let cellsize = 4
+            let cellsize = 9
             let margin = 4
             this.imgTag = qr.createImgTag(cellsize, margin)
             this.showTag = true
@@ -46,6 +48,9 @@ export default {
 
 <style lang='stylus' scoped>
 
+@import '../../styles/colours'
+@import '../../styles/button'
+
 img
     position: inline
     height: 2.4em
@@ -58,9 +63,22 @@ img
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(29,93,99,0.8); /* Black background with opacity */
+    background-color: rgba(29,93,99,0.8);
     z-index: 289768; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
-    padding: 4em
+    padding-left: 40em
+    padding-right: 40em
+    padding-top: 6em
+
+button, h4
+    max-width: 333px
+
+
+h4
+    color: black
+    background-color: white
+
+
+
 
 </style>
