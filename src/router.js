@@ -44,12 +44,16 @@ import TaskCalendar from './components/TaskCalendar'
 import List from './components/EventsList'
 
 import MyPage from './components/MyPage'
+import Nodes from './components/Nodes'
 
 Vue.use(VueRouter)
 
 const routes =[{
   path: '/',
   component: Home
+},{
+  path: '/nodes',
+  component: Nodes
 },{
   path: '/auth',
   component: Auth

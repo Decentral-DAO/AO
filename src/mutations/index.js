@@ -6,6 +6,7 @@ import sessionsMuts from './sessionsMuts'
 import tasksMuts from './tasksMuts'
 import joinersMuts from './joinersMuts'
 import recentMuts from './recentMuts'
+import nodesMuts from './nodesMuts'
 
 let mutations = {
     joinersMuts,
@@ -16,6 +17,7 @@ let mutations = {
     resourcesMuts,
     sessionsMuts,
     tasksMuts,
+    nodesMuts,
 }
 
 export default mutations

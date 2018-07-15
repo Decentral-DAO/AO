@@ -14,7 +14,12 @@ const serverState = {
     currency: 'CAD',
     cash: 0,
     spot: 0,
-    rent: 0
+    rent: 0,
+    variable: 0
+  },
+  nodes: {
+    bitcoind: {},
+    lnd: {}
   },
 }
 
@@ -30,7 +35,12 @@ const pubState = {
     currency: 'CAD',
     cash: 0,
     spot: 0,
-    rent: 0
+    rent: 0,
+    variable: 0
+  },
+  nodes: {
+      bitcoind: {},
+      lnd: {}
   },
 }
 
@@ -43,6 +53,7 @@ function applyEvent(state, ev) {
     M.sessionsMuts(state.sessions, ev)
     M.tasksMuts(state.tasks, ev)
     M.joinersMuts(state.joiners, ev)
+    M.nodesMuts(state.nodes, ev)
 }
 
 function initialize(callback) {

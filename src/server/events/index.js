@@ -6,6 +6,7 @@ import resourcesEvs from './resourcesEvs'
 import invoicesEvs from './invoicesEvs'
 import sessionsEvs from './sessionsEvs'
 import joinersEvs from './joinersEvs'
+import nodesEvs from './nodesEvs'
 // //
 // expose all of the events in a single object
 module.exports = {
@@ -16,4 +17,5 @@ module.exports = {
     resourcesEvs,
     invoicesEvs,
     sessionsEvs,
+    nodesEvs,
 }

@@ -31,7 +31,6 @@ export default {
     computed: {
         isMrClean(){
             let isMrClean = this.$store.getters.mrclean == this.m.memberId
-            console.log({isMrClean})
             return isMrClean
         }
     },
