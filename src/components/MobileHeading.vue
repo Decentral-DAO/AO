@@ -8,14 +8,17 @@
             img(src='../assets/images/dctrl.svg')
         .toggle(v-if="showHeaderNav" @click="toggleHeaderNav")
             navigation().navigation--header
+    auth
     slot
 
 </template>
 
 <script>
 import Navigation from './Navigation'
+import Auth from './Auth'
+
 export default {
-    components: { Navigation },
+    components: { Navigation, Auth },
     props: ['content'],
     data(){
       return {

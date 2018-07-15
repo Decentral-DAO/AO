@@ -3,6 +3,15 @@
 ## TODO
 
 ### Secure SSH
+Start your ssh server (confirm with systemctl status ssh).
+
+- `sudo apt-get install openssh-server`
+
+On controlling computer
+
+- `ssh-keygen -t rsa`
+- `scp ~/.ssh/id_rsa.pub username@serverip-address:~/.ssh`
+
 
 ### HTTPS / SSL
 
@@ -14,8 +23,11 @@ Use lets encrypt
 ### Tor Relay
 Copy the configuration file from the samples into the /etc/tor/torrc file.
 
-- `deb https://deb.torproject.org/torproject.org bionic main`
-- `deb-src https://deb.torproject.org/torproject.org bionic main`
+```
+deb https://deb.torproject.org/torproject.org bionic main
+deb-src https://deb.torproject.org/torproject.org bionic main
+```
+
 - `gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89`
 - `gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -`
 - `sudo apt update`

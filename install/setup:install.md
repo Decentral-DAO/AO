@@ -13,6 +13,9 @@ Download the .iso file from the above link and write it to a usb. To find the lo
 This should create a bootable usb and you can then boot from it. Use `delete` or `f10` to interrupt boot.
 ---
 
+
+
+
 ### ZMQ
 http://zeromq.org/intro:get-the-software
 
@@ -38,6 +41,8 @@ A database is needed to store and persist our applications state. Our database o
 Use the command `which rethinkdb`. If installed correctly the path to the executable file (in my case /usr/local/bin/rethinkdb) will be printed. The db can be started by `rethinkdb`.
 
 ---
+
+bitcoin -install + clang + git
 
 ### Blockchain (Bitcoin)
 First get the bitcoin binaries from https://bitcoin.org/en/download and unpack them
@@ -89,9 +94,9 @@ Yarn is a dependency manager for nodejs (https://yarnpkg.com/en/docs/install)
 ### Autonomous Organization
 
 Get the code from github and install the dependencies:
-- `git clone https://github.com/dctrl-ao/ao.git`
+- `git clone keybase://team/dctrlvan/ao`
 - `cd ao`
-- `yarn build`
+- `yarn install`
 
 At this point you will should be ready to run the app in dev mode. Try `yarn serve` to startup with vue hot-reloading. In this mode any changes you make to the /src/ folder will be immeadiately displayed. This is useful while editing styles & templating new functionality.
 
