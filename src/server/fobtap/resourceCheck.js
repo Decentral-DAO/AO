@@ -10,7 +10,7 @@ function access(member, resource){
     }
     let limit = member.active * 3 + 17
     let newBalance = member.balance - resource.charged
-    let isOverLimit = (newBalance + limit < 0)
+    let isOverLimit = (newBalance + limit > 0)
     console.log( {member, resource, limit, newBalance, isOverLimit} )
     return isOverLimit
 }
