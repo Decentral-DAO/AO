@@ -13,25 +13,29 @@ bitcoindZmq.hashblockStream
 
 function checkForPayments(){
     console.log("CHECKING FOR PAYMENTS.")
-    currentAccounts.forEach( watchedAddress => {
-        bitcoindRpc.getBalance(watchedAddress.address, (err, balance)=> {
-            if (err) return console.log('getbalance err:', {err})
+    currentAccounts.forEach( (watchedAddress, i) => {
+        setTimeout(function () {
+          bitcoindRpc.importAddress(watchedAddress.address, (err, balance)=> {
+            bitcoindRpc.getBalance(watchedAddress.address, (err, balance)=> {
+                if (err) return console.log('getbalance err:', {err})
 
-            if (watchedAddress.balance !== balance){
-                let amount = parseFloat(balance) - parseFloat(watchedAddress.balance)
-                watchedAddress.balance = balance
-                switch(watchedAddress.group){
-                    case 'member':
-                        recordMemberPayment(amount, watchedAddress.address)
-                        break
-                    case 'resource':
-                        recordResourcePayment(amount, watchedAddress.address)
-                        break
+                if (watchedAddress.balance !== balance){
+                    let amount = parseFloat(balance) - parseFloat(watchedAddress.balance)
+                    watchedAddress.balance = balance
+                    switch(watchedAddress.group){
+                        case 'member':
+                            recordMemberPayment(amount, watchedAddress.address)
+                            break
+                        case 'resource':
+                            recordResourcePayment(amount, watchedAddress.address)
+                            break
+                    }
+                } else {
+                    console.log('no payment received', watchedAddress)
                 }
-            } else {
-                console.log('no payment received', watchedAddress)
-            }
-        })
+              })
+            })
+        }, 100 * i)
     })
 }
 

@@ -10,6 +10,9 @@ function membersMuts(members, ev){
       case "member-activated":
           members.forEach( member => {
               if (member.memberId === ev.memberId){
+                  if ( member.active < 0) {
+                      member.active = -1 * member.active
+                  }
                   member.active ++
               }
           })
@@ -36,7 +39,7 @@ function membersMuts(members, ev){
               if (member.memberId === ev.memberId){
                   // if already seen do not adjust balance
                   // if txid put into member txids list
-                  
+
                   member.balance += parseFloat(ev.paid)
               }
           })
