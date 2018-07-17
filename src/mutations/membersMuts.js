@@ -3,6 +3,7 @@ import _ from 'lodash'
 function membersMuts(members, ev){
   switch (ev.type){
       case "member-created":
+          ev.txids = []
           members.push(ev)
           break
 
@@ -33,6 +34,9 @@ function membersMuts(members, ev){
       case "member-paid":
           members.forEach( member => {
               if (member.memberId === ev.memberId){
+                  // if already seen do not adjust balance
+                  // if txid put into member txids list
+                  
                   member.balance += parseFloat(ev.paid)
               }
           })
@@ -97,6 +101,11 @@ function membersMuts(members, ev){
           })
           break
   }
+}
+
+
+function checkForOnChain(member, txid){
+
 }
 
 export default membersMuts

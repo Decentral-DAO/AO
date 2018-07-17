@@ -4,7 +4,12 @@
     crazy-btn(v-if='loggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
     .list(v-if="loggedIn")
-        p Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is ${{ perMonth }} each.
+        p Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is
+            span &nbsp;
+            span(v-if="perMonth < cap") ${{ perMonth }} each.
+            span(v-else) $
+                span.cross {{ perMonth }}
+                span - {{ cap }} each. Warning cap breached! At this member count this node is not self sustaining!
         joiners
         row(v-for="m in activeMembers", :m="m")
         .purg
@@ -57,8 +62,15 @@ export default {
             return this.$store.getters.isLoggedIn
         },
         perMonth(){
-            let perMonth = parseFloat( this.$store.state.cash.rent ) / this.activeMembers.length
+            let fixed = parseFloat(this.$store.state.cash.rent)
+            let variable = parseFloat(this.$store.state.cash.variable)
+            let numActiveMembers = this.activeMembers.length
+            let perMonth = ( fixed + variable ) / numActiveMembers
+            console.log("fixed & variable:" , {perMonth}, this.$store.state.cash.rent , this.$store.state.cash.variable)
             return  perMonth.toFixed(2)
+        },
+        cap(){
+            return this.$store.state.cash.cap
         }
     },
     components:{
@@ -95,6 +107,9 @@ li
     position: relative;
     animation: moveX 3s linear 0.5s infinite alternate,
       moveY 0.5s linear 1s infinite alternate;
+
+.cross
+    text-decoration: line-through;
 
 @keyframes moveX {
   from { left: 0; } to { left: 400px }

@@ -14,6 +14,8 @@ const mutations = {
         state.spot = current.cash.spot
         state.currency = current.cash.currency
         state.rent = current.cash.rent
+        state.cap = current.cash.cap
+        state.variable = current.cash.variable
     },
     applyEvent: M.cashMuts
 }

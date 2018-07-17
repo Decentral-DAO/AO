@@ -4,8 +4,8 @@
     shared-title(title='Node Info')
     p Lightning Node Status: Active
     p We have {{ activeChannels }} active channels.
-    p We have {{ confirmedBalance }} satoshis.
-    p Connect to our node from a lightning wallet using this qr:
+    p Open a channel with our node from a lightning wallet using this qr:
+    label {{ nodeUri }}
     div(v-html='tag')
 
 </template>
@@ -22,8 +22,11 @@ export default {
         confirmedBalance(){
             return this.$store.state.nodes.lnd.wallet.confirmed_balance
         },
+        nodeUri(){
+            return this.$store.state.nodes.lnd.info.identity_pubkey + "@dctrl.ca:9735"
+        },
         tag(){
-            let data = this.$store.state.nodes.lnd.info.identity_pubkey + "@dctrl.ca:9735"
+            let data = this.nodeUri
             let typeNumber = 10;
             let errorCorrectionLevel = 'L';
             let qr = qrcode(typeNumber, errorCorrectionLevel);

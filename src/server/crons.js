@@ -21,9 +21,13 @@ function rent(){
     console.log('charging for Rent')
     let activeMembers = serverState.members.filter( m => m.active >= 0)
     let numberOfActiveMembers = activeMembers.length
-    let charged = serverState.cash.rent / activeMembers.length
+    let fixed = parseFloat(serverState.cash.rent)
+    let variable = parseFloat(serverState.cash.variable)
+    let numActiveMembers = activeMembers.length
+    let perMonth = ( fixed + variable ) / numActiveMembers
+    let charged = Math.min(perMonth, parseFloat( serverState.cash.cap ))
     let notes = ''
-    console.log('attempting ev create loop', {numberOfActiveMembers, charged, notes})
+    console.log('attempting ev create loop', {numActiveMembers, charged, notes})
     activeMembers.forEach( m => {
         events.membersEvs.memberCharged(m.memberId, charged, notes)
     })

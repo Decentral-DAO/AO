@@ -15,7 +15,8 @@ const serverState = {
     cash: 0,
     spot: 0,
     rent: 0,
-    variable: 0
+    variable: 0,
+    cap: 75,
   },
   nodes: {
     bitcoind: {},
@@ -36,7 +37,8 @@ const pubState = {
     cash: 0,
     spot: 0,
     rent: 0,
-    variable: 0
+    variable: 0,
+    cap: 75,
   },
   nodes: {
       bitcoind: {},
