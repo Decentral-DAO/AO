@@ -22,7 +22,7 @@ module.exports = function(req, res, next){
     if (member && resource && canAccess){
         events.resourcesEvs.resourceUsed(
           req.body.resourceId,
-          memberId,
+          member.memberId,
           req.body.amount || 1,
           resource.charged || 0,
           req.body.notes || '',

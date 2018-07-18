@@ -16,11 +16,11 @@ function importAddress(address, account, callback){
     )
 }
 
-
 function getAccountBalance(account, callback) {
    client.command(
        'getreceivedbyaccount',
        account,
+       3,
        (err, balance, resHeaders)=>{
            if (err) return callback(err);
            callback(null, balance)
