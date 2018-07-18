@@ -3,21 +3,47 @@ const config = require('../../../configuration')
 
 const client = new Client(config.bitcoind)
 
-function importAddress(address, callback){
+function importAddress(address, account, callback){
     console.log({address})
     client.command(
         'importaddress',
         address,
-        'test',
+        account,
         false,
-        (err)=>{
+        (err) => {
             callback(err)
         }
     )
 }
 
+
+function getAccountBalance(account, callback) {
+   client.command(
+       'getreceivedbyaccount',
+       account,
+       (err, balance, resHeaders)=>{
+           if (err) return callback(err);
+           callback(null, balance)
+       }
+   )
+}
+
+function listAccountTransactions(account, callback){
+    client.command(
+        'listtransactions',
+        account,
+        99, // max tx
+        0, // skip
+        true, // use watch only
+        (err, transcations, resHeaders)=>{
+            if (err) return callback(err);
+            console.log('listAccountTransactions', {err, transcations, resHeaders})
+            callback(null, transcations)
+        }
+    )
+}
+
 function getBalance(address, callback){
-    console.log({address})
     client.command(
         'getreceivedbyaddress',
         address,
@@ -41,5 +67,7 @@ function getAddressHistory(address, callback){
 module.exports = {
     getBalance,
     importAddress,
-    getAddressHistory
+    getAddressHistory,
+    getAccountBalance,
+    listAccountTransactions,
 }

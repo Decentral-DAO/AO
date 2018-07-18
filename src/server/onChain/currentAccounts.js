@@ -5,24 +5,29 @@ const bitcoindRpc = require('./bitcoindRpc')
 
 const currentAccounts = []
 
+// on startup, fills current account list to be checked
 function initializeWatchedMembersAddresses(){
-    state.pubState.members.forEach( member => {
-        checkInitial(member.address, 'member')
-    })
-}
-
-function checkInitial(address, group){
-    if (!address) return console.log('address required')
-    bitcoindRpc.importAddress(address, (err, res)=> {
-        bitcoindRpc.getBalance(address, (err, balance)=> {
-            if (err) return console.log('getbalance err:', err);
-            currentAccounts.push({
-                address,
-                balance,
-                group
-            })
+    state.pubState.members.forEach( (member, i) => {
+        addAddressToAccount(member.address, member.memberId, (err, res)=> {
+          setTimeout(()=>{
+              checkInitial(member.memberId)
+          }, 321 * i)
         })
     })
 }
 
-module.exports = {currentAccounts, initializeWatchedMembersAddresses, checkInitial}
+function addAddressToAccount(address, account, callback) {
+    bitcoindRpc.importAddress(address, account, callback)
+}
+
+function checkInitial(account){
+    bitcoindRpc.getAccountBalance(account, (err, balance)=> {
+        if (err) return console.log('getbalance err:', err);
+        currentAccounts.push({
+            account,
+            balance
+        })
+    })
+}
+
+module.exports = {currentAccounts, initializeWatchedMembersAddresses, addAddressToAccount, checkInitial}

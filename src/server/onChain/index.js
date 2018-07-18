@@ -13,30 +13,23 @@ bitcoindZmq.hashblockStream
 
 function checkForPayments(){
     console.log("CHECKING FOR PAYMENTS.")
-    currentAccounts.forEach( watchedAddress => {
-        bitcoindRpc.getBalance(watchedAddress.address, (err, balance)=> {
-            if (err) return console.log('getbalance err:', {err})
+    currentAccounts.forEach( watched => {
+        bitcoindRpc.getAccountBalance(watched.account, (err, balance)=> {
+            if (err) return console.log('getAccountBalance err:', {err})
 
-            if (watchedAddress.balance !== balance){
-                let amount = parseFloat(balance) - parseFloat(watchedAddress.balance)
-                watchedAddress.balance = balance
-                switch(watchedAddress.group){
-                    case 'member':
-                        recordMemberPayment(amount, watchedAddress.address)
-                        break
-                    case 'resource':
-                        recordResourcePayment(amount, watchedAddress.address)
-                        break
-                }
+            if (watched.balance !== balance){
+                let amount = parseFloat(balance) - parseFloat(watched.balance)
+                watched.balance = balance
+                recordMemberPayment(amount, watched.account)
             } else {
-                console.log('no payment received', watchedAddress)
+                console.log('no payment received', watched)
             }
         })
     })
 }
 
-function recordMemberPayment(btcAmount, address){
-    let memberId = getMemberIdFromAddress(address)
+function recordMemberPayment(btcAmount, account){
+    let memberId = account
     let paid = (state.pubState.cash.spot * btcAmount).toFixed(6).toString()
     let isCash = false
     let notes = 'dctrl-admin' // txid ?
@@ -44,32 +37,4 @@ function recordMemberPayment(btcAmount, address){
     if (memberId && paid){
         events.membersEvs.memberPaid(memberId, paid, isCash, notes)
     }
-}
-
-function getMemberIdFromAddress(address){
-  let memberId
-  state.pubState.members.forEach( member => {
-      if (member.address == address){
-          memberId = member.memberId
-      }
-  })
-  return memberId
-}
-
-function recordResourcePayment(btcAmount, address){
-    console.log("TODO: recordResourcePayment:", {btcAmount, address})
-    let resourceId = getResourceIdFromAddress(address)
-    let notes = 'dctrl-admin' // bring in the transaction ID, instead of this.
-    let amount = (state.pubState.cash.spot * btcAmount).toFixed(6).toString()
-    // events.resourceEvs.resourcePaid(resourceId, amount, isCash, notes)
-}
-
-function getResourceIdFromAddress(address, callback){
-  let resourceId
-  state.pubState.resources.forEach( resource => {
-      if (resource.address == address){
-          resourceId = resource.resourceId
-      }
-  })
-  return resourceId
 }

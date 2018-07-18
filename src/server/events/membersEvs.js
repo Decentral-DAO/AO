@@ -2,7 +2,7 @@ import lnd from '../onLightning/lnd.js'
 
 import uuidV1 from 'uuid/v1'
 import dctrlDb from '../dctrlDb'
-import { checkInitial } from '../onChain/currentAccounts'
+import { checkInitial, addAddressToAccount } from '../onChain/currentAccounts'
 
 const NESTED_PUBKEY_HASH = 1
 
@@ -17,9 +17,10 @@ function memberCreated(name, fob, secret, callback) {
         }
         console.log('new address from lnd', response.address)
         a = response.address
+        let memberId = uuidV1()
         let newEvent = {
             type: "member-created",
-            memberId: uuidV1(),
+            memberId,
             fob,
             name,
             secret,
@@ -29,7 +30,9 @@ function memberCreated(name, fob, secret, callback) {
             badges: [],
             info: {}
         }
-        checkInitial(newEvent.address, 'member')
+        addAddressToAccount(a, memberId, (err, res)=> {
+            checkInitial(memberId)
+        })
         dctrlDb.insertEvent(newEvent, callback)
     })
 
@@ -79,7 +82,7 @@ function memberAddressUpdated(memberId, address, proof, callback){
       address,
       proof,
   }
-  checkInitial(newEvent.address, 'member')
+  addAddressToAccount(address, memberId)
   dctrlDb.insertEvent(newEvent, callback)
 }
 
