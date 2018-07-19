@@ -82,7 +82,7 @@ function memberAddressUpdated(memberId, address, proof, callback){
       address,
       proof,
   }
-  addAddressToAccount(address, memberId)
+  addAddressToAccount(address, memberId, console.log)
   dctrlDb.insertEvent(newEvent, callback)
 }
 
