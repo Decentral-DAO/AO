@@ -3,10 +3,12 @@
 .join
     .row
         .six.columns
-            label Choose Alias:
-            br
-            input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
-            button(@click="createJoinReq") Request Access to Commons
+            div(v-if='!response')
+                label Choose Alias:
+                br
+                input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
+                button(@click="createJoinReq") Request Access to Commons
+            div(v-else) Thank you for your interest {{ name }}. Reach out to the members you know and we will try to get you a fob. :)
         .six.columns
             br
 
@@ -25,7 +27,7 @@ export default {
   data(){
       return {
           name: '',
-          responseInvoice: false,
+          response: false,
           password: '',
           repassword:''
       }
@@ -39,9 +41,8 @@ export default {
                      return console.log(err)
                   }
                   console.log(res.body)
-                  this.responseInvoice = res.body
+                  this.response = res.body
               })
-
       },
   }
 }
