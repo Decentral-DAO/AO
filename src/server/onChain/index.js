@@ -13,18 +13,20 @@ bitcoindZmq.hashblockStream
 
 function checkForPayments(){
     console.log("CHECKING FOR PAYMENTS.")
-    currentAccounts.forEach( watched => {
-        bitcoindRpc.getAccountBalance(watched.account, (err, balance)=> {
-            if (err) return console.log('getAccountBalance err:', {err})
+    currentAccounts.forEach( (watched, i) => {
+        setTimeout( () => {
+            bitcoindRpc.getAccountBalance(watched.account, (err, balance)=> {
+                if (err) return console.log('getAccountBalance err:', {err})
 
-            if (watched.balance !== balance){
-                let amount = parseFloat(balance) - parseFloat(watched.balance)
-                watched.balance = balance
-                recordMemberPayment(amount, watched.account)
-            } else {
-                console.log('no payment received', watched)
-            }
-        })
+                if (watched.balance !== balance){
+                    let amount = parseFloat(balance) - parseFloat(watched.balance)
+                    watched.balance = balance
+                    recordMemberPayment(amount, watched.account)
+                } else {
+                    console.log('no payment received', watched)
+                }
+            })
+        }, 100 * i )
     })
 }
 

@@ -10,7 +10,7 @@ function reactions(ev){
             }
             break
         case 'member-paid':
-            if (ev.amount > 33){
+            if (parseFloat(ev.paid) > 20){
                 events.membersEvs.memberActivated(ev.memberId)
             }
             break
