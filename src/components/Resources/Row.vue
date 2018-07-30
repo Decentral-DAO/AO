@@ -2,7 +2,7 @@
 
 .resources
     h3 {{ r.name }}
-        span(v-if='r.stock >= 0').stock ({{ r.stock }} remain)
+        span(v-if='r.stock && r.stock >= 0').stock ({{ r.stock }} remain)
     .invoices(v-if='showInvoices')
         pay-req(v-if='invoice', :i='invoice')
     .row

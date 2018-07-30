@@ -10,16 +10,31 @@
             current(:memberId="b.lastClaimedBy")
     .six.columns
         .instructions(v-if='!editMode') {{ b.instructions }}
-        .editBox(v-else)
-            div
-                label Edit Instructions
+        div(v-else)
+            p The instructions on how to do the task properly.
+            .editBox
                 textarea(v-model='newInstructions')
-            button(@click='submitChange') submit change
+            button(@click='submitChange') update instructions
+            div(v-if='!b.oneTime')
+                p The monthly rate accumulates over time on the tasks bounty.
+                .row
+                    input.six.columns(v-model='newRate')
+                    button.six.columns(@click='submitRate') change monthly rate
+                p The payout of the task is capped.
+                .row
+                    input.six.columns(v-model='newCap')
+                    button.six.columns(@click='submitCap') update cap
+            .boost
+                p Add a one time boost to the current value
+                .row
+                    input.six.columns(v-model='newBoost')
+                    button.six.columns(@click='submitBoost') add a boost
     .two.columns
-      img.pencil(v-if='!editMode', src='../../assets/images/pencil.svg', @click='edit')
-      img.pencil(v-else, @click='edit', src='../../assets/images/pencil.svg')
-      router-link(:to='historyLocation')
-          img(src='../../assets/images/calendar.svg')
+        router-link(:to='historyLocation')
+            img(src='../../assets/images/calendar.svg')
+        br
+        img.pencil(v-if='!editMode', src='../../assets/images/pencil.svg', @click='edit')
+        img.pencil(v-else, @click='edit', src='../../assets/images/cancel.svg')
 
 </template>
 
@@ -66,7 +81,10 @@ export default {
         return {
             currentValue: '...calc',
             editMode: false,
-            newInstructions: ''
+            newInstructions: '',
+            newBoost: 0,
+            newRate: this.b.monthlyValue,
+            newCap: this.b.cap
         }
     },
     mounted(){
@@ -94,10 +112,12 @@ export default {
 
 @import '../../styles/colours'
 @import '../../styles/skeleton'
-@import '../../styles/skeleton-button'
+@import '../../styles/button'
 
 .task
     color: accent2
+    input
+        color: main
 
 .name
     content-align: left
@@ -118,7 +138,7 @@ export default {
     color: accent2
 
 .pencil
-    height: 24px
+    break: both
 
 .instructions
     padding: 1.5em
@@ -126,7 +146,7 @@ export default {
     background: lightGrey
     color: main
     min-height: 4em
-    font-size: .8em
+    font-size: 1em
     padding-top: .8em
     vertical-align: bottom
     margin-top: 1.5em
@@ -137,6 +157,7 @@ export default {
     color: main
     label
         color: accent1
+        text-align: left
     button
         width: 100%
         color: accent1
@@ -144,9 +165,10 @@ export default {
     textarea
         width: 100%
         height: 8em
+        padding: 1em
 
 img
-    height: 55px
+    height: 3em
 
 .row
     border-color: accent4
