@@ -3,8 +3,9 @@ Description=ao-deamon
 After=lnd.service
 
 [Service]
-ExecStart=/home/trhode/.nvm/versions/node/v9.11.2/bin/node /home/trhode/dctrl/ao/production/server/app.js
-User=trhode
+ExecStart=/home/dctrl/.nvm/versions/node/v9.11.2/bin/node /home/dctrl/ao/production/server/app.js
+User=dctrl
+Type=simple
 Restart=always
 RestartSec=39
 PrivateTmp=true

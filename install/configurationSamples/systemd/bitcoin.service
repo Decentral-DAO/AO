@@ -3,9 +3,9 @@ Description=bitcoin-deamon
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/bitcoind 
+ExecStart=/home/dctrl/Downloads/bitcoin-0.16.1/bin/bitcoind
 RuntimeDirectory=bitcoind
-User=trhode
+User=dctrl
 Type=forking
 Restart=on-failure
 PrivateTmp=true

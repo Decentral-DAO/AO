@@ -2,8 +2,8 @@
 Description=rethinkdb-deamon
 
 [Service]
-User=trhode
-ExecStart=/usr/local/bin/rethinkdb serve --port-offset 1 --config-file /home/trhode/.rethinkdb/rethinkdb.conf --directory /home/trhode/.rethinkdb
+User=dctrl
+ExecStart=/usr/local/bin/rethinkdb serve --config-file /home/dctrl/.rethinkdb/rethinkdb.conf --directory /home/dctrl/.rethinkdb/rethinkdb_data/
 Restart=always
 KillMode=process
 PrivateTmp=true
