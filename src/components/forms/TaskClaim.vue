@@ -3,7 +3,9 @@
 #newmember
     shared-title(:title='getTitle')
     form-box(btntxt="Claim task", v-bind:data="info", event='task-claimed')
-        label Notes (optional)
+        label Did you do the following?
+        p {{ getInstructions }}
+        label Add a Note (optional)
         input(v-model='info.notes' type='text')
 
 </template>
@@ -30,13 +32,22 @@ export default {
     },
     computed: {
         getTitle(){
-            let title = '...loadin'
+            let title = '...'
             this.$store.state.tasks.forEach(t => {
                 if (t.taskId == this.info.taskId){
                     title = "Claim " + t.name + "!"
                 }
             })
             return title
+        },
+        getInstructions(){
+            let instructions = '...'
+            this.$store.state.tasks.forEach(t => {
+                if (t.taskId == this.info.taskId){
+                    instructions = t.instructions + "!!!"
+                }
+            })
+            return instructions
         }
     },
     components: {

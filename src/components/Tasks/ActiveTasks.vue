@@ -45,6 +45,17 @@ import {calculateTaskPayout, cadToSats} from '../../calculations'
 import Current from '../Resources/Current'
 
 export default {
+    props: ['b'],
+    data() {
+        return {
+            currentValue: '...calc',
+            editMode: false,
+            newInstructions: '',
+            newBoost: 0,
+            newRate: this.b.monthlyValue,
+            newCap: this.b.cap
+        }
+    },
     components: { Current },
     methods: {
         edit(){
@@ -74,17 +85,48 @@ export default {
                     if (err) return console.log(err);
                     console.log('createPayRec:', res.body)
                 })
-        }
-    },
-    props: ['b'],
-    data() {
-        return {
-            currentValue: '...calc',
-            editMode: false,
-            newInstructions: '',
-            newBoost: 0,
-            newRate: this.b.monthlyValue,
-            newCap: this.b.cap
+        },
+        submitRate(){
+            request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    taskId: this.b.taskId,
+                    type: 'task-rate-updated',
+                    amount: this.newRate,
+                })
+                .end((err,res)=>{
+                    if (err) return console.log(err);
+                    console.log('createPayRec:', res.body)
+                })
+        },
+        submitCap(){
+            request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    taskId: this.b.taskId,
+                    type: 'task-cap-updated',
+                    amount: this.newCap,
+                })
+                .end((err,res)=>{
+                    if (err) return console.log(err);
+                    console.log('createPayRec:', res.body)
+                })
+        },
+        submitBoost(){
+            request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    taskId: this.b.taskId,
+                    type: 'task-boosted',
+                    amount: this.newBoost,
+                })
+                .end((err,res)=>{
+                    if (err) return console.log(err);
+                    console.log('createPayRec:', res.body)
+                })
         }
     },
     mounted(){

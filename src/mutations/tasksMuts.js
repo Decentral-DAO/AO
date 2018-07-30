@@ -18,6 +18,13 @@ function tasksMuts(tasks, ev) {
 				}
 			})
 			break
+		case "task-cap-updated":
+			tasks.forEach(task => {
+				if (task.taskId === ev.taskId) {
+					task.cap = parseFloat(ev.amount)
+				}
+			})
+			break
 		case "task-rate-updated":
 			tasks.forEach(task => {
 				if (task.taskId === ev.taskId) {

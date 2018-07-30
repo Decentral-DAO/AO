@@ -15,8 +15,11 @@ module.exports = function(req,res, next){
       case 'task-boosted':
           specTaskBoosted(req, res, next)
           break
-      case 'task-monthly-updated':
+      case 'task-rate-updated':
           specTaskRateUpdated(req, res, next)
+          break
+      case 'task-cap-updated':
+          specTaskCapUpdated(req, res, next)
           break
       case 'task-instructions-updated':
           specTaskInstructionsUpdated(req, res, next)
@@ -79,17 +82,31 @@ function specTaskClaimed(req, res, next){
   }
 }
 
+function specTaskCapUpdated(req, res, next){
+  let errRes = []
+  if (
+    validators.isTaskId(req.body.taskId, errRes) &&
+    validators.isAmount(req.body.amount, errRes)
+  ){
+    events.tasksEvs.taskCapUpdated(
+      req.body.taskId,
+      req.body.amount,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
 function specTaskRateUpdated(req, res, next){
   let errRes = []
   if (
     validators.isTaskId(req.body.taskId, errRes) &&
-    validators.isAmount(req.body.amount, errRes) &&
-    validators.isNotes(req.body.notes, errRes)
+    validators.isAmount(req.body.amount, errRes)
   ){
-    events.tasksEvs.taskMonthlyUpdated(
+    events.tasksEvs.taskRateUpdated(
       req.body.taskId,
       req.body.amount,
-      req.body.notes,
       utils.buildResCallback(res)
     )
   } else {
@@ -118,13 +135,11 @@ function specTaskBoosted(req, res, next){
   let errRes = []
   if (
     validators.isTaskId(req.body.taskId, errRes) &&
-    validators.isAmount(req.body.amount, errRes) &&
-    validators.isNotes(req.body.notes, errRes)
+    validators.isAmount(req.body.amount, errRes)
   ){
     events.tasksEvs.taskBoosted(
       req.body.taskId,
       req.body.amount,
-      req.body.notes,
       utils.buildResCallback(res)
     )
   } else {

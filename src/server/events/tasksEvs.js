@@ -28,22 +28,29 @@ function taskClaimed(taskId, memberId, paid, notes, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
-function taskBoosted(taskId, amount, notes, callback) {
+function taskBoosted(taskId, amount, callback) {
   let newEvent = {
       type: "task-boosted",
       taskId,
       amount,
-      notes
   }
   dctrlDb.insertEvent(newEvent, callback)
 }
 
-function taskRateUpdated(taskId, amount, notes, callback) {
+function taskRateUpdated(taskId, amount, callback) {
   let newEvent = {
     type: "task-rate-updated",
-    amount,
     taskId,
-    notes,
+    amount,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
+function taskCapUpdated(taskId, amount, callback) {
+  let newEvent = {
+    type: "task-cap-updated",
+    taskId,
+    amount,
   }
   dctrlDb.insertEvent(newEvent, callback)
 }
@@ -58,9 +65,10 @@ function taskInstructionsUpdated(taskId, newInstructions, callback){
 }
 
 export default {
-  taskRateUpdated,
   taskBoosted,
   taskCreated,
   taskClaimed,
   taskInstructionsUpdated,
+  taskRateUpdated,
+  taskCapUpdated,
 }
