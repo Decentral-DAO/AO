@@ -11,9 +11,7 @@
             .current
                 current(v-for='memberId in currentMembers', :memberId='memberId')
         .six.columns
-            button.payreq(v-if='r.charged > 0', @click='createPayRec')
-                img.payreqimg(src='../../assets/images/address.svg')
-                img.payreqlnimg(src='../../assets/images/lightning.svg')
+            button.pay(v-if='r.charged > 0', @click='createPayRec')
                 span lightning ({{sats.toLocaleString()}} sat)
             router-link(v-if='trackStock', :to='"/resource_stock/" + r.resourceId')
                 button.refill replenish supply
@@ -117,21 +115,11 @@ img
     background: green
     border-color: main
 
-.payreq
-    color: main
-    background: accent2
-    border-color: main
-
-.payreqimg
-    float: right
-    height: 2.5em
-
-.payreqlnimg
-    float: left
-    height: 2em
-
 .recent
     font-size: .8em
+
+.pay
+    background-color: accent2
 
 .current
     background: lightGrey

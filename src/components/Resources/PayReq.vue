@@ -1,15 +1,16 @@
 <template lang='pug'>
 
 .payreq
-  a(:href='"bitcoin:" + this.i.payment_request')
-    .row
-      .six.columns
-          label memo: {{i.memo}}
-          .box(v-if='!i.settled') {{ i.payment_request }}
-          .paid(v-else) PAID
-      .six.columns
-          label satoshis: {{i.sats}} ($ {{ cadAmount }})
-          div(v-if='!i.settled', v-html='imgTag')
+  .row
+    .six.columns
+        label memo: {{i.memo}}
+        .box(v-if='!i.settled') {{ i.payment_request }}
+        .paid(v-else) PAID
+        a(:href='"lightning:" + this.i.payment_request')
+            button(v-if='!i.settled') Open Wallet
+    .six.columns
+        label satoshis: {{i.sats}} ($ {{ cadAmount }})
+        div(v-if='!i.settled', v-html='imgTag')
 
 </template>
 
@@ -71,5 +72,9 @@ a
 .paid
     color: purple
     font-size: 5em
+
+p
+    color: accent1
+
 
 </style>
