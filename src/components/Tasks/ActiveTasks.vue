@@ -5,7 +5,7 @@
     .four.columns.name
         label {{b.name}}
         br
-        button(@click='claim') claim - {{ sats }} sats (${{currentValue}})
+        button(@click='claim') claim - {{ sats.toLocaleString() }} sats (${{currentValue.toLocaleString()}})
         p(v-if="b.lastClaimedBy") Last done by
             current(:memberId="b.lastClaimedBy")
     .six.columns
@@ -48,7 +48,7 @@ export default {
     props: ['b'],
     data() {
         return {
-            currentValue: '...calc',
+            currentValue: parseFloat( calculateTaskPayout(this.b).toFixed(2) ),
             editMode: false,
             newInstructions: '',
             newBoost: 0,
@@ -57,6 +57,12 @@ export default {
         }
     },
     components: { Current },
+    mounted(){
+        setInterval( ()=>{
+            this.currentValue = parseFloat( calculateTaskPayout(this.b).toFixed(2) )
+            console.log('updated', this.currentValue)
+        },3333)
+    },
     methods: {
         edit(){
             console.log('edit called')
@@ -87,6 +93,7 @@ export default {
                 })
         },
         submitRate(){
+            this.editMode = false
             request
                 .post('/events')
                 .set('Authorization', this.$store.state.loader.token)
@@ -101,6 +108,7 @@ export default {
                 })
         },
         submitCap(){
+            this.editMode = false
             request
                 .post('/events')
                 .set('Authorization', this.$store.state.loader.token)
@@ -115,7 +123,8 @@ export default {
                 })
         },
         submitBoost(){
-            request
+          this.editMode = false
+          request
                 .post('/events')
                 .set('Authorization', this.$store.state.loader.token)
                 .send({
@@ -129,15 +138,9 @@ export default {
                 })
         }
     },
-    mounted(){
-        this.currentValue = calculateTaskPayout(this.b).toFixed(2)
-        setInterval( ()=>{
-            this.currentValue = calculateTaskPayout(this.b).toFixed(2)
-        },11111)
-    },
     computed: {
         sats(){
-            return cadToSats(this.currentValue, this.$store.state.cash.spot)
+            return parseInt( cadToSats(this.currentValue, this.$store.state.cash.spot) )
         },
         claimLocation(){
             return '/TASK_CLAIM/' + this.b.taskId
