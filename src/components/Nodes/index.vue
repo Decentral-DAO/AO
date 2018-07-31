@@ -3,10 +3,12 @@
 #nodes
     shared-title(title='Node Info')
     p Lightning Node Status: Active
-    p We have {{ activeChannels }} active channels.
     p Open a channel with our node from a lightning wallet using this qr:
     label {{ nodeUri }}
     div(v-html='tag')
+    p {{ activeChannels }} active channels.
+    p {{ confirmedBalance.toLocaleString() }} satoshis available for channels
+    p {{ inChannels.toLocaleString() }} satoshis in lightning channels
 
 </template>
 
@@ -16,11 +18,14 @@ import SharedTitle from '../slotUtils/SharedTitle'
 
 export default {
     computed: {
+        inChannels(){
+            return parseFloat( this.$store.state.nodes.lnd.wallet.channels.balance )
+        },
         activeChannels(){
-            return this.$store.state.nodes.lnd.info.num_active_channels
+            return parseFloat( this.$store.state.nodes.lnd.info.num_active_channels )
         },
         confirmedBalance(){
-            return this.$store.state.nodes.lnd.wallet.confirmed_balance
+            return parseFloat( this.$store.state.nodes.lnd.wallet.confirmed_balance )
         },
         nodeUri(){
             return this.$store.state.nodes.lnd.info.identity_pubkey + "@dctrl.ca:9735"
