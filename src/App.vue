@@ -51,6 +51,7 @@ export default {
                     console.log('eventstream:' , ev)
                     this.$store.commit('applyEvent', ev)
                     this.$store.dispatch('displayEvent', ev)
+                    console.log('joiners now', this.$store.state.joiners)
                 })
             });
         });

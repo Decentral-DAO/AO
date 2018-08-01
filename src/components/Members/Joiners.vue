@@ -1,11 +1,13 @@
 <template lang='pug'>
 
 div
-    p(v-if="$store.state.joiners.length > 0") Will you vouch for a joiner??!
+    p(v-if="$store.state.joiners.length > 0") The following aliases have requested joining. Remember, if you vouch for them you are also responsible for showing them the ropes, welcoming them, and to some degree their actions. Will you vouch for a joiner?
     .row
         template(v-for='j in $store.state.joiners')
             .three.columns.w
-                button.a(@click='vouch(j.joinerId)') {{ j.name }}
+                button(@click='vouch(j.joinerId)').a {{ j.name }}
+                    img.vouchImg(src='../../assets/images/check.svg')
+                img.rejectImg(@click='reject(j.joinerId)', src='../../assets/images/cancel.svg')
                 current(v-for='m in j.vouchers', :memberId='m')
                 button.b(v-if='j.vouchers.length > 2' @click='create(j.name)') Create New Member
 </template>
@@ -20,6 +22,19 @@ export default {
     methods: {
         create(name){
             this.$router.push("/member_create/" + name)
+        },
+        reject(joinerId){
+            request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    type: 'joiner-rejected',
+                    joinerId,
+                    memberId:this.$store.getters.member.memberId
+                })
+                .end((err,r)=>{
+                    console.log({err, r})
+                })
         },
         vouch(joinerId){
             request
@@ -45,13 +60,14 @@ export default {
 @import '../../styles/colours'
 
 .w
-    border-style: dotted
-    border-color: accent2
+    border-style: solid
+    border-color: accent4
+    background-color: lightGrey
 
 button.a
     position: inline
-    background: accent1
-    color: main
+    background-color: accent4
+    color: accent3
     padding: 1em
     border-radius: 3px
 
@@ -59,5 +75,13 @@ button.b
     float: right
     background: accent2
     color: main
+
+img
+    padding: .5em
+    height: 2em
+.rejectImg
+    float: right
+.vouchImg
+    float: left
 
 </style>

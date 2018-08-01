@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 function joinersMuts(joiners, ev){
 		switch (ev.type) {
 				case "joiner-created":
@@ -17,7 +15,16 @@ function joinersMuts(joiners, ev){
 				case "member-created":
 						joiners.forEach( (j, i) => {
 								if (j.name == ev.name){
-										_.pullAt(joiners, i)
+										joiners.splice(i, 1)
+								}
+						})
+						break
+				case "joiner-rejected":
+						joiners.forEach( (j, i) => {
+								if (j.joinerId == ev.joinerId){
+										console.log('removing joiner::!!', i)
+										joiners.splice(i, 1)
+										console.log('joiners', {joiners})
 								}
 						})
 						break

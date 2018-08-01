@@ -14,7 +14,6 @@ function joinerCreated(name, callback) {
 }
 
 function joinerVouched (joinerId, memberId, callback){
-
     let newEvent = {
         type: "joiner-vouched",
         joinerId,
@@ -23,7 +22,17 @@ function joinerVouched (joinerId, memberId, callback){
     dctrlDb.insertEvent(newEvent, callback)
 }
 
+function joinerRejected (joinerId, memberId, callback){
+    let newEvent = {
+        type: "joiner-rejected",
+        joinerId,
+        memberId
+    }
+    dctrlDb.insertEvent(newEvent, callback)
+}
+
 export default {
     joinerCreated,
+    joinerRejected,
     joinerVouched
 }
