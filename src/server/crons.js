@@ -19,7 +19,10 @@ const deactivateJob = new cron.CronJob({
 
 function rent(){
     console.log('charging for Rent')
-    let activeMembers = serverState.members.filter( m => m.active >= 0)
+    let activeMembers = serverState.members.filter(m => {
+        let isAdmin = (m.badges.indexOf('admin') !== -1)
+        return (m.active > 0 && !isAdmin)
+    })
     let numberOfActiveMembers = activeMembers.length
     let fixed = parseFloat(serverState.cash.rent)
     let variable = parseFloat(serverState.cash.variable)
@@ -35,7 +38,8 @@ function rent(){
 
 function deactivate(){
     let deadbeats = serverState.members.filter(m => {
-        return (m.active >= 0 && m.balance < 0)
+        let isAdmin = (m.badges.indexOf('admin') !== -1)
+        return (m.active >= 0 && m.balance < 0 && !isAdmin)
     })
     deadbeats.forEach(m => {
         events.membersEvs.memberDeactivated(m.memberId)

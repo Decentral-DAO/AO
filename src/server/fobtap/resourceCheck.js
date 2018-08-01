@@ -10,9 +10,9 @@ function access(member, resource){
     }
     let limit = member.active * 3 + 17
     let newBalance = member.balance - resource.charged
-    let isOverLimit = (newBalance + limit > 0)
-    console.log( {member, resource, limit, newBalance, isOverLimit} )
-    return isOverLimit
+    let canAccess = (newBalance + limit > 0)
+    console.log( {member, resource, limit, newBalance, canAccess} )
+    return canAccess
 }
 
 module.exports = function(req, res, next){

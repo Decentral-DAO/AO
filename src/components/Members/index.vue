@@ -45,7 +45,10 @@ export default {
     computed: {
         activeMembers(){
             // place members with recent events at top of list
-            let active = this.$store.state.members.filter(m => m.active > 0)
+            let active = this.$store.state.members.filter(m => {
+                let isAdmin = (m.badges.indexOf('admin') !== -1)
+                return (m.active > 0 && !isAdmin)
+            })
             let withRecent = active.map( (m, i) => {
                 this.$store.state.recent.forEach(ev => {
                     if ( ev.memberId == m.memberId ) {
