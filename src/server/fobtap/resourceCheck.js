@@ -3,7 +3,6 @@ const utils = require('../spec/utils')
 const validators = require('../spec/validators')
 const events = require('../events')
 
-
 function access(member, resource){
     if (member.active < 0){
         return false
@@ -26,7 +25,6 @@ module.exports = function(req, res, next){
           req.body.amount || 1,
           resource.charged || 0,
           req.body.notes || '',
-
           utils.buildResCallback(res)
         )
     } else {

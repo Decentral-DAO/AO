@@ -3,13 +3,13 @@
 #home
     .intro
         p Welcome to dctrl commons,
-        p ao is a community building application that facilitates non-hierarchical cooperation and sharing of tools & toys.
+        p The commons is managed by ao: a community application that facilitates non-hierarchical sharing of spaces, tools & toys.
         p It is fully transparent for all participants.
-        p We strive to encourage using encryption, bitcoin, and other personally empowering technologies (insert platitude here about great power and responsibility)
+        p We strive to encourage using encryption, bitcoin, and other empowering technologies.
         p Interested in joining?
         p Request your alias:
         join
-        p Decentralization is about accepting personal responsibility and striving to create.
+        p Decentralization is about accepting responsibility and striving to create.
 
 </template>
 

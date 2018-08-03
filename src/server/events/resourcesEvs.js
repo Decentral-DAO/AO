@@ -8,13 +8,11 @@ function resourceCreated(resourceId, name, charged, secret, trackStock, callback
         name,
         charged,
         secret,
-        info: {}
+        info: {},
     }
-
     if (trackStock) {
         newEvent.stock = 0
     }
-
     dctrlDb.insertEvent(newEvent, callback)
 }
 
@@ -42,8 +40,30 @@ function resourceUsed(resourceId, memberId, amount, charged, notes, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
+function resourceBooked(resourceId, memberId, bookTime, notes, callback) {
+  let newEvent = {
+      type: 'resource-booked',
+      resourceId,
+      memberId,
+      bookTime,
+      notes,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
+function bookCancelled(resourceId, bookTime, callback){
+  let newEvent = {
+      type: 'book-cancelled',
+      resourceId,
+      bookTime,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
 export default {
     resourceCreated,
     resourceUsed,
     resourceStocked,
+    resourceBooked,
+    bookCancelled,
 }

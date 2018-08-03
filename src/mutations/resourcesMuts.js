@@ -19,6 +19,24 @@ function resourcesMuts(resources, ev){
 				}
 			})
 			break
+		case "resource-booked":
+			resources.forEach( resource => {
+				if (resource.resourceId == ev.resourceId){
+						resource.book.push(ev)
+				}
+			})
+			break
+		case "book-cancelled":
+			resources.forEach( resource => {
+				if (resource.resourceId == ev.resourceId){
+						resource.book.forEach( (book, i) => {
+								if (book.bookTime == ev.bookTime) {
+										resource.book.splice(i, 1)
+								}
+						})
+				}
+			})
+			break
 		case "cleanup":
 			break
 	}

@@ -16,7 +16,8 @@ module.exports = {
       let isField = (
           val === 'name' ||
           val === 'email' ||
-          val === 'secret'
+          val === 'secret' ||
+          val === 'fob'
       )
       if (!isField) {
           errRes.push('invalid field')

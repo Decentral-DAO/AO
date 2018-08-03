@@ -69,7 +69,6 @@ export default {
             let variable = parseFloat(this.$store.state.cash.variable)
             let numActiveMembers = this.activeMembers.length
             let perMonth = ( fixed + variable ) / numActiveMembers
-            console.log("fixed & variable:" , {perMonth}, this.$store.state.cash.rent , this.$store.state.cash.variable)
             return  perMonth.toFixed(2)
         },
         cap(){
