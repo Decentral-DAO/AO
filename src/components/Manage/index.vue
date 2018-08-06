@@ -10,14 +10,15 @@
     .row
         label Update the monthly cap.
         cap-set
-    p Dctrl keeps a small amount of cash on hand ( Current Cash: {{bal}} ). If you are accepting or receiving cash on behalf of the commons please record here:
-    .full.row
-      .six.columns
-          label Record Cash Received
-          cash-receive
-      .six.columns
-          label Record Cash Used
-          cash-expense
+    // Cash events are broken, maybe remove this tracking?
+    //- p Dctrl keeps a small amount of cash on hand ( Current Cash: {{bal}} ). If you are accepting or receiving cash on behalf of the commons please record here:
+    //- .full.row
+    //-   .six.columns
+    //-       label Record Cash Received
+    //-       cash-receive
+    //-   .six.columns
+    //-       label Record Cash Used
+    //-       cash-expense
 
 </template>
 
@@ -33,16 +34,15 @@ export default {
     components:{
         SharedTitle, CashExpense, CashReceive, RentSet, CapSet
     },
-    computed:{
-      bal(){
-          console.log(this.$store.state.cash)
-          let cash = this.$store.state.cash.cash
-          if (cash) {
-              return '$' + cash
-          }
-          return '$???'
-      }
-    }
+    // computed:{
+    //   bal(){
+    //       let cash = this.$store.state.cash.cash
+    //       if (cash) {
+    //           return '$' + cash
+    //       }
+    //       return '$???'
+    //   }
+    // }
 }
 
 </script>
