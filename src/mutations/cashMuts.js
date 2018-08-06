@@ -12,6 +12,9 @@ function cashMuts(cash, ev){
 					cash.cash += parseFloat(ev.paid)
 				}
 				break
+			case "task-claimed":
+			 	cash.variable += parseFloat(ev.paid)
+				break
 			case "spot-updated":
 				cash.spot = ev.spot
 				break
@@ -20,6 +23,12 @@ function cashMuts(cash, ev){
 				break
 			case "rent-set":
 				cash.rent = ev.amount
+				break
+			case "cap-set":
+				cash.cap = ev.amount
+				break
+			case "variable-set":
+				cash.variable = ev.amount
 				break
 		}
 }

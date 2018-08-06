@@ -26,7 +26,21 @@ function rentSet(amount, callback){
     dctrlDb.insertEvent(newEvent, callback)
 }
 
-// function rentPaid (cb => dctrlDb.insertEvent({type: "rent-paid"}, cb) )
+function capSet(amount, callback){
+    let newEvent = {
+      type: "cap-set",
+      amount
+    }
+    dctrlDb.insertEvent(newEvent, callback)
+}
+
+function variableSet(amount, callback){
+    let newEvent = {
+      type: "variable-set",
+      amount
+    }
+    dctrlDb.insertEvent(newEvent, callback)
+}
 
 function spotUpdated(spot, callback) {
   let newEvent = {
@@ -56,5 +70,7 @@ export default {
   cashIncreased,
   cashDecreased,
   spotUpdated,
-  rentSet
+  rentSet,
+  capSet,
+  variableSet,
 }

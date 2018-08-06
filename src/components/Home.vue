@@ -1,15 +1,16 @@
 <template lang='pug'>
 
 #home
-    .intro
+    .intro(v-if='!isLoggedIn')
         p Welcome to dctrl commons,
-        p The commons is managed by ao: a community application that facilitates non-hierarchical sharing of spaces, tools & toys.
+        p The commons is managed by ao - Autonomous Organization: a community application for non-hierarchical sharing of spaces, tools & toys.
         p It is fully transparent for all participants.
-        p We strive to encourage using encryption, bitcoin, and other empowering technologies.
+        p We strive to encourage using encryption, Bitcoin, and other empowering technologies.
         p Interested in joining?
-        p Request your alias:
         join
         p Decentralization is about accepting responsibility and striving to create.
+    manage(v-else)
+
 
 </template>
 
@@ -18,10 +19,16 @@
 import SharedTitle from './slotUtils/SharedTitle'
 import Auth from './Auth'
 import Join from './Join'
+import Manage from './Manage'
 
 export default {
     components:{
-        SharedTitle, Auth, Join
+        SharedTitle, Auth, Join, Manage
+    },
+    computed: {
+        isLoggedIn(){
+            return this.$store.getters.isLoggedIn
+        },
     }
 }
 

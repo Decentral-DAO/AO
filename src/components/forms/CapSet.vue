@@ -1,8 +1,8 @@
 <template lang='pug'>
 
 #cashexpense
-    form-box(btntxt="Update Fixed Costs"  event='rent-set' v-bind:data='details')
-        label Fixed Cost of this Node:
+    form-box(btntxt="Update Maximum Monthly Charge"  event='cap-set' v-bind:data='details')
+        label Set Monthly Cap:
         input(v-model='details.amount' type='text')
 
 </template>
@@ -15,7 +15,7 @@ export default {
     data(){
         return {
             details: {
-                amount: this.$store.state.cash.rent
+                amount: this.$store.state.cash.cap
             }
         }
     },

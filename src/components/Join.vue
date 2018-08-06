@@ -4,13 +4,11 @@
     .row
         .six.columns
             div(v-if='!response')
-                label Choose Alias:
+                label Request Your Alias:
                 br
                 input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
                 button(@click="createJoinReq") Request to Join
-            div(v-else) Thank you for your interest {{ name }}. Reach out to the current members you know, or come hang out on an open night and we'll get you set up with an account and fob.
-        .six.columns
-            br
+            div(v-else) Thank you for your interest {{ name }}. Reach out to the current members you know, or come hang out on an open night. 
 
 </template>
 

@@ -14,6 +14,9 @@ module.exports = function(req, res, next){
       case 'rent-set':
           specRentSet(req, res, next)
           break
+      case 'cap-set':
+          specCapSet(req, res, next)
+          break
       default:
           next()
   }
@@ -57,6 +60,20 @@ function specRentSet(req, res, next){
     validators.isAmount(req.body.amount, errRes)
   ){
     events.cashEvs.rentSet(
+      req.body.amount,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
+function specCapSet(req, res, next){
+  let errRes = []
+  if (
+    validators.isAmount(req.body.amount, errRes)
+  ){
+    events.cashEvs.capSet(
       req.body.amount,
       utils.buildResCallback(res)
     )

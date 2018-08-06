@@ -34,6 +34,8 @@ function rent(){
     activeMembers.forEach( m => {
         events.membersEvs.memberCharged(m.memberId, charged, notes)
     })
+
+    events.cashEvs.variableSet(0)
 }
 
 function deactivate(){
