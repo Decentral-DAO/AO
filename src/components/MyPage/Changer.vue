@@ -1,7 +1,6 @@
 <template lang='pug'>
 
 .changer
-  p Update your account details:
   form-box(event='member-field-updated', :data='changeReq', :btntxt='"change your " + change.field')
       .row
           .six.columns

@@ -1,15 +1,24 @@
 <template lang='pug'>
 
 .payment
-    .invoice(v-if='showInvoice')
-        pay-req(v-if='invoice', :i='invoice')
-    .row.lncontrols
-        .five.columns
-          label Set Value($):
-          br
-          input(type='text', v-model='cadvalue')
-        .seven.columns
-            button(@click='createPayRec') Lightning ({{sats}})
+    .ln
+        h4 Lightning
+        .row
+          .four.columns
+              label Set Value($):
+              br
+              input(type='text', v-model='cadvalue')
+              button(@click='createPayRec')
+                  label New Invoice
+                  br
+                  label {{sats.toLocaleString()}} satoshis
+          .seven.columns.offset-by-one
+              p Bitcoin Lightning Payment Request
+              .invoice(v-if='showInvoice')
+                  pay-req(v-if='invoice', :i='invoice')
+    label Your address in our node:
+    .qr(v-html='imgTag')
+    label -- {{ address }} --
 
 </template>
 
@@ -24,6 +33,9 @@ import Addr from '../Members/Addr'
 
 export default {
     components: { PayReq, Addr },
+    mounted(){
+        this.createPayRec()
+    },
     data( ){
         let cadvalue
         if ( this.$store.getters.member.balance < 0){
@@ -38,7 +50,7 @@ export default {
     },
     computed: {
         sats(){
-            return calcs.cadToSats(this.cadvalue, this.$store.state.cash.spot)
+            return parseInt( calcs.cadToSats(this.cadvalue, this.$store.state.cash.spot) )
         },
         name(){
             let name = '...loading'
@@ -54,17 +66,11 @@ export default {
             let typeNumber = 4;
             let errorCorrectionLevel = 'L';
             let qr = qrcode(typeNumber, errorCorrectionLevel);
-            let address = 'x'
-            this.$store.state.members.forEach( member => {
-                if (member.memberId === this.$store.getters.memberId){
-                    address = member.address.slice()
-                }
-            })
-            let data = 'bitcoin:' + address
+            let data = 'bitcoin:' + this.address
             qr.addData(data)
             qr.make()
-            let cellsize = 3
-            let margin = 3
+            let cellsize = 4
+            let margin = 4
             return qr.createImgTag(cellsize, margin)
         },
         address(){
@@ -94,7 +100,7 @@ export default {
               .send({
                   type: 'invoice-created',
                   sats: this.sats,
-                  memo: 'Payment: ' + this.$store.getters.member.name ,
+                  memo: 'Payment from ' + this.$store.getters.member.name,
                   ownerId: this.$store.getters.memberId
               })
               .end((err,res)=>{
@@ -130,6 +136,10 @@ button
 
 .createaddr
     float: right
+
+
+.ln
+    padding: 1.5em
 
 
 </style>

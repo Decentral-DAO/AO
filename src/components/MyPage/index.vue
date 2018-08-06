@@ -4,13 +4,19 @@
     shared-title(:title='calcTitle')
     p Welcome {{ $store.getters.member.name }},
     p You have access to cool shared resources, but also responsibility for their care, improvement, maintenance, and replenishment!
-    p You can settle your account on chain:{{$store.getters.member.address}} - Or with lightning:
+    hr
+    p Contribute to our node and your account:
     payment
+    hr
+    p Control Your Account Details:
     changer
-    p See all the badges you've earned:
+    hr
+    p Your Current Badges:
     badges(:m='member')
-    p See your recent activity:
-    calendar
+    hr
+    p Your Recent Activity:
+    div
+        calendar
 
 </template>
 

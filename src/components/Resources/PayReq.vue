@@ -9,7 +9,7 @@
         a(:href='"lightning:" + this.i.payment_request')
             button(v-if='!i.settled') Open Wallet
     .six.columns
-        label satoshis: {{i.sats}} ($ {{ cadAmount }})
+        label {{ parseInt(i.sats).toLocaleString() }} satoshis ($ {{ cadAmount }}) 
         div(v-if='!i.settled', v-html='imgTag')
 
 </template>
