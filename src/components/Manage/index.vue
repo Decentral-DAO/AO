@@ -6,7 +6,7 @@
     .row
         label Update the communal fixed cost. This covers the rent, internet and other recurring burdens.
         rent-set
-    p At the start of the month the cost is split equally between all active members. To make the cost to members more predictable we set a maximum amount, or cap, that limits what possibly can be charged. If we hit the cap, we are not covering our costs. 
+    p At the start of the month the cost is split equally between all active members. To make the cost to members more predictable we set a maximum amount, or cap, that limits what possibly can be charged. If we hit the cap, we are not covering our costs.
     .row
         label Update the monthly cap.
         cap-set
@@ -35,7 +35,12 @@ export default {
     },
     computed:{
       bal(){
-          return '$' + this.$store.state.cash.cash.toFixed(2)
+          console.log(this.$store.state.cash)
+          let cash = this.$store.state.cash.cash
+          if (cash) {
+              return '$' + cash
+          }
+          return '$???'
       }
     }
 }
