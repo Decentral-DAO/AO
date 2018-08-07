@@ -2,7 +2,7 @@
 
 #cashexpense
     form-box(btntxt="Update Fixed Costs"  event='rent-set' v-bind:data='details')
-        label Fixed Cost of this Node:
+        label Set Fixed Cost:
         input(v-model='details.amount' type='text')
 
 </template>

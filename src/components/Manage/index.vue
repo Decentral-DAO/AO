@@ -2,14 +2,10 @@
 
 #manage
     shared-title(title='Manage Dctrl Node')
-    p The amount that is split between the active members at the start of the month is the sum of the fixed costs, set below, and the variable costs that grow as tasks are claimed.
-    .row
-        label Update the communal fixed cost. This covers the rent, internet and other recurring burdens.
-        rent-set
-    p At the start of the month the cost is split equally between all active members. To make the cost to members more predictable we set a maximum amount, or cap, that limits what possibly can be charged. If we hit the cap, we are not covering our costs.
-    .row
-        label Update the monthly cap.
-        cap-set
+    p The fixed amount that is split between the active members each month to cover the costs of operating the space.
+    rent-set
+    p We set a maximum amount, or cap, that limits what possibly can be charged. If we hit the cap, we are not covering our costs.
+    cap-set
     // Cash events are broken, maybe remove this tracking?
     //- p Dctrl keeps a small amount of cash on hand ( Current Cash: {{bal}} ). If you are accepting or receiving cash on behalf of the commons please record here:
     //- .full.row
