@@ -17,6 +17,8 @@
                 .bouncy
                     p {{ m.name }} {{m.balance}}
                         addr(:a="m.address")
+                        router-link.purgcal(:to='\'/calendar/\' + m.memberId')
+                            img(src='../../assets/images/calendar.svg')
                     dctrl-active(m="m")
 
     .padding(v-else)
@@ -109,6 +111,11 @@ li
     position: relative;
     animation: moveX 3s linear 0.5s infinite alternate,
       moveY 0.5s linear 1s infinite alternate;
+
+.purgcal
+    position: inline
+    img
+        height: 2em
 
 .cross
     text-decoration: line-through;
