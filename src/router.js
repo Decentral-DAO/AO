@@ -33,6 +33,7 @@ import Resources from './components/Resources'
 import ResourceCreate from './components/forms/ResourceCreate'
 import ResourceUse from './components/forms/ResourceUse'
 import ResourceStock from './components/forms/ResourceStock'
+import ResourceRemove from './components/forms/ResourceRemove'
 import RentSet from './components/forms/RentSet'
 
 // Invoice components
@@ -120,6 +121,9 @@ const routes =[{
 },{
   path: '/resource_stock/*',
   component: ResourceStock
+},{
+  path: '/resource_remove/*',
+  component: ResourceRemove
 },{
   path:'/cash_expense',
   component: CashExpense

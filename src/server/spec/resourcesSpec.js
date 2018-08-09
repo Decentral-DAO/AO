@@ -14,6 +14,9 @@ module.exports = function(req,res, next){
       case 'resource-stocked':
           specResourceStocked(req, res, next)
           break
+      case 'resource-removed':
+          specResourceRemoved(req, res, next)
+          break
       default:
           next()
   }
@@ -78,6 +81,20 @@ function specResourceStocked(req, res, next){
       req.body.amount,
       req.body.paid,
       req.body.notes,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
+function specResourceRemoved(req, res, next){
+  let errRes = []
+  if (
+    validators.isResourceId(req.body.resourceId, errRes)
+  ){
+    events.resourcesEvs.resourceRemoved(
+      req.body.resourceId,
       utils.buildResCallback(res)
     )
   } else {
