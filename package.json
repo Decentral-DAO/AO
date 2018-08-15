@@ -41,7 +41,8 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "tape": "^4.9.0",
-    "vue-template-compiler": "^2.5.13"
+    "vue-template-compiler": "^2.5.13",
+    "webpack": "^4.16.5"
   },
   "babel": {
     "presets": [

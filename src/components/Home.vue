@@ -27,7 +27,8 @@ export default {
     },
     computed: {
         isLoggedIn(){
-            return this.$store.getters.isLoggedIn
+            //return this.$store.getters.isLoggedIn
+            return 'true'
         },
     }
 }
@@ -39,7 +40,7 @@ export default {
 @import '../styles/colours'
 
 .intro
-    padding: 1em
+    padding: 1em 0;
 
 p
     font-size:1.3em

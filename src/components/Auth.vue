@@ -3,18 +3,18 @@
 #auth.row
   .six.columns.offset-by-three(v-if='!confirmed')
       h4 Login to access app:
+      div.input-container
+        input#name.input-effect(type='text', v-model='name', autocapitalize="none", autocomplete="off", autocorrect="off")
+        label(for='name') hackername
+        span.focus-border
       br
-      label hackername
-      br
-      input#name(type='text', v-model='name', placeholder='enter name', autocapitalize="none", autocomplete="off", autocorrect="off")
-      br
-      label pass --
-          span(v-for="a in pass") &nbsp;!&nbsp;
-      br
-      input.secret(type='text', v-model='pass', autocapitalize="none", autocomplete="off", autocorrect="off")
+      div.input-container
+        input#password.input-effect(type='password', v-model='pass', autocapitalize="none", autocomplete="off", autocorrect="off")
+        label(for='password') password
+        span.focus-border
       br
       p.red {{ err }}
-      button(@click="createSession") login
+      button.primary(@click="createSession") login
   .c(v-else)
       h3 you are logged in:
       button(@click="killSession") log out
@@ -97,12 +97,20 @@ export default {
 @import '../styles/colours'
 @import '../styles/button'
 
+
 #auth
-    width: 100%
-    content-align: center
-    input
-        color: main
-        width: 100%
+    background-color:accent5
+
+main #auth
+    margin: 0 0 0 50px
+    padding: 0 20px 20px 20px;
+    width:calc(100% - 90px)
+
+#mobileheading #auth
+  margin: 50px auto 50px auto
+  padding: 20px 50px 50px 50px;
+  width:300px
+
 .secret
     -webkit-text-fill-color: transparent; /* sets just the text color */
 

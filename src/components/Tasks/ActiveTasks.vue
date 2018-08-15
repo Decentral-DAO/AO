@@ -2,39 +2,54 @@
 
 .task
   .row
-    .four.columns.name
+    .mainColumn.columns.name
         label {{b.name}}
         br
-        button(@click='claim') claim - {{ sats.toLocaleString() }} sats (${{currentValue.toLocaleString()}})
-        p(v-if="b.lastClaimedBy") Last done by
-            current(:memberId="b.lastClaimedBy")
-    .six.columns
         .instructions(v-if='!editMode') {{ b.instructions }}
         div(v-else)
-            p The instructions on how to do the task properly.
+            p.input-instructions The instructions on how to do the task properly.
             .editBox
                 textarea(v-model='newInstructions')
             button(@click='submitChange') update instructions
             div(v-if='!b.oneTime')
-                p The monthly rate accumulates over time on the tasks bounty.
+                p.input-instructions The monthly rate accumulates over time on the tasks bounty.
                 .row
-                    input.six.columns(v-model='newRate')
-                    button.six.columns(@click='submitRate') change monthly rate
-                p The payout of the task is capped.
+                    div.input-container
+                      input#newRate.input-effect(v-model='newRate')
+                      label(for='newRate') monthly rate
+                      span.focus-border
+                    button(@click='submitRate') change monthly rate
+                p.input-instructions The payout of the task is capped.
                 .row
-                    input.six.columns(v-model='newCap')
-                    button.six.columns(@click='submitCap') update cap
+                    div.input-container
+                      input#newCap.input-effect(v-model='newCap')
+                      label(for='newCap') payout cap
+                      span.focus-border
+                    button(@click='submitCap') update cap
             .boost
-                p Add a one time boost to the current value
+                p.input-instructions Add a one time boost to the current value
                 .row
-                    input.six.columns(v-model='newBoost')
-                    button.six.columns(@click='submitBoost') add a boost
-    .two.columns
-        router-link(:to='historyLocation')
-            img(src='../../assets/images/calendar.svg')
-        br
-        img.pencil(v-if='!editMode', src='../../assets/images/pencil.svg', @click='edit')
-        img.pencil(v-else, @click='edit', src='../../assets/images/cancel.svg')
+                    div.input-container
+                      input#newBoost.input-effect(v-model='newBoost')
+                      label(for='newBoost') boost
+                      span.focus-border
+                    button(@click='submitBoost') add a boost
+      
+    .secondaryColumn.columns
+        button.halfsize(@click='history')
+            img(src='../../assets/images/calendar-alt-solid.svg')
+
+        button.halfsize(v-if='!editMode', @click='edit')
+          img.pencil(src='../../assets/images/pen-solid.svg')
+        button.halfsize(v-else,  @click='edit')
+          img.pencil.cancel(src='../../assets/images/times-solid.svg')
+        
+        button.primary(@click='claim') 
+         span.claimSpan Claim
+         span.satsSpan {{ sats.toLocaleString() }} sats (${{currentValue.toLocaleString()}})
+        p(v-if="b.lastClaimedBy") Last done by
+            current(:memberId="b.lastClaimedBy")
+
 
 </template>
 
@@ -64,6 +79,9 @@ export default {
         },3333)
     },
     methods: {
+        history(){
+          this.$router.push(this.historyLocation)
+        },
         edit(){
             console.log('edit called')
             if (!this.editMode){
@@ -155,72 +173,74 @@ export default {
 
 <style lang="stylus" scoped>
 
-@import '../../styles/colours'
-@import '../../styles/skeleton'
-@import '../../styles/button'
+@import '../../styles/colours';
+@import '../../styles/skeleton';
+@import '../../styles/button';
 
 .task
     color: accent2
-    input
-        color: main
+    background-color: accent5
+    margin:10px 0
+    padding:20px
 
 .name
     content-align: left
     text-align: left
-    label
+    
+.name>label
         font-size: 1.4em
         text-align: left
         color: accent1
-    button
-        margin-top: 1.5em
-        border-color: main
-        color: main
-        background-color: accent2
-    p
-        font-size: 0.777em
 
 .val
     color: accent2
 
-.pencil
-    break: both
 
 .instructions
-    padding: 1.5em
-    border-radius: .5em
-    background: lightGrey
-    color: main
+    color: contentColour
     min-height: 4em
     font-size: 1em
-    padding-top: .8em
+    padding-top: 0.8em
     vertical-align: bottom
     margin-top: 1.5em
     text-align: left
 
 .editBox
-    margin-top: 1.5em
-    color: main
     label
         color: accent1
         text-align: left
-    button
-        width: 100%
-        color: accent1
-        border-color: accent1
     textarea
-        width: 100%
+        width: calc(100% - 42px)
         height: 8em
-        padding: 1em
+        padding: 20px
 
-img
-    height: 3em
+img.cancel
+    width:30%
 
 .row
-    border-color: accent4
-    border-bottom-style: solid
-    padding-bottom: .8em
-    margin-bottom: .7em
-    border-width: 3px
+    //border-color: accent4
+    //border-bottom-style: solid
+    //padding-bottom: 0.8em
+    //margin-bottom: 0.7em
+    //border-width: 3px
     width: 100%
-
+    
+    .mainColumn
+      width:calc(100% - 150px - 4%)
+    .secondaryColumn
+      width:150px
+      button
+        height:75px
+      
+.claimSpan
+    //font-style: italic
+    //font-weight:bold
+    //text-transform: uppercase
+    
+.satsSpan
+    display: block
+    font-size:0.8em
+    font-style: italic
+    font-weight:lighter
+    
 </style>

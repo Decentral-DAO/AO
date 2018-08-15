@@ -2,13 +2,15 @@
 
 .join
     .row
-        .six.columns
+        #signup.six.columns
             div(v-if='!response')
-                label Request Your Alias:
-                br
-                input#name(type='text', v-model='name', placeholder='choose name', autocapitalize="none", autocomplete="off", autocorrect="off")
+                h4 Request Your Alias:
+                div.input-container
+                  input#name.input-effect(type='text', v-model='name', autocapitalize="none", autocomplete="off", autocorrect="off")
+                  label(for='name') choose name
+                  span.focus-border
                 button(@click="createJoinReq") Request to Join
-            div(v-else) Thank you for your interest {{ name }}. Reach out to the current members you know, or come hang out on an open night. 
+            div(v-else) Thank you for your interest {{ name }}. Reach out to the current members you know, or come hang out on an open night.
 
 </template>
 
@@ -59,5 +61,12 @@ label
 img
     height: 3em
     float: right
+
+.input-container
+    margin-bottom: 20px;
+
+#signup
+  width:100%;
+  max-width: 400px;
 
 </style>

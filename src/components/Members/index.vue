@@ -1,7 +1,7 @@
 <template lang='pug'>
 
 #member
-    crazy-btn(v-if='loggedIn', to='/member_create', text='new member')
+    crazy-btn(v-if='isLoggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
     .list(v-if="loggedIn")
         p Currently there are {{ activeMembers.length }} sharing this dctrl commons node. Cost per month is
@@ -90,6 +90,8 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
+@import '../../styles/input'
+
 
 #member
     width: 100%

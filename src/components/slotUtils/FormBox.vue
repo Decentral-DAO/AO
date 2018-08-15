@@ -58,18 +58,18 @@ export default {
 
 <style lang='stylus' scoped>
 
-@import '../../styles/colours'
-@import '../../styles/framework'
-@import '../../styles/button'
+@import '../../styles/colours';
+@import '../../styles/framework';
+@import '../../styles/button';
 
 .response
   color: red
 
 form
   padding: 0em
-  width:95%
+  max-width:400px
   color: accent1
-  margin: 1em
+  //margin: 1em
 
 label
   font-family: sans-serif

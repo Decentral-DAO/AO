@@ -2,8 +2,10 @@
 
 #cashexpense
     form-box(btntxt="Update Maximum Monthly Charge"  event='cap-set' v-bind:data='details')
-        label Set Monthly Cap:
-        input(v-model='details.amount' type='text')
+        div.input-container
+            input#capInput.input-effect(v-model='details.amount' type='text')
+            label(for="capInput") Set Monthly Cap
+            span.focus-borders
 
 </template>
 

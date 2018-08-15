@@ -12,7 +12,7 @@
           main-menu
       .content
           router-view
-    img(src='./assets/images/decent_logo_alpha_no_text.svg')
+    //img(src='./assets/images/decent_logo_alpha_no_text.svg')
 
 </template>
 
@@ -69,11 +69,13 @@ export default {
 @import "./styles/normalize"
 @import "./styles/breakpoints"
 @import "./styles/colours"
+@import "./styles/input"
+
 
 #app
     position:relative
     color: accent1
-    font-family:sans-serif
+    //font-family:'sans-serif'
     font-weight: lighter
 
 body
@@ -86,13 +88,16 @@ main
     padding: 0;
     display: flex;
 
+h4
+  margin-bottom:35px
+
 .side_bar, .content
     display: flex;
 
 .content
     flex-grow: 4;
-    overflow-y:scroll
-    padding:0 5rem
+    overflow-y:scroll;
+    padding:0 5rem;
 
 .side_bar {
     flex-basis: 10rem;
@@ -101,13 +106,14 @@ main
 }
 
 .mobile
-    width: 100vw
-    padding-left: 1em
-    padding-right: 1em
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
 
 @media (max-width: breakpoint)
     main
         display: none
+
 
 @media (min-width: breakpoint)
     .mobile

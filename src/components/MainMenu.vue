@@ -7,16 +7,19 @@ nav
       li 1 BTC = ${{ cadPrice.toFixed(2).toLocaleString() }}
       li $1 = {{ sats.toLocaleString() }} satoshis
   navigation
+  auth
 
 </template>
 
 <script>
 import Navigation from './Navigation'
+import Auth from './Auth'
 import { cadToSats } from '../calculations'
 
 export default {
   components:{
-      Navigation
+      Navigation,
+      Auth
   },
 
   computed: {
@@ -43,11 +46,8 @@ nav
     flex-direction: column;
 
 img
-    padding: 2rem
-    height: 160px
-
-li
-    margin-left: 3em
+    padding: 2rem 0 0 40px
+    height: 200px
 
 
 </style>

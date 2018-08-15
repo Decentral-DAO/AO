@@ -14,4 +14,45 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script src="jquery-1.11.1/jquery-1.11.1.min.js"></script>
+  <script>
+    $(window).load(function(){
+      $(".input-effect").focusout(function(){
+        if($(this).val() != ""){
+          $(this).addClass("has-content");
+        }else{
+          $(this).removeClass("has-content");
+        }
+      });
+    });
+
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+    var observer = new MutationObserver(function(mutations, observer) {
+      $('.input-effect').each(function(){
+        if($(this).val() != ""){
+          $(this).addClass("has-content");
+        }else{
+          $(this).removeClass("has-content");
+        }
+      });
+
+      // fired when a mutation occurs
+      $(".input-effect").focusout(function(){
+        if($(this).val() != ""){
+          $(this).addClass("has-content");
+        }else{
+          $(this).removeClass("has-content");
+        }
+      });
+    });
+    // define what element should be observed by the observer
+    // and what types of mutations trigger the callback
+    observer.observe(document, {
+      subtree: true,
+      attributes: true,
+      childList: true
+    });
+
+  </script>
 </html>
