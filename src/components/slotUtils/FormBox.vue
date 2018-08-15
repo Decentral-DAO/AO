@@ -71,12 +71,5 @@ form
   color: accent1
   //margin: 1em
 
-label
-  font-family: sans-serif
-  font-weight: lighter
-  font-size: 1.2em
-
-input
-  width:100%
 
 </style>

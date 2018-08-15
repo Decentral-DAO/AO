@@ -4,7 +4,7 @@
     form-box(btntxt="Update Fixed Costs"  event='rent-set' v-bind:data='details')
         div.input-container
           input#rentInput.input-effect(v-model='details.amount' type='text')
-          label(for='rentInput') Fixed Cost of this Node
+          label(for='rentInput') Set Fixed Cost
           span.focus-border
 
 </template>

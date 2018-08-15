@@ -34,6 +34,10 @@
                       label(for='newBoost') boost
                       span.focus-border
                     button(@click='submitBoost') add a boost
+                    
+                    .remove
+                        .row
+                            button.purge(@click='submitRemove') Purge Task
       
     .secondaryColumn.columns
         button.halfsize(@click='history')
@@ -154,6 +158,20 @@ export default {
                     if (err) return console.log(err);
                     console.log('createPayRec:', res.body)
                 })
+        },
+        submitRemove(){
+          this.editMode = false
+          request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    taskId: this.b.taskId,
+                    type: 'task-removed',
+                })
+                .end((err,res)=>{
+                    if (err) return console.log(err);
+                    console.log('createPayRec:', res.body)
+                })
         }
     },
     computed: {
@@ -242,5 +260,9 @@ img.cancel
     font-size:0.8em
     font-style: italic
     font-weight:lighter
+    
+.purge
+    background-color: warning
+    border-color: warning
     
 </style>

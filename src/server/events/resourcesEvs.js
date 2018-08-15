@@ -40,6 +40,14 @@ function resourceUsed(resourceId, memberId, amount, charged, notes, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
+function resourceRemoved(resourceId, callback) {
+  let newEvent = {
+      type: 'resource-removed',
+      resourceId,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
 function resourceBooked(resourceId, memberId, bookTime, notes, callback) {
   let newEvent = {
       type: 'resource-booked',
@@ -66,4 +74,5 @@ export default {
     resourceStocked,
     resourceBooked,
     bookCancelled,
+    resourceRemoved,
 }

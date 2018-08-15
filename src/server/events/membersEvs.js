@@ -75,15 +75,23 @@ function memberActivated(memberId, callback) {
   dctrlDb.insertEvent(newEvent, callback)
 }
 
-function memberAddressUpdated(memberId, address, proof, callback){
-  let newEvent = {
-      type: "member-address-updated",
-      memberId,
-      address,
-      proof,
-  }
-  addAddressToAccount(address, memberId, console.log)
-  dctrlDb.insertEvent(newEvent, callback)
+function memberAddressUpdated(memberId, callback){
+  lnd.getClient().newAddress({
+      type: NESTED_PUBKEY_HASH ,
+  }, (err, response)=>{
+      if (err) {
+          return console.log('lnd err', err)
+      }
+
+      let newEvent = {
+        type: "member-address-updated",
+        memberId,
+        address: response.address,
+      }
+      
+      addAddressToAccount(response.address, memberId, console.log)
+      dctrlDb.insertEvent(newEvent, callback)
+  })
 }
 
 function memberFieldUpdated(memberId, field, newfield, callback){

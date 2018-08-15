@@ -46,6 +46,13 @@ function tasksMuts(tasks, ev) {
 					}
 				})
 				break
+		case "task-removed":
+				tasks.forEach((task, i) => {
+					if (task.taskId === ev.taskId) {
+							tasks.splice(i, 1)
+					}
+				})
+				break
 	}
 }
 

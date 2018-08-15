@@ -64,6 +64,14 @@ function taskInstructionsUpdated(taskId, newInstructions, callback){
   dctrlDb.insertEvent(newEvent, callback)
 }
 
+function taskRemoved(taskId, callback){
+  let newEvent = {
+    type: "task-removed",
+    taskId,
+  }
+  dctrlDb.insertEvent(newEvent, callback)
+}
+
 export default {
   taskBoosted,
   taskCreated,
@@ -71,4 +79,5 @@ export default {
   taskInstructionsUpdated,
   taskRateUpdated,
   taskCapUpdated,
+  taskRemoved,
 }

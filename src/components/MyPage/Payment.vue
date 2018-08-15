@@ -16,9 +16,12 @@
               p Bitcoin Lightning Payment Request
               .invoice(v-if='showInvoice')
                   pay-req(v-if='invoice', :i='invoice')
-    label Your address in our node:
-    .qr(v-html='imgTag')
-    label -- {{ address }} --
+    .onchain
+        h4 On Chain
+        label -- {{ address }} --
+        .qr(v-html='imgTag')
+        form-box(btntxt="Get New Address",  event='member-address-updated', v-bind:data='details')
+
 
 </template>
 
@@ -32,7 +35,7 @@ import PayReq from '../Resources/PayReq'
 import Addr from '../Members/Addr'
 
 export default {
-    components: { PayReq, Addr },
+    components: { PayReq, Addr, FormBox },
     mounted(){
         this.createPayRec()
     },
@@ -49,6 +52,11 @@ export default {
         return { cadvalue, showInvoice: false }
     },
     computed: {
+        details(){
+            return {
+                memberId: this.$store.getters.member.memberId
+            }
+        },
         sats(){
             return parseInt( calcs.cadToSats(this.cadvalue, this.$store.state.cash.spot) )
         },
@@ -69,8 +77,8 @@ export default {
             let data = 'bitcoin:' + this.address
             qr.addData(data)
             qr.make()
-            let cellsize = 4
-            let margin = 4
+            let cellsize = 7
+            let margin = 7
             return qr.createImgTag(cellsize, margin)
         },
         address(){

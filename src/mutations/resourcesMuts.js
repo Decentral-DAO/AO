@@ -37,6 +37,13 @@ function resourcesMuts(resources, ev){
 				}
 			})
 			break
+		case "resource-removed":
+				resources.forEach( (r, i) => {
+						if (r.resourceId == ev.resourceId){
+								resources.splice(i, 1)
+						}
+				})
+				break
 		case "cleanup":
 			break
 	}
