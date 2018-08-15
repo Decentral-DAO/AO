@@ -38,5 +38,6 @@ function recordMemberPayment(btcAmount, account){
     console.log({memberId, paid})
     if (memberId && paid){
         events.membersEvs.memberPaid(memberId, paid, isCash, notes)
+        events.membersEvs.badgeAdded(memberId, 'bitcoin')
     }
 }
