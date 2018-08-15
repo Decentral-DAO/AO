@@ -39,15 +39,12 @@ module.exports = function(req,res,next){
 
 function specMemberAddressUpdated(req, res, next){
   let errRes = []
+
   if (
-    validators.isId(req.body.memberId, errRes) &&
-    validators.isAddress(req.body.address, errRes) &&
-    validators.isNotes(req.body.proof, errRes)
+    validators.isId(req.body.memberId, errRes)
   ){
     events.membersEvs.memberAddressUpdated(
       req.body.memberId,
-      req.body.address,
-      req.body.proof,
       utils.buildResCallback(res)
     )
   } else {
