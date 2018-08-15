@@ -29,6 +29,10 @@
                 .row
                     input.six.columns(v-model='newBoost')
                     button.six.columns(@click='submitBoost') add a boost
+            .remove
+                .row
+                    button.purge(@click='submitRemove') Purge Task
+
     .two.columns
         router-link(:to='historyLocation')
             img(src='../../assets/images/calendar.svg')
@@ -136,6 +140,20 @@ export default {
                     if (err) return console.log(err);
                     console.log('createPayRec:', res.body)
                 })
+        },
+        submitRemove(){
+          this.editMode = false
+          request
+                .post('/events')
+                .set('Authorization', this.$store.state.loader.token)
+                .send({
+                    taskId: this.b.taskId,
+                    type: 'task-removed',
+                })
+                .end((err,res)=>{
+                    if (err) return console.log(err);
+                    console.log('createPayRec:', res.body)
+                })
         }
     },
     computed: {
@@ -222,5 +240,9 @@ img
     margin-bottom: .7em
     border-width: 3px
     width: 100%
+
+.purge
+    background-color: warning
+    border-color: warning
 
 </style>

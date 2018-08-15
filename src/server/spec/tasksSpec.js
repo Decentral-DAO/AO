@@ -24,6 +24,9 @@ module.exports = function(req,res, next){
       case 'task-instructions-updated':
           specTaskInstructionsUpdated(req, res, next)
           break
+      case 'task-removed':
+          specTaskRemoved(req, res, next)
+          break
       default:
           next()
   }
@@ -140,6 +143,21 @@ function specTaskBoosted(req, res, next){
     events.tasksEvs.taskBoosted(
       req.body.taskId,
       req.body.amount,
+      utils.buildResCallback(res)
+    )
+  } else {
+    res.status(200).send(errRes)
+  }
+}
+
+
+function specTaskRemoved(req, res, next){
+  let errRes = []
+  if (
+    validators.isTaskId(req.body.taskId, errRes)
+  ){
+    events.tasksEvs.taskRemoved(
+      req.body.taskId,
       utils.buildResCallback(res)
     )
   } else {
