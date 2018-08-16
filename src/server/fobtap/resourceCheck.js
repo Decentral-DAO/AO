@@ -7,6 +7,9 @@ function access(member, resource){
     if (member.active < 0){
         return false
     }
+    if (resource.charged == 0){
+        return true
+    }
     let limit = member.active * 3 + 17
     let newBalance = member.balance - resource.charged
     let canAccess = (newBalance + limit > 0)
