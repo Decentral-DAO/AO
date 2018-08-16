@@ -18,11 +18,13 @@ console.log({MemberBadge})
 
 // Task components
 import Tasks from './components/Tasks'
+import Bounties from './components/Bounties'
 // Task forms
 import TaskBoost from './components/forms/TaskBoost'
 import TaskClaim from './components/forms/TaskClaim'
 import TaskCreate from './components/forms/TaskCreate'
 import TaskRateUpdate from './components/forms/TaskRateUpdate'
+import BountyCreate from './components/forms/BountyCreate'
 
 // Cash forms
 import CashExpense from './components/forms/CashExpense'
@@ -134,6 +136,9 @@ const routes =[{
   path: '/task_create',
   component: TaskCreate
 },{
+  path: '/bounty_create',
+  component: BountyCreate
+},{
   path: '/task_claim/*',
   component: TaskClaim
 },{
@@ -145,6 +150,9 @@ const routes =[{
 },{
   path: '/tasks',
   component: Tasks
+},{
+  path: '/bounties',
+  component: Bounties
 },{
   path: '/task_boost/*',
   component: TaskBoost

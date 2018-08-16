@@ -1,38 +1,32 @@
 <template lang='pug'>
 
 #tasks
-    crazy-btn(v-if='isLoggedIn && !isBounties', to='/TASK_CREATE', text='New Task')
-    shared-title(title='Active Tasks')
+    crazy-btn(v-if='isLoggedIn && !isBounties', to='/BOUNTY_CREATE', text='Propose Bounty')
+    shared-title(title='Project & Improvement Bounties')
     .list(v-if='isLoggedIn')
         table
             tbody
                 active-tasks(v-for="b in tasks", :b="b")
     .padding(v-else)
-        h5 dctrl task
+        h5 dctrl bounty
         ol
-            li Essential task to maintain community resource.
-            li Need of skill, tool, or energy.
-            li Collaboration & cooperation.
-        p
-            strong visit a node to find out more
+            li Reward for completion.
 
 </template>
 
 <script>
-import ActiveTasks from "./ActiveTasks"
+
+import ActiveTasks from "../Tasks/ActiveTasks"
 import request from "superagent"
 import SharedTitle from '../slotUtils/SharedTitle'
 import CrazyBtn from '../slotUtils/CrazyBtn'
 import {calculateTaskPayout} from '../../calculations'
 
 export default {
-  // mounted(){
-  //     this.$forceUpdate()
-  // },
   computed: {
       tasks(){
           let tasks = this.$store.state.tasks.filter(t => {
-              return !t.oneTime
+              return t.oneTime
           })
           return tasks.sort( (first, second) => {
               let f = calculateTaskPayout(first)

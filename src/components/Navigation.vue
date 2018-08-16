@@ -6,6 +6,7 @@ ul.navigation
     router-link(to='/MEMBERS') Members
     router-link(to='/RESOURCES') Resources
     router-link(to='/TASKS') Tasks
+    router-link(to='/BOUNTIES') Bounties
     //- router-link(to='/EVENTS') Events
 
 </template>
