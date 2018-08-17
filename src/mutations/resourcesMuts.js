@@ -8,14 +8,14 @@ function resourcesMuts(resources, ev){
 		case "resource-used":
 			resources.forEach( resource => {
 				if (resource.resourceId == ev.resourceId){
-					resource.stock -= parseFloat(ev.amount)
+					resource.stock -= parseInt(ev.amount)
 				}
 			})
 			break
 		case "resource-stocked":
 			resources.forEach( resource => {
 				if (resource.resourceId == ev.resourceId){
-						resource.stock += parseFloat(ev.amount)
+						resource.stock += parseInt(ev.amount)
 				}
 			})
 			break

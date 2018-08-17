@@ -1,14 +1,13 @@
 <template lang='pug'>
 
 #nodes
-    shared-title(title='Node Info')
-    p Lightning Node Status: Active
-    p Open a channel with our node from a lightning wallet using this qr:
+    shared-title(title='Lightning Node Info')
+    p {{ activeChannels }} active channels.
+    p {{ inChannels.toLocaleString() }} satoshis in lightning channels.
+    p {{ confirmedBalance.toLocaleString() }} satoshis available.
+    p With a lightning enabled wallet you can open a channel with our node using this information:
     label {{ nodeUri }}
     div(v-html='tag')
-    p {{ activeChannels }} active channels.
-    p {{ confirmedBalance.toLocaleString() }} satoshis available for channels
-    p {{ inChannels.toLocaleString() }} satoshis in lightning channels
 
 </template>
 
@@ -28,7 +27,7 @@ export default {
             return parseFloat( this.$store.state.nodes.lnd.wallet.confirmed_balance )
         },
         nodeUri(){
-            return this.$store.state.nodes.lnd.info.identity_pubkey + "@dctrl.ca:9735"
+            return this.$store.state.nodes.lnd.info.identity_pubkey + "@174.6.108.132:9735"
         },
         tag(){
             let data = this.nodeUri

@@ -4,9 +4,9 @@ ul.navigation
     router-link(v-if='$store.getters.isLoggedIn' to='/MYPAGE') My Page
     router-link(v-if='$store.getters.isLoggedIn' to='/NODES') Our Nodes
     router-link(to='/MEMBERS') Members
-    router-link(to='/RESOURCES') Resources
     router-link(to='/TASKS') Tasks
     router-link(to='/BOUNTIES') Bounties
+    router-link(to='/FOBTAP') Fobtap Points
     //- router-link(to='/EVENTS') Events
 
 </template>

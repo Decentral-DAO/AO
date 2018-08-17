@@ -112,7 +112,7 @@ const routes =[{
   path: '/member_paid_stuff/*',
   component: MemberPaidStuff
 },{
-  path: '/resources',
+  path: '/fobtap',
   component: Resources
 },{
   path: '/resource_create',

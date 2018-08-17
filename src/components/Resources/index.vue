@@ -1,16 +1,14 @@
 <template lang='pug'>
 
 #resource
-    shared-title(title='Resources')
+    shared-title(title='Fobtap Points')
     .list(v-if='isLoggedIn')
         row(v-for="r in resources", :r="r")
     .padding(v-else)
-        h5 dctrl resource
+        h5 dctrl fobtap points
         ol
             li Raspberry pi running fobtap rfid scan point.
             li Door, vending machine, ... many possibilities
-        p
-          strong code at github.com/dctrl-ao/fobtap
 
 </template>
 
