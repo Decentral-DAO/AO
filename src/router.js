@@ -151,7 +151,7 @@ const routes =[{
   path: '/tasks',
   component: Tasks
 },{
-  path: '/bounties',
+  path: '/projects',
   component: Bounties
 },{
   path: '/task_boost/*',

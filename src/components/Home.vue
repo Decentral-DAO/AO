@@ -2,13 +2,11 @@
 
 #home
     .intro(v-if='!isLoggedIn')
-        p Welcome to dctrl commons,
-        p The commons is managed by ao - Autonomous Organization: a community application for non-hierarchical sharing of spaces, tools & toys.
-        p It is fully transparent for all participants.
-        p We strive to encourage using encryption, Bitcoin, and other empowering technologies.
-        p Interested in joining?
+        p Autonomous Organization, a flat community application for sharing of spaces, tools & toys.
+        p We encourage literacy in encryption, Bitcoin, and other empowering technologies.
+        p Exploring dogeconciousness is worthy.
         join
-        p Decentralization is about accepting responsibility and striving to create.
+        p Decentralization fails without accepting responsibility and striving to create.
     manage(v-else)
 
 
@@ -27,8 +25,7 @@ export default {
     },
     computed: {
         isLoggedIn(){
-            //return this.$store.getters.isLoggedIn
-            return 'true'
+            return this.$store.getters.isLoggedIn
         },
     }
 }

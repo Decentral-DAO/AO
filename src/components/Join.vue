@@ -4,13 +4,13 @@
     .row
         #signup.six.columns
             div(v-if='!response')
-                h4 Request Your Alias:
+                h4 Interested in joining? Request Your Alias:
                 div.input-container
                   input#name.input-effect(type='text', v-model='name', autocapitalize="none", autocomplete="off", autocorrect="off")
                   label(for='name') choose name
                   span.focus-border
                 button(@click="createJoinReq") Request to Join
-            div(v-else) Thank you for your interest {{ name }}. Reach out to the current members you know, or come hang out on an open night.
+            div(v-else) Thank you {{ name }}. Reach out to the current members you know to recieve an initial password and fob.
 
 </template>
 

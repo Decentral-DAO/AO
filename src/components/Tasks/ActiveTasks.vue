@@ -34,11 +34,11 @@
                       label(for='newBoost') boost
                       span.focus-border
                     button(@click='submitBoost') add a boost
-                    
+
                     .remove
                         .row
                             button.purge(@click='submitRemove') Purge Task
-      
+
     .secondaryColumn.columns
         button.halfsize(@click='history')
             img(src='../../assets/images/calendar-alt-solid.svg')
@@ -47,8 +47,8 @@
           img.pencil(src='../../assets/images/pen-solid.svg')
         button.halfsize(v-else,  @click='edit')
           img.pencil.cancel(src='../../assets/images/times-solid.svg')
-        
-        button.primary(@click='claim') 
+
+        button.primary(@click='claim')
          span.claimSpan Claim
          span.satsSpan {{ sats.toLocaleString() }} sats (${{currentValue.toLocaleString()}})
         p(v-if="b.lastClaimedBy") Last done by
@@ -204,7 +204,7 @@ export default {
 .name
     content-align: left
     text-align: left
-    
+
 .name>label
         font-size: 1.4em
         text-align: left
@@ -212,7 +212,6 @@ export default {
 
 .val
     color: accent2
-
 
 .instructions
     color: contentColour
@@ -242,27 +241,27 @@ img.cancel
     //margin-bottom: 0.7em
     //border-width: 3px
     width: 100%
-    
+
     .mainColumn
       width:calc(100% - 150px - 4%)
     .secondaryColumn
       width:150px
       button
         height:75px
-      
+
 .claimSpan
     //font-style: italic
     //font-weight:bold
     //text-transform: uppercase
-    
+
 .satsSpan
     display: block
     font-size:0.8em
     font-style: italic
     font-weight:lighter
-    
+
 .purge
     background-color: warning
     border-color: warning
-    
+
 </style>

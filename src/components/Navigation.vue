@@ -5,7 +5,7 @@ ul.navigation
     router-link(v-if='$store.getters.isLoggedIn' to='/NODES') Our Nodes
     router-link(to='/MEMBERS') Members
     router-link(to='/TASKS') Tasks
-    router-link(to='/BOUNTIES') Bounties
+    router-link(to='/PROJECTS') Projects
     router-link(to='/FOBTAP') Fobtap Points
     //- router-link(to='/EVENTS') Events
 
