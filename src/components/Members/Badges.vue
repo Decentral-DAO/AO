@@ -3,7 +3,7 @@
 .badges
   router-link(v-if='isMrClean' to='/')
       img(src='../../assets/images/mrclean.jpg')
-  template(v-for='b in m.badges')
+  template(v-for='b in uniqueBadges')
       router-link(v-if='b.badge === "admin"' to='/')
           img(src='../../assets/images/admin.svg')
       router-link(v-if='b.badge === "secure"' to='/badges/secure')
@@ -32,8 +32,19 @@ export default {
         isMrClean(){
             let isMrClean = this.$store.getters.mrclean == this.m.memberId
             return isMrClean
+        },
+        uniqueBadges(){
+            let unique = []
+            return this.m.badges.filter( b => {
+                if ( unique.indexOf(b.badge) === -1){
+                    unique.push(b.badge)
+                    return true
+                }
+                return false
+            })
         }
     },
+
 }
 
 </script>

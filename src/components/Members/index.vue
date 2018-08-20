@@ -46,9 +46,10 @@ import Addr from './Addr'
 export default {
     computed: {
         activeMembers(){
-            // place members with recent events at top of list
             let active = this.$store.state.members.filter(m => {
-                let isAdmin = (m.badges.indexOf('admin') !== -1)
+                let isAdmin = m.badges.some( b => {
+                    return (b.badge === 'admin')
+                })
                 return (m.active > 0 && !isAdmin)
             })
             let withRecent = active.map( (m, i) => {
