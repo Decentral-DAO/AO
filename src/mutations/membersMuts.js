@@ -37,6 +37,7 @@ function membersMuts(members, ev){
       case "member-paid":
           members.forEach( member => {
               if (member.memberId === ev.memberId){
+                  // TODO
                   // if already seen do not adjust balance
                   // if txid put into member txids list
 
@@ -73,7 +74,6 @@ function membersMuts(members, ev){
           members.forEach( member => {
               if (member.memberId === ev.memberId){
                   member.address = ev.address
-                  member.proof = ev.proof
               }
           })
           break
@@ -89,18 +89,31 @@ function membersMuts(members, ev){
       case "badge-added":
           members.forEach( member => {
               if (member.memberId === ev.memberId){
-                  if (member.badges.indexOf(ev.badge) === -1){
-                      member.badges.push( ev.badge )
-                  }
+                  member.badges.push( ev )
               }
           })
           break
 
       case "badge-removed":
           members.forEach( member => {
-              if (member.memberId === ev.memberId){
-                  _.remove(member.badges, n => n === ev.badge)
+              if (member.memberId === ev.memberId) {
+                  member.badges.forEach((b, i) => {
+                      if (ev.badge === b.badge) {
+                          member.badges.splice(i, 1)
+                      }
+                  })
               }
+          })
+          break
+      case "cleanup":
+          members.forEach( member => {
+              member.badges.forEach( (b, i) => {
+                  let ageMs = Date.now() - parseInt( b.timestamp )
+                  let isOld = ageMs > (1000 * 60 * 60 * 24 * 55) // badges last 55 days
+                  if (isOld){
+                      member.badges.splice(i, 1)
+                  }
+              })
           })
           break
   }
