@@ -3,13 +3,16 @@ function recentMuts(recent, ev){
 		switch (ev.type) {
 				case "cleanup":
 						let now = Date.now()
+						let offset = 0
 						recent.forEach( (ev, i) => {
-								let msSinceEvent = now - parseInt(ev.timestamp)
-								let isOld = msSinceEvent > 1000 * 60 * 60 * 24 * 5
+								let ts = parseInt(ev.timestamp)
+								let msSinceEvent = now - ts
+								let isOld = msSinceEvent > 1000 * 60 * 60 * 24 * 40
 								if (isOld){
-										recent.splice(i, 1)
+										offset += 1
 								}
 						})
+						recent.splice(0, offset)
 						break
 				default:
 						let isMemberEv = /member.+/.test(ev.type)

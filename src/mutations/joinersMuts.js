@@ -22,9 +22,7 @@ function joinersMuts(joiners, ev){
 				case "joiner-rejected":
 						joiners.forEach( (j, i) => {
 								if (j.joinerId == ev.joinerId){
-										console.log('removing joiner::!!', i)
 										joiners.splice(i, 1)
-										console.log('joiners', {joiners})
 								}
 						})
 						break
