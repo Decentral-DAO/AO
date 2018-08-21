@@ -2,17 +2,20 @@
 
 #home
     shared-title(title='All recent history')
-    p TODO
+    ev(v-for='a in $store.state.recent', :e='a')
+
 
 </template>
 
 <script>
 
 import SharedTitle from '../slotUtils/SharedTitle'
+import Ev from './Ev'
+
 
 export default {
     components:{
-        SharedTitle
+        SharedTitle, Ev
     }
 }
 

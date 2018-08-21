@@ -3,6 +3,7 @@
 ul.navigation
     router-link(v-if='$store.getters.isLoggedIn' to='/MYPAGE') My Page
     router-link(v-if='$store.getters.isLoggedIn' to='/NODES') Our Nodes
+    router-link(v-if='$store.getters.isLoggedIn' to='/HISTORY') Recent History
     router-link(to='/MEMBERS') Members
     router-link(to='/TASKS') Tasks
     router-link(to='/PROJECTS') Projects
