@@ -2,15 +2,34 @@
 
 .row
     .three.grid
-        img(src='../../assets/images/loggedOut.svg')
+      img(src='../../assets/images/loggedOut.svg')
+      div(v-if='e.memberId')
         label {{ name }}
+      div(v-if='e.resourceId')
+        label {{ resourceName }}
+      div(v-if='e.taskId')
+        label {{ taskName }}
     .three.grid
         label {{ e.type }}
     .three.grid
-        div &nbsp;
+      div &nbsp;
+      div(v-if='e.name')
+        p Name: {{ e.name }}
+      div(v-if='e.paid')
         p Paid: {{ e.paid }}
+      div(v-if='e.amount')
+        p Amount: {{ e.amount }}
+      div(v-if='e.monthlyValue')
+        p Monthly Value: {{ e.monthlyValue }}
+      div(v-if='e.cap')
+        p Cap: {{ e.cap }}
+      div(v-if='e.boost')
+        p Boost: {{ e.boost }}
+      div(v-if='e.charged')
+        p Charged: {{ e.charged }}
     .three.grid
-        div {{ e.amount }}
+        div &nbsp;
+        div {{ dateStr }}
 
 </template>
 
@@ -29,6 +48,28 @@ export default {
                 }
             })
             return name
+        },
+        resourceName(){
+          let name
+          this.$store.state.resources.forEach(r => {
+              if (this.e.resourceId === r.resourceId) {
+                  name = r.name
+              }
+          })
+          return name
+        },
+        taskName(){
+          let name
+          this.$store.state.tasks.forEach(t => {
+              if (this.e.taskId === t.taskId) {
+                  name = t.name
+              }
+          })
+          return name
+        },
+        dateStr(){
+            let d = new Date(parseInt(this.e.timestamp))
+            return d.toUTCString()
         }
     },
     methods: {

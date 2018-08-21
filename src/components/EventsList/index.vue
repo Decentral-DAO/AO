@@ -1,9 +1,8 @@
 <template lang='pug'>
 
 #home
-    shared-title(title='All recent history')
-    ev(v-for='a in $store.state.recent', :e='a')
-
+    shared-title(title='Recent History')
+    ev(v-for='a in recent', :e='a')
 
 </template>
 
@@ -12,8 +11,12 @@
 import SharedTitle from '../slotUtils/SharedTitle'
 import Ev from './Ev'
 
-
 export default {
+    computed: {
+        recent(){
+            return this.$store.state.recent.slice().reverse()
+        }
+    },
     components:{
         SharedTitle, Ev
     }
