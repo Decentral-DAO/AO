@@ -13,12 +13,11 @@
                   img(v-if='matched', src='../../assets/images/check.svg')
                   img(v-else, src='../../assets/images/warn.svg')
           .six.columns
-                label New Detail
-                input(:type='inputType' v-model='change.newfield', :placeholder='"new " + change.field ')
+                fancy-input(:labelText='"new " + change.field')
+                    input.input-effect(:type='inputType' v-model='change.newfield')
                 br
-                input(v-if='inputType === "password"', type='password', v-model='change.confirmNewfield', placeholder='repeat secret')
-
-
+                fancy-input(v-if='inputType === "password"', labelText='repeat')
+                    input.input-effect(:type='inputType', v-model='change.confirmNewfield')
 
 </template>
 
@@ -26,10 +25,12 @@
 
 import FormBox from '../slotUtils/FormBox'
 import cryptoUtils from '../../crypto'
+import FancyInput from '../slotUtils/FancyInput'
+
 
 export default {
     components: {
-        FormBox
+        FormBox, FancyInput
     },
     computed: {
         matched(){

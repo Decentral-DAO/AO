@@ -5,21 +5,18 @@
         h4 Lightning
         .row
           .four.columns
-              label Set Value($):
-              br
-              input(type='text', v-model='cadvalue')
-              button(@click='createPayRec')
-                  label New Invoice
-                  br
-                  label {{sats.toLocaleString()}} satoshis
+              fancy-input(labelText='Set $ Value')
+                  input.input-effect(v-model='cadvalue', type='text')
+              button(v-if='sats > 0' @click='createPayRec')
+                  label {{ sats.toLocaleString() }} satoshis - create invoice
           .seven.columns.offset-by-one
-              p Bitcoin Lightning Payment Request
+              p &nbsp;
               .invoice(v-if='showInvoice')
                   pay-req(v-if='invoice', :i='invoice')
     .onchain
         h4 On Chain
-        label -- {{ address }} --
         .qr(v-html='imgTag')
+        label -- {{ address }} --
         form-box(btntxt="Get New Address",  event='member-address-updated', v-bind:data='details')
 
 
@@ -37,7 +34,9 @@ import Addr from '../Members/Addr'
 export default {
     components: { PayReq, Addr, FormBox },
     mounted(){
-        this.createPayRec()
+        if (this.sats  > 0 ){
+            this.createPayRec()
+        }
     },
     data( ){
         let cadvalue
@@ -45,7 +44,7 @@ export default {
             cadvalue = -this.$store.getters.member.balance
         }
         if (!cadvalue){
-            cadvalue = 0
+            cadvalue = ""
         } else {
             cadvalue = cadvalue.toFixed(2)
         }

@@ -76,7 +76,7 @@ const routes =[{
   path: '/invoice_create/*',
   component: InvoiceCreate
 },{
-  path: '/mypage',
+  path: '/account',
   component: MyPage
 },{
   path: '/calendar/*',
