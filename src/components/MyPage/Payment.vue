@@ -30,9 +30,10 @@ import qrcode from 'qrcode-generator'
 import calcs from '../../calculations'
 import PayReq from '../Resources/PayReq'
 import Addr from '../Members/Addr'
+import FancyInput from '../slotUtils/FancyInput'
 
 export default {
-    components: { PayReq, Addr, FormBox },
+    components: { PayReq, Addr, FormBox, FancyInput },
     mounted(){
         if (this.sats  > 0 ){
             this.createPayRec()
