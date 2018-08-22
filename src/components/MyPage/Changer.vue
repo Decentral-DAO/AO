@@ -4,7 +4,7 @@
   form-box(event='member-field-updated', :data='changeReq', :btntxt='"change your " + change.field')
       .row
           .six.columns
-              select(v-model='change.field')
+              select(v-model='change.field', @change='empty')
                   option(value='secret') password
                   option(value='email') e-mail
                   option(value='name') hackername
@@ -38,7 +38,6 @@ export default {
             return x === y
         },
         changeReq(){
-
             if (this.change.field === 'secret'){
                   return {
                       field: this.change.field,
@@ -75,6 +74,12 @@ export default {
                 confirmNewfield: ''
             }
         }
+    },
+    methods: {
+        empty(){
+            this.change.newfield = ''
+            this.change.confirmNewfield = ''
+        }
     }
 }
 </script>
@@ -93,6 +98,5 @@ img
 
 input, select
     z-index:123123
-    color: main
 
 </style>
