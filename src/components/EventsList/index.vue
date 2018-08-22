@@ -3,6 +3,7 @@
 #home
     shared-title(title='Recent History')
     ev(v-for='a in recent', :e='a')
+    button(@click='buildAll') Load All
 
 </template>
 
@@ -12,9 +13,22 @@ import SharedTitle from '../slotUtils/SharedTitle'
 import Ev from './Ev'
 
 export default {
+    data(){
+        return {
+            loadAll: false
+        }
+    },
+    methods: {
+        buildAll(){
+            this.loadAll = true
+        }
+    },
     computed: {
         recent(){
-            return this.$store.state.recent.slice().reverse()
+            if (this.loadAll){
+                return this.$store.state.recent.slice().reverse()
+            }
+            return this.$store.state.recent.slice(-7).reverse()
         }
     },
     components:{
@@ -27,6 +41,7 @@ export default {
 <style lang='stylus' scoped>
 
 @import '../../styles/colours'
+@import '../../styles/button'
 
 
 </style>
