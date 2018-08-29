@@ -6,7 +6,7 @@
         event-feed
     .mobile
         mobile-heading
-        router-view
+            router-view
     main
       .side_bar
           main-menu

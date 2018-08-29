@@ -8,8 +8,9 @@
             img(src='../assets/images/dctrl.svg')
         .toggle(v-if="showHeaderNav" @click="toggleHeaderNav")
             navigation().navigation--header
-    auth
+    auth(v-if='!$store.getters.isLoggedIn')
     slot
+    auth(v-if='$store.getters.isLoggedIn')
 
 </template>
 
