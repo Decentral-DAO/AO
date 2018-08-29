@@ -2,10 +2,11 @@
 
 #purg
     template(v-for="m in inactiveMembers")
-        .bouncy
+        .bouncy.row
             .four.grid
                 p {{ m.name }} {{m.balance}}
             .four.grid
+                div &nbsp;
                 badges(:m='m')
             .four.grid
                 addr(:a="m.address")

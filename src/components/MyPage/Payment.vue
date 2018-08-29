@@ -10,7 +10,7 @@
               button(v-if='sats > 0' @click='createPayRec')
                   label {{ sats.toLocaleString() }} satoshis - create invoice
           .seven.columns.offset-by-one
-              p &nbsp;
+              div &nbsp;
               .invoice(v-if='showInvoice')
                   pay-req(v-if='invoice', :i='invoice')
     .onchain
@@ -18,7 +18,6 @@
         .qr(v-html='imgTag')
         label -- {{ address }} --
         form-box(btntxt="Get New Address",  event='member-address-updated', v-bind:data='details')
-
 
 </template>
 
@@ -146,7 +145,7 @@ button
     float: right
 
 
-.ln
+.ln, .onchain
     padding: 1.5em
 
 
