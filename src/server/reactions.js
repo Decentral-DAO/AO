@@ -33,6 +33,7 @@ function reactions(ev){
                 events.resourcesEvs.resourceUsed(ev.resourceId,'', amount, 0, '')
             }
             break
+
     }
 }
 

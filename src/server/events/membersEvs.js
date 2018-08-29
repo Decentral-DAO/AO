@@ -88,7 +88,7 @@ function memberAddressUpdated(memberId, callback){
         memberId,
         address: response.address,
       }
-      
+
       addAddressToAccount(response.address, memberId, console.log)
       dctrlDb.insertEvent(newEvent, callback)
   })

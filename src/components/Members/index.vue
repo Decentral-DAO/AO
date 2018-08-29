@@ -12,15 +12,7 @@
                 span - {{ cap }} each. Warning cap breached! At this member count this node is not self sustaining!
         joiners
         row(v-for="m in activeMembers", :m="m")
-        .purg
-            template(v-for="m in inactiveMembers")
-                .bouncy
-                    p {{ m.name }} {{m.balance}}
-                        addr(:a="m.address")
-                        router-link.purgcal(:to='\'/calendar/\' + m.memberId')
-                            img(src='../../assets/images/calendar.svg')
-                    dctrl-active(m="m")
-
+        purg
     .padding(v-else)
         p dctrl member
         ol
@@ -42,6 +34,7 @@ import CrazyBtn from '../slotUtils/CrazyBtn'
 import DctrlActive from './DctrlActive'
 import Joiners from './Joiners'
 import Addr from './Addr'
+import Purg from './Purg'
 
 export default {
     computed: {
@@ -60,9 +53,6 @@ export default {
                 })
             })
             return _.sortBy( active, 'recentTs')
-        },
-        inactiveMembers(){
-            return this.$store.state.members.filter(m => m.active <= 0)
         },
         loggedIn(){
             return this.$store.getters.isLoggedIn
@@ -84,7 +74,8 @@ export default {
         CrazyBtn,
         DctrlActive,
         Joiners,
-        Addr
+        Addr,
+        Purg,
     }
 }
 
@@ -105,31 +96,8 @@ li
 .padding
     padding: 1.987654321em
 
-.purg
-    width: 100%
-    position: relative;
-    overflow: hidden;
-
-.bouncy
-    position: relative;
-    animation: moveX 3s linear 0.5s infinite alternate,
-      moveY 0.5s linear 1s infinite alternate;
-
-.purgcal
-    position: inline
-    img
-        height: 2em
-
 .cross
     text-decoration: line-through;
-
-@keyframes moveX {
-  from { left: 0; } to { left: 400px }
-}
-
-@keyframes moveY {
-  from { top: 0; } to { top: 10px; }
-}
 
 
 </style>
