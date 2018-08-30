@@ -48,7 +48,7 @@ export default {
                     // XXX - the forms should return different places depending, ie member create should hit /members
                     this.$router.push('/')
                 }
-
+                this.response = false
             })
       },
     }

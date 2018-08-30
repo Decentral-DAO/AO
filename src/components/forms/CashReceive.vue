@@ -2,29 +2,30 @@
 
 #newmember
     form-box(btntxt="Cash Safed"  event='cash-increased' v-bind:data='details')
-        label amount
-        input(v-model='details.amount' type='text')
-        label notes
-        input(v-model='details.notes' type='text')
+        fancy-input(labelText='amount')
+            input.input-effect(v-model='details.amount' type='text')
+        fancy-input(labelText='notes')
+            input.input-effect(v-model='details.notes' type='text')
 
 </template>
 
 <script>
 import SharedTitle from '../slotUtils/SharedTitle'
 import FormBox from '../slotUtils/FormBox'
+import FancyInput from '../slotUtils/FancyInput'
+
 
 export default {
     data(){
         return {
             details: {
-                amount: 0,
+                amount: '',
                 notes: ''
             }
         }
     },
-
     components: {
-        SharedTitle, FormBox
+        SharedTitle, FormBox, FancyInput
     }
 }
 
