@@ -19,6 +19,10 @@
           p.input-instructions Record Any Cash Expenses.
           cash-expense
     .current Locker Cash Estimate: $ {{ $store.state.cash.cash }}
+    .variable Month's Tasks & Projects: $ {{ $store.state.cash.variable }}
+    .current Currently Active Members: {{ $store.getters.activeMembers.length }}
+    .variable Unsubsidized cost per member: {{ $store.getters.perMonth }}
+
 
 </template>
 
@@ -45,8 +49,14 @@ export default {
 
 .current
     color: green
-    font-size: 2em
+    font-size: 1.8em
     text-align: center
     margin-top: 2.234em
+
+.variable
+    font-size: 1.8em
+    margin-top: 2.234em
+
+
 
 </style>

@@ -72,6 +72,29 @@ export default new Vuex.Store({
           })
           return loggedInMember
       },
+      activeMembers(state, getters){
+          let active = state.members.filter(m => {
+              let isAdmin = m.badges.some( b => {
+                  return (b.badge === 'admin')
+              })
+              return (m.active > 0 && !isAdmin)
+          })
+          let withRecent = active.map( (m, i) => {
+              state.recent.forEach(ev => {
+                  if ( ev.memberId == m.memberId ) {
+                      m.recentTs = - ev.timestamp
+                  }
+              })
+          })
+          return _.sortBy( active, 'recentTs')
+      },
+      perMonth(state, getters){
+          let fixed = parseFloat(state.cash.rent)
+          let variable = parseFloat(state.cash.variable)
+          let numActiveMembers = getters.activeMembers.length
+          let perMonth = ( fixed + variable ) / numActiveMembers
+          return  perMonth.toFixed(2)
+      },
   },
   middlewares: [],
   strict: process.env.NODE_ENV !== 'production'
