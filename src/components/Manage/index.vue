@@ -19,10 +19,9 @@
           p.input-instructions Record Any Cash Expenses.
           cash-expense
     .current Locker Cash Estimate: $ {{ $store.state.cash.cash }}
-    .variable Month's Tasks & Projects: $ {{ $store.state.cash.variable }}
+    .variable Month's Tasks & Projects: $ {{ $store.state.cash.variable.toFixed(2) }}
     .current Currently Active Members: {{ $store.getters.activeMembers.length }}
-    .variable Unsubsidized cost per member: {{ $store.getters.perMonth }}
-
+    .variable Unsubsidized cost per member: $ {{ $store.getters.perMonth }}
 
 </template>
 
