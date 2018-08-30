@@ -18,7 +18,8 @@ function recentMuts(recent, ev){
 						let isMemberEv = /member.+/.test(ev.type)
 						let isTaskEv = /task.+/.test(ev.type)
 						let isResourceEv = /resource.+/.test(ev.type)
-						if (isMemberEv || isTaskEv || isResourceEv){
+						let isCashEv = /cash.+/.test(ev.type)
+						if (isMemberEv || isTaskEv || isResourceEv || isCashEv){
 								recent.push(ev)
 						}
 		}
