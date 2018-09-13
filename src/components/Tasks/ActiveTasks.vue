@@ -240,7 +240,7 @@ img.cancel
     //padding-bottom: 0.8em
     //margin-bottom: 0.7em
     //border-width: 3px
-    width: 100%
+    width: 10%
 
     .mainColumn
       width:calc(100% - 150px - 4%)

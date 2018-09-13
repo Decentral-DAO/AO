@@ -1,6 +1,6 @@
 <template lang='pug'>
 
-ul.navigation
+.navigation
     router-link(v-if='$store.getters.isLoggedIn' to='/Account') Account
     router-link(v-if='$store.getters.isLoggedIn' to='/NODES') Our Nodes
     router-link(v-if='$store.getters.isLoggedIn' to='/HISTORY') Recent History
@@ -26,36 +26,25 @@ export default {
 
 @import '../styles/colours'
 
-.side_bar ul
-  margin-left: 10px;
-
-.toggle ul
-  padding-left:0;
+.navigation
+  margin-left:47px
 
 a
   text-decoration: none;
   color: accent1
   padding: 10px 20px;
-  margin-bottom: 0;
-  margin-left:auto;
-  margin-right:auto;
-  //border-style:solid
-  //border-width:3px
-  //border-radius: 30px
-  //border-color:accent1
+  margin-bottom: 3px;
   list-style: none;
   font-family:sans-serif
   display: block;
-  //margin-bottom:.54321em
-  margin-bottom:5px
+  margin-bottom:0px
   max-width:360px
   text-align:center;
-
   background-color:accent5
+  width: 200px
 
 a:hover, .router-link-active
   background-color: accent4
-  //border-radius:30px
   color:contentColour
 
 .admin

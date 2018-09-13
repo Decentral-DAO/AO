@@ -3,7 +3,7 @@
 #member
     crazy-btn(v-if='isLoggedIn', to='/member_create', text='new member')
     shared-title(title='Illuminati Hit List')
-    .list(v-if="$store.getters.isLoggedIn")
+    .list(v-if="true")
         joiners
         row(v-for="m in $store.getters.activeMembers", :m="m")
         purg

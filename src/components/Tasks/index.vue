@@ -3,7 +3,7 @@
 #tasks
     crazy-btn(v-if='isLoggedIn && !isBounties', to='/TASK_CREATE', text='New Task')
     shared-title(title='Active Tasks')
-    .list(v-if='isLoggedIn')
+    .list(v-if='true')
         table
             tbody
                 active-tasks(v-for="b in tasks", :b="b")

@@ -2,6 +2,7 @@
 
 #home
     .intro(v-if='!isLoggedIn')
+        img(src='../assets/images/decentralbanner.png')
         p Autonomous Organization, a flat community application for sharing of spaces, tools & toys.
         p We encourage literacy in encryption, Bitcoin, and other empowering technologies.
         p Exploring dogeconciousness is worthy.
@@ -41,7 +42,7 @@ export default {
 
 p
     font-size:1.3em
-    color:white
+    color:accent3
     font-family: 'Open Sans', light, sans-serif;
 
 h3
@@ -55,5 +56,7 @@ a
 
 a:visited
     color: accent1
+
+
 
 </style>

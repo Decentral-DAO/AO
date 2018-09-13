@@ -2,16 +2,18 @@
 
 nav
   router-link(to='/')
-      img(src='../assets/images/dctrl.svg')
-  div(v-if='$store.getters.isLoggedIn')
+      img(src='../assets/images/sundoge.png')
+  div(v-if='true')
       li 1 BTC = ${{ cadPrice.toFixed(2).toLocaleString() }}
       li $1 = {{ sats.toLocaleString() }} satoshis
   navigation
   auth
 
+
 </template>
 
 <script>
+
 import Navigation from './Navigation'
 import Auth from './Auth'
 import { cadToSats } from '../calculations'

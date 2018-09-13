@@ -18,9 +18,9 @@ export default {
 
 div
     //width: 100%
-    border-bottom-style: dotted
-    border-bottom-width: .4em
-    border-color: accent4
+    border-bottom-style: solid
+    border-bottom-width: 4em
+    border-color: accent6
     color: accent4
     padding-top: 3em
     background: main
@@ -31,7 +31,7 @@ div
     h3
         font-size: 2.2em
         margin:0
-  
+
 
 
 </style>

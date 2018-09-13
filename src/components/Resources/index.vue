@@ -2,7 +2,7 @@
 
 #resource
     shared-title(title='Fobtap Points')
-    .list(v-if='isLoggedIn')
+    .list(v-if='true')
         row(v-for="r in resources", :r="r")
     .padding(v-else)
         h5 dctrl fobtap points
